@@ -1,0 +1,423 @@
+/*--------------------
+ Estilos generales
+--------------------*/
+
+
+
+
+
+/*a {	color: #575757;	cursor: pointer;}
+a:hover, a:active {
+	color: #292929;
+	text-decoration: none;
+}*/
+img {border: 0;}
+p {	line-height: 22px;	margin: 10px 0;}
+strong {font-weight: 700;}
+input[type="checkbox"], input[type="radio"] {
+	display: inline-block;
+	position: relative;
+	top: 2px;
+	margin-right: 3px;
+}
+
+div.checkbox p {
+	display: inline;
+	font-size: 10px;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+}
+
+table thead tr th {
+	padding: 10px;
+	background: #292929;
+	color: #fff;
+	text-align: left;
+	vertical-align: middle;
+}
+
+table thead tr th.precio, table tbody tr td.precio {
+	text-align: right;
+	min-width: 110px;
+}
+
+table tbody tr td.precio small {
+	font-size: 12px;
+}
+
+table tbody tr td.precio > i {
+	font-weight: 700;
+}
+
+table thead tr th.acciones, table tbody tr td.acciones {
+	text-align: center;
+}
+
+table tbody tr td.acciones a {
+	font-size: 18px;
+	margin: 0 3px;
+}
+
+table tbody tr td.acciones a.activo {
+	color: #52EFBF;
+}
+
+table .habitaciones, table .superficie, table .fotos {
+	text-align: center;
+}
+
+table tbody tr td {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+	vertical-align: middle;
+}
+
+table tbody tr:nth-child(2n) td {
+	background: #f0f0f0;
+}
+
+table tbody tr:hover td {
+	background: #ccc;
+	color: #292929;
+}
+
+table .btnAccion {
+	display: block;
+	background: #eee;
+	color: #575757;
+	border-radius: 3px;
+	margin-bottom: 4px;
+	text-decoration: none !important;
+	font-weight: bold;
+	padding: 5px 0 5px 10px;
+	text-align: left;
+	transition: all ease .15s;
+	-webkit-transition: all ease .15s;
+	-moz-transition: all ease .15s;
+}
+
+table .btnAccion:hover {
+	background: #575757;
+	color: #fff;
+	transition: all ease .15s;
+	-webkit-transition: all ease .15s;
+	-moz-transition: all ease .15s;
+}
+
+table .btnAccion i {
+	margin-right: 10px;
+}
+
+table .btnAccion.bConfirmar {
+	background: #dff0d8;
+	color: #326b31;
+}
+
+table .btnAccion.bConfirmar:hover {
+	background: #326b31;
+	color: #fff;
+}
+
+table .btnAccion.modPrecio {
+	background: #fcf8e3;
+	color: #8d6a32;
+}
+
+table .btnAccion.modPrecio:hover {
+	background: #8d6a32;
+	color: #fff;
+}
+
+table .btnAccion.retirar {
+	background: #f5dede;
+	color: #a93538;
+}
+
+table .btnAccion.retirar:hover {
+	background: #a93538;
+	color: #fff;
+}
+
+fieldset {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+label {
+	display: inline-block;
+	font-size: 1em;
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+
+
+/* ==================================================
+| 		SLIDER CABECERA
+|==================================================*/
+#slider {overflow: hidden;min-height: 400px;}
+#slider .slider {height: 400px;}
+#slider .slider .slide .contenedor {height: 400px;margin: 0 auto;position: relative;}
+#slider .slider .fraction-slider {overflow: visible !important;}
+/*=========================================================================*
+**    CARRUSEL TOP
+**=========================================================================*/
+.welcome .thumbnail{overflow: hidden;width: 330px;height: 250px;margin-bottom:10px;}
+.welcome .thumbnail img{width: 100%;height: auto!important;}
+.top_destacado{width:400px; height:400px; display:inline-block;vertical-align:top;}
+
+.datostop{text-align:center; width:100%; color: #fff; padding:15px 10px}
+ .carrusel_container .prev {
+  width: 28px;
+  height: 32px;
+  position: absolute;
+  left: 16px;
+  top: 36%;
+  /*background: url("../imagenes/leftDash.png") no-repeat;*/
+  background: url("../images/nav.png") no-repeat 0 0;
+  opacity: 0.7;
+}
+.carrusel_container .next {
+  width: 28px;
+  height: 32px;
+  position: absolute;
+  right: 16px;
+  top: 36%;
+  background: url("../images/nav.png") no-repeat -32px 0;
+  opacity: 0.7;
+}
+ .carrusel_container .prev:hover, .carrusel_container .next:hover{ opacity: 1;}
+
+/* ==================================================
+| 		DATOS CONTACTO CABECERA
+|==================================================*/
+header .datosContacto {
+	position: absolute;
+	top: 130px;
+
+	z-index: 10000;
+}
+
+header .datosContacto address {
+	float: right;
+	background: rgba(255,255,255,0.8);
+	padding: 20px;
+}
+/* ==================================================
+| 		BUSCADOR
+|==================================================*/
+#buscador {
+	position: relative;
+	margin: 20px auto;
+}
+
+.tabs {
+	border-bottom: 1px solid #ccc;
+	display: table;
+	width: 100%;
+}
+
+.tabs li {
+	float: left;
+	list-style: none;
+	margin-bottom: -1px;
+}
+
+.tabs li a {
+	display: block;
+	padding: 10px 15px;
+	margin-right: 5px;
+	text-decoration: none;
+	border-radius: 4px 4px 0 0;
+}
+
+.tabs li a:hover {
+	background-color: #eee;
+	border-bottom: 1px solid #eee;
+}
+
+.tabs li.activo a {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-bottom-color: rgba(0, 0, 0, 0);
+
+	cursor: default;
+}
+
+form {
+	padding: 10px;
+}
+
+form fieldset {
+	margin: 10px 0;
+	position: relative;
+}
+
+form fieldset legend {
+	padding: 8px 11px;
+	font-size: 20px;
+	color: #000;
+	background: #FFF;
+	width: 100%;
+	border-bottom: 3px solid #000;
+	z-index: 10;
+	position: relative;
+	margin: 0 0 0 -11px;
+}
+
+form div.line {
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 15px;
+}
+
+form div.line:last-child {
+	margin-right: 0;
+}
+
+form input[type="text"], form input[type="number"], form input[type="email"], form input[type="tel"], form input[type="search"],form select, form textarea {
+	display: block;
+	width: 100%;
+	height: 30px;
+	padding: 5px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	font-family: inherit;
+}
+
+form textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+form input:hover, form select:hover, form textarea:hover {
+	border: 1px solid #575757;
+}
+
+form input:focus, form select:focus {
+	outline: 0;
+	border: 1px solid #5bc0de;
+	box-shadow: 0 0 8px rgba(91,192,222, 0.6);
+}
+
+form input[type="radio"]:focus {
+	box-shadow: none;
+}
+
+form div.line.checkbox input[type="checkbox"] {
+	float: left;
+	margin-right: 5px;
+	margin-top: 2px;
+}
+
+form div.line.secureCode div img {
+	float: left;
+	margin: 3px 10px 0 0;
+}
+
+form div.line.secureCode div input {
+	float: left;
+	width: auto;
+}
+
+form div.line input.errorFormInput, form div select.errorFormInput, form div textarea.errorFormInput {
+	border: 1px solid #a94442 !important;
+}
+
+form div.line div.errorForm {
+	font-size: 12px;
+	background:#a94442;
+	color: #fff;
+	margin-top: 5px;
+	display: block;
+	font-weight: bold;
+}
+
+#newsletter_form #email_newsletter-error {
+	position: absolute;
+	top: -10px;
+}
+#newsletter_form #newsletter_acepto-error{
+position: absolute;top: 15px;
+}
+#newsletter_form  {
+
+}
+.btn {
+	position: relative;
+	top: 8px;
+	/*width: 100%;*/
+	height: 30px;
+	margin: 15px 0;
+	padding: 7px 12px;
+	font-size: 12px;
+	color: #575757;
+	background: #ccc;
+	border: none;
+	border: 1px solid #ccc;;
+	border-radius: 4px;
+	cursor: pointer;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	transition: all ease .25s;
+	-webkit-transition: all ease .25s;
+	-moz-transition: all ease .25s;
+}
+
+.btn:hover {
+	background: #575757;
+	color: #fff;
+	border: 1px solid #575757;
+	transition: all ease .25s;
+	-webkit-transition: all ease .25s;
+	-moz-transition: all ease .25s;
+}
+
+
+
+.trp, #trp {
+	display: none !important;
+}
+
+article .texto {
+	line-height: 22px;
+}
+
+.msgOk {
+	padding: 20px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border: 1px solid #06d1c4;
+	background: #acebe7;
+	color: #077a73;
+}
+/* ==================================================
+| 		BOTON ANUNCIA GRATIS
+|==================================================*/
+.anuncia > a {
+	position: absolute;
+	top: -34px;
+	right: 10px;
+	text-decoration: none;
+}
+
+
+
+
+
+/*--------------------
+ Content:section
+--------------------*/
+section {margin: 20px auto;}
+
+/* main text */
+article#mainText {display: table;margin: 0px auto;width: 100% !important;}
+article#mainText div {margin: 0 auto;}
+article#mainText .welcome {float: left;width: 75%;}
+article#mainText .datosContacto {float: right;width: 25%;}

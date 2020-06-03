@@ -1,0 +1,805 @@
+/*--------------------
+ Responsive
+--------------------*/
+@media (max-width: 767px) {
+	#loginContainer, .traductor{position:relative!important;}
+		.traductor{top:30px!important;left: 10px!important;}
+}
+@media (max-width: 480px) {
+	#loginContainer{top: -68px!important;}
+	.traductor, #main-slideshow{display: none;}
+	.datosContacto address ul li {display: block; margin: 0 auto;}
+	.datosContacto .logo_header {width: 78%}
+	.datosContacto .logo_telefono {width: 55%}
+	.datosContacto .logo_direccion {width: 50%}
+	#navegacion{position: fixed; top: 0;}
+	.datosContacto{position: initial;margin-top: 33px;}
+	#mensaje_dinamico_2{display: block;}
+   	#mensaje_dinamico_1{display: none;}
+   	.imagen_dinamica{float:none!important;}
+}
+
+@media screen and (min-width: 0) and (max-width: 767px) {
+	#main-slideshow{
+   		    position: relative;
+    		top: -70px;
+   	}
+	#buscador, article, aside > div, footer #datosContactoFooter, footer #creditos, #navegacion nav, #slider .slider .slide .contenedor, .headerResults, .paginacion, .informe_propietario {
+		width: 100%;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+	}
+	#buscador {display: none;}
+	#navegacion #navHeader #navLinks li {float: none;border-bottom: 1px dotted #CCC;}
+	#navegacion #navHeader #navLinks li:last-child {border-bottom: none;background: none;}
+	#navegacion #navHeader #navLinks .dropDownMenu ul {
+		position: relative;
+		top: 0;
+		left: 0;
+		/*display: block;*/
+		background: none;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+	}
+	#navegacion ul li.dropDownMenu > ul > li > a {
+		padding-left: 15px;
+	}
+
+	#navegacion ul li.dropDownMenu > ul > li > a > span > i {
+		float: left;
+		margin-right: 5px;
+		transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+		filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+	}
+
+	#navegacion ul li.dropDownMenu > ul > li.dropDownMenu > ul > li > a {
+		padding-left: 55px;
+	}
+
+	#navegacion #navHeader #navLinks li a:hover {
+		background: #292929;
+	}
+
+	#navegacion ul#idiomas {
+		position: absolute;
+		top: 9px;
+		right: 0px;
+	}
+
+	#navegacion ul#idiomas > li > a {
+		margin-bottom: 7px;
+		color: #292929;
+	}
+
+	#navegacion ul#idiomas > li > ul {
+		background: #f0f0f0;
+	}
+
+	#navegacion ul#idiomas > li > ul > li > a {
+		text-align: center;
+	}
+
+	#navegacion ul#idiomas li a span span:last-child {
+		display: none;
+	}
+	#navegacion ul#favoritos {
+		display: none;
+	}
+
+	.dropDownMenu ul li {
+		border-bottom: none !important;
+	}
+	/* /menú navegación */
+
+	header .datosContacto {
+		display: none;
+	}
+
+	#logo {
+		width: 100%;
+		text-align: center;
+		left: 0;
+	}
+
+	#slider .slider {
+		height: 260px;
+	}
+
+	#slider .slider div[class*="slide"] {
+		background-size: cover;
+	}
+
+	#slider .slider .slide .texto {
+		display: none!important;
+	}
+
+	article#mainText {
+		display: none!important;
+	}
+
+	/* mailing list */
+	aside #mailingList h3, aside #mailingList p {
+		width: auto;
+		text-align: center;
+		margin: 10px;
+	}
+
+	aside #mailingList p {
+		margin: 0 10px;
+	}
+
+	aside #mailingList form {
+		width: auto;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+	}
+
+	aside #mailingList form .line {
+		margin-bottom: 10px !important;
+	}
+
+	aside #mailingList form .line input[type="email"] {
+		width: 100%;
+	}
+
+	aside #mailingList form .line.checkbox {
+		position: relative;
+		top: 0px;
+	}
+
+	.box_vertical .promocion, .box_vertical .venta, .box_vertical .alquiler {
+		width: 100%;
+		height: 365px;
+		margin: 0;
+		margin-bottom: 20px;
+	}
+
+	.promocion figure:hover .sliderPropiedad.sliderMini, .venta figure:hover .sliderPropiedad.sliderMini, .alquiler figure:hover .sliderPropiedad.sliderMini {
+		-webkit-transform: translateY(0px) !important;
+		-moz-transform: translateY(0px) !important;
+		-ms-transform: translateY(0px) !important;
+		transform: translateY(0px) !important;
+	}
+
+	/* ficha */
+	#ficha .header .headerTitulo .headerLeft, #ficha .header .headerTitulo .headerRight {
+		width: 100% !important;
+		text-align: center !important;
+	}
+
+	#ficha .header .headerTitulo .headerRight {
+		border-top: 1px solid #ccc;
+	}
+
+	#ficha .actionBar ul li.printPage, #ficha .actionBar ul li.presentation, #ficha .actionBar ul li.documents {
+		display: none;
+	}
+
+	#ficha .actionBar a.hazOferta {
+		float: none;
+		display: block;
+		clear: both;
+		text-align: center;
+	}
+
+	#ficha div.colIzq, #ficha div.colDch, #formMasInfo, #ficha div.colDch .detallesFicha, #ficha div.footer .detallesFicha, #detallePromocion #ficha div .detallesFicha div[id*="modelo_"] .row .image, #detallePromocion #ficha div .detallesFicha div[id*="modelo_"] .row .caracteristicas {
+		float: none !important;
+		width: 100% !important;
+	}
+
+	.sliderPropiedad {
+		width: 320px;
+	}
+
+	#ficha div .detallesFicha ul li {
+		width: 100% !important;
+	}
+
+	#ficha .detallesFicha ul li[class*="certificacion_"] span.imgCertificado, #fichaScroll {
+		display: none !important;
+	}
+	/* /ficha */
+
+	/* modal */
+	.modalContainer {
+		left: 0;
+	}
+	.modalContainer .modal {
+		width: 100%;
+		margin-left: 0;
+		position: absolute;
+		left: 0;
+	}
+
+	.modalContainer form .colIzq, .modalContainer form .colDcha {
+		width: 100% !important;
+		float: none !important;
+	}
+
+	.busquedaAvanzada form fieldset div.line > div input[type="text"], .busquedaAvanzada form fieldset div.line > div select {
+		width: 110px;
+	}
+
+	.hazTuOferta .modal {
+		height: auto;
+	}
+
+	.hazTuOferta form div.line {
+		float: none;
+		width: 100%;
+	}
+	/* /modal */
+
+	/* la empresa */
+	#laEmpresa .imageEmpresa {
+		width: 100%;
+		float: none;
+		margin-right: 0;
+	}
+	/* /la empresa */
+
+	/* contacto */
+	#contacto .datosContacto {
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	#contacto .datosContacto .sucursales, #contacto .datosContacto form {
+		width: 100%;
+		float: none;
+	}
+
+	#contacto .datosContacto .sucursales {
+		text-align: inherit;
+		border-bottom: none;
+		border-right: none;
+	}
+
+	#contacto .datosContacto form {
+		padding: 30px 0;
+	}
+	/* /contacto */
+
+	/* quiere vender */
+	#captacion form .datosPersonales, #captacion form .localizacionInmueble {
+		float: none;
+		width: 100% !important;
+	}
+
+	#captacion form .datosPersonales div.line:nth-child(2), #captacion form .datosPersonales div.line:nth-child(3), #captacion form .localizacionInmueble div.line:nth-child(2), #captacion form .localizacionInmueble div.line:nth-child(3), #captacion form .localizacionInmueble div.line:nth-child(4), #captacion form .localizacionInmueble div.line:nth-child(5), #captacion form .detalleInmueble div.line {
+		width: 100% !important;
+	}
+
+	#captacion form div.line:last-child div button {
+		width: 49%;
+	}
+	/* /quiere vender */
+
+	/* sección informe propietarios */
+	#informe_propietario .informe_propietario #content_left, #informe_propietario .informe_propietario #content_right {
+		float: none;
+		width: 100%;
+	}
+
+	#informe_propietario table thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	#informe_propietario table tbody tr {
+		border-top: 2px solid #292929;
+		border-bottom: 2px solid #292929;
+	}
+
+	#informe_propietario table tbody tr:nth-of-type(odd) {
+		background: #F0F4FD;
+	}
+
+	#informe_propietario table tbody tr td {
+		display: block;
+		padding-left: 40%;
+		position: relative;
+	}
+	#informe_propietario table tbody tr td.precio {
+		text-align: left;
+	}
+
+	#informe_propietario table tbody tr td:before {
+		position: absolute;
+		top: 10px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+		font-weight: 700;
+	}
+
+	#informe_propietario table tbody tr td:nth-child(1):before {
+		content: "Imagen";
+	}
+
+	#informe_propietario table tbody tr td:nth-child(2):before {
+		content: "Tiempo cartera";
+	}
+
+	#informe_propietario table tbody tr td:nth-child(3):before {
+		content: "Visitas web";
+	}
+
+	#informe_propietario table tbody tr td:nth-child(4):before {
+		content: "Visitas inmueble";
+	}
+
+	#informe_propietario table tbody tr td:nth-child(5):before {
+		content: "Precio propietario";
+	}
+
+	#informe_propietario table tbody tr td:nth-child(6):before {
+		content: "Acciones";
+	}
+	/* /sección informe propietarios */
+
+	/* results */
+	.vistaResultados ul li:nth-child(2), .vistaResultados ul li:nth-child(3) {
+		display: none;
+	}
+
+	.filtroResultados > ul > li > ul {
+		right: -10px;
+	}
+
+	.filtroResultados > ul > li > ul > li > strong {
+		display: block;
+		text-align: left;
+	}
+	/* /results */
+
+	/* sección interna */
+	#seccionInterna .imagenes a {
+		width: 49%;
+	}
+	/* /sección interna */
+
+	.breadcrumbs {
+		width: 100%;
+		border-bottom: 1px dotted #ccc;
+	}
+
+	.breadcrumbs > ul > li > ul, .breadcrumbs > ul > li > a > span, .breadcrumbs > ul > li > a > i, .breadcrumbs > ul > li:hover > ul {
+		display: none;
+	}
+
+	.vistaResultados {
+		float: left;
+	}
+
+	.paginacion {
+		text-align: center;
+	}
+
+	.paginacion .resultados, .paginacion ul {
+		float: none;
+	}
+
+	article.offers #listOffers, article.offers #leyenda {
+		width: 100% !important;
+		float: none;
+	}
+
+	table thead tr th.acciones, table tbody tr td.acciones, table thead tr th.fotos, table tbody tr td.fotos, table thead tr th.superficie, table tbody tr td.superficie {
+		display: none;
+	}
+
+	table thead tr th.habitaciones span:last-child {
+		display: block;
+	}
+
+	table thead tr th.habitaciones span:first-child {
+
+	}
+
+	.box_mapa #googleMaps {
+		min-height: 400px !important;
+		margin-bottom: 20px;
+	}
+
+	footer #datosContactoFooter div, aside > div > div > div, aside > div > div > nav, article#mainText .welcome, article#mainText .datosContacto {
+		float: none!important;
+		width: 100%!important;
+	}
+
+	footer #datosContactoFooter div, footer #datosContactoFooter div.socialLinks > i {
+		display: none!important;
+	}
+
+	footer #datosContactoFooter div.socialLinks {
+		display: block!important;
+	}
+
+	.flecha {
+		right: 50%!important;
+		margin-right: -20px!important;
+	}
+
+	/*cookies*/
+	#aviso_cookie {
+		padding: 0 10px;
+		text-align: justify;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+	}
+
+	#aviso_cookie div a {
+		text-indent: -9999px;
+		width: 35px;
+		height: 35px;
+		top: -35px;
+		right: 5px;
+		/*background: url(img/icn_closecookies2.png) no-repeat top;*/
+	}
+
+	#aviso_cookie div a:hover {
+		/*background: url(img/icn_closecookies2.png) no-repeat bottom;*/
+	}
+
+	/*selector plantillas*/
+	#refPlantilla {
+		top: 10px !important;
+		left: 10px !important;
+	}
+
+	#selectorAbrirCerrar {
+		left: 10px !important;
+	}
+
+	#selectorDemo {
+		height: 325px !important;
+	}
+
+	#selectorDemo .wrapDemo {
+		width: 100% !important;
+	}
+
+	#selectorDemo .miniaturas {
+		width: 100% !important;
+		padding: 0 !important;
+		margin: 0 auto !important;
+	}
+
+	#selectorDemo .miniaturas .wrapMiniaturas {
+		margin-top: 50px !important;
+		width: 100% !important;
+	}
+
+	#selectorDemo .miniaturas .wrapMiniaturas > div {
+		width: 67px !important;
+		height: 146px !important;
+		margin: 0 5px 15px 5px !important;
+	}
+
+	#selectorDemo .miniaturas div figure {
+		width: 67px !important;
+		height: 119px !important;
+		overflow: hidden;
+	}
+
+	#selectorDemo .miniaturas div figure:hover {
+		overflow: visible;
+	}
+
+	#selectorDemo .miniaturas div figure img {
+		width: 67px !important;
+		height: 119px !important;
+	}
+
+	#selectorDemo .miniaturas div figure:hover img, #selectorDemo .miniaturas div.activo figure img {
+		width: 67px !important;
+		height: 119px !important;
+	}
+
+	#selectorDemo .miniaturas .wrapMiniaturas > div > span {
+		font-size: 10px !important;
+	}
+
+	#selectorDemo .miniaturas div figure:hover, #selectorDemo .miniaturas div.activo figure {
+		transform: none !important;
+		-webkit-transform: none !important;
+		-moz-transform: none !important;
+	}
+
+	#selectorDemo .miniaturas div figure div.colores[class*="numeroColores"] {
+		bottom: 123px !important;
+	}
+
+	#selectorDemo .miniaturas div figure ul li a {
+		width: 26px !important;
+		height: 26px !important;
+	}
+
+	#selectorDemo .miniaturas div figure ul li.color9 a, #selectorDemo .miniaturas div figure ul li.color10 a, #selectorDemo .miniaturas div figure ul li.color11 a, #selectorDemo .miniaturas div figure ul li.color12 a, #selectorDemo .miniaturas div figure ul li.color13 a, #selectorDemo .miniaturas div figure ul li.color14 a, #selectorDemo .miniaturas div figure ul li.color15 a, #selectorDemo .miniaturas div figure ul li.color16 a, #selectorDemo .miniaturas div figure ul li.color17 a, #selectorDemo .miniaturas div figure ul li.color18 a, #selectorDemo .miniaturas div figure ul li.color19 a, #selectorDemo .miniaturas div figure ul li.color20 a, #selectorDemo .miniaturas div figure ul li.color21 a, #selectorDemo .miniaturas div figure ul li.color22 a, #selectorDemo .miniaturas div figure ul li.color23 a {
+		border-left-width: 13px !important;
+		border-top-width: 13px !important;
+		border-bottom-width: 13px !important;
+		border-right-width: 13px !important;
+	}
+
+	#selectorDemo .miniaturas div figure ul li:hover:after, #selectorDemo .miniaturas div figure ul li a.activo:after {
+		width: 26px !important;
+		height: 26px !important;
+	}
+
+	#detalle #sliderPropiedad .img img {
+		max-width: 310px;
+	}
+}
+
+
+@media screen and (min-width: 768px) {
+	#buscador,  aside > div, footer #datosContactoFooter, footer #creditos, #navegacion nav, #slider .slider .slide .contenedor, #navegacion ul#favoritos > li > div > div > div, .headerResults, .paginacion, .informe_propietario, #aviso_cookie div {
+		width: 768px;
+	}
+
+	#logo, header .datosContacto {
+		width: 768px;
+		margin-left: -384px;
+	}
+
+	/* mailing list */
+	aside #mailingList h3, aside #mailingList p {
+		width: 100%;
+		text-align: center;
+	}
+
+	aside #mailingList form {
+		left: 50%;
+		margin-left: -237px;
+	}
+
+	/* ficha */
+	.sliderPropiedad {
+		width: 377px;
+	}
+
+	#detalle #ficha div .detallesFicha ul li {
+		width: 50%;
+	}
+
+	.busquedaGeneral form div.line {
+		width: 13.6%;
+	}
+
+	.box_vertical .promocion, .box_vertical .venta, .box_vertical .alquiler {
+		width: 47.3%;
+	}
+
+	/* quiere vender */
+	#captacion form .localizacionInmueble div.line:nth-child(2), #captacion form .localizacionInmueble div.line:nth-child(3), #captacion form .localizacionInmueble div.line:nth-child(4), #captacion form .localizacionInmueble div.line:nth-child(5) {
+		width: 24.1%;
+	}
+	#captacion form .detalleInmueble div.line {
+		width: 17.8%;
+	}
+	/* /quiere vender */
+
+	/* favoritos */
+	#navegacion nav ul#favoritos > li > a span {
+		display: none !important;
+	}
+
+	#navegacion ul#favoritos > li > div > div > div > ul > li {
+		width: 172px;
+	}
+
+	/* sección informe propietarios */
+	#informe_propietario .informe_propietario #content_left, #informe_propietario .informe_propietario #content_right {
+		float: none;
+		width: 100%;
+	}
+
+	#informe_propietario .informe_propietario #content_left {
+		border-right: none;
+	}
+
+	.informe_propietario #content_left .datosContactoAgencia {
+		display: table;
+		width: 100%;
+	}
+
+	.informe_propietario #content_left .datosContactoAgencia > div {
+		float: left;
+		width: 31%;
+	}
+	/* /sección informe propietarios */
+
+	/* modal */
+	.hazTuOferta .modal {
+		height: auto;
+	}
+
+	.modalContainer form .colIzq, .modalContainer form .colDcha {
+		width: 100% !important;
+		/*float: none !important;*/
+	}
+
+	#detalle #sliderPropiedad .img img {
+		max-width: 775px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+
+	#buscador,  aside > div, footer #datosContactoFooter, footer #creditos, #navegacion nav, #slider .slider .slide .contenedor, #navegacion ul#favoritos > li > div > div > div, .headerResults, .paginacion, .informe_propietario, #aviso_cookie div {
+		width: 984px;
+	}
+
+	#logo, header .datosContacto {
+		width: 984px;
+		margin-left: -492px;
+	}
+
+	/* ficha */
+	.sliderPropiedad {
+		width: 487px;
+	}
+
+	/* box propiedades */
+	.box_vertical .promocion, .box_vertical .venta, .box_vertical .alquiler {
+		width: 22.9%;
+		padding: 10px;
+	}
+
+	/* favoritos */
+	#navegacion nav ul#favoritos > li > a span {
+		display: inline-block !important;
+		margin-left: 2px;
+	}
+
+	#navegacion ul#favoritos > li > div > div > div > ul > li {
+		width: 144px;
+	}
+
+	/* sección informe propietarios */
+	#informe_propietario .informe_propietario #content_left, #informe_propietario .informe_propietario #content_right {
+		float: left;
+		width: 23%;
+	}
+
+	#informe_propietario .informe_propietario #content_right {
+		float: right;
+		width: 75%;
+	}
+
+	#informe_propietario .informe_propietario #content_left {
+		border-right: 1px solid #CCC;
+	}
+
+	.informe_propietario #content_left .datosContactoAgencia {
+		display: table;
+		width: auto;
+	}
+
+	.informe_propietario #content_left .datosContactoAgencia > div {
+		float: none;
+		width: auto;
+	}
+	/* /sección informe propietarios */
+
+	/* modal */
+	.hazTuOferta .modal {
+		height: 500px;
+	}
+
+	.modalContainer form .colIzq, .modalContainer form .colDcha {
+		width: 50% !important;
+		float: left !important;
+	}
+
+	article.offers #leyenda form .line .desplegado span, article.offers #leyenda form .line ul li {
+		width: 100%;
+	}
+
+	#detalle #sliderPropiedad .img img {
+		max-width: 645px;
+	}
+}
+
+@media screen and (min-width: 1260px) {
+	#buscador,  aside > div, footer #datosContactoFooter, footer #creditos, #navegacion nav, #slider .slider .slide .contenedor, #navegacion ul#favoritos > li > div > div > div, .headerResults, .paginacion, .informe_propietario, #aviso_cookie div {
+		width: 1220px;
+	}
+
+	#logo, header .datosContacto {
+		width: 1220px;
+		margin-left: -610px;
+	}
+
+	#navegacion nav ul#favoritos > li > a span {
+		display: inline-block !important;
+		margin-left: 2px;
+	}
+
+	#navegacion ul#favoritos > li > div > div > div > ul > li {
+		width: 154px;
+	}
+
+	/* box propiedades */
+	.box_vertical .promocion, .box_vertical .venta, .box_vertical .alquiler {
+		width: 23.3%;
+	}
+
+	.box_vertical #listOffers .promocion, .box_vertical #listOffers .venta, .box_vertical #listOffers .alquiler {
+		width: 22.8%;
+	}
+
+	/* ficha */
+	.sliderPropiedad {
+		width: 605px;
+	}
+	/* /ficha */
+
+	/* resultados */
+	article.offers #leyenda form .line.filtro_precio div input, article.offers #leyenda form .line.filtro_m2 div input {
+		width: 100px;
+	}
+
+	/* modal */
+	.hazTuOferta .modal {
+		height: 500px;
+	}
+
+	.modalContainer form .colIzq, .modalContainer form .colDcha {
+		width: 50% !important;
+		float: left !important;
+	}
+
+	article.offers #leyenda form .line .desplegado span, article.offers #leyenda form .line ul li {
+		width: 48%;
+	}
+
+	#detalle #sliderPropiedad .img img {
+		max-width: 835px;
+	}
+}
+
+@media print {
+	header, #buscador, .headerResults, .actionBar, .offers, footer #datosContactoFooter div.socialLinks, #creditos, .tabs, #aviso_cookie, footer, .miniaturas, #formMasInfo, .sliderPropiedad .sliderPrincipal > a, #detalle #ficha div.colDch {
+		display: none !important;
+	}
+
+	article.infoAgencia {
+		display: table !important;
+		width: 750px;
+	}
+
+	.sliderPropiedad .sliderPrincipal .img img {
+		width: 750px;
+	}
+
+	.detallesFicha, article.infoAgencia address ul li {
+		color: #292929;
+	}
+
+	#detalle #ficha div.colDch, #detalle .colIzq .detallesFicha, .sliderPropiedad {
+		width: 750px;
+	}
+
+	#detalle #ficha .header, #detalle #ficha div.colIzq {
+		margin-bottom: 10px;
+	}
+
+	#detalle #ficha div .detallesFicha ul li {
+		width:  240px;
+	}
+
+	#etiqueta .etiqueta {
+		font-weight: bold;
+		font-size: 20px;
+	}
+
+	#detalle #ficha .header .headerTitulo {
+		border-bottom: 2px solid #292929;
+	}
+}

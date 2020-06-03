@@ -1,0 +1,10 @@
+/* buscador*/
+#buscador > div {background: rgba(0,0,0,0.70) !important;}
+#buscador .tabs li a {color: #c5c5c5;background: rgba(0,0,0,0.50) !important;}
+#buscador .tabs li.activo a {background: rgba(0,0,0,0.70) !important;color: #fff;}
+/* tops */
+article#mainText > div {background: rgba(0,0,0,0.70) !important;}
+article#mainText h2 {background: none;color: #fff;}
+/* mailing list */
+aside {background: #626262;background-position: center 50px !important;background-repeat: no-repeat;border-top: 15px solid #7c7c7c;}
+aside #mailingList p, aside #mailingList form .line.checkbox p a {color: #fff;}

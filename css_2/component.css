@@ -1,0 +1,117 @@
+.grid {
+  /*max-width: 1200px;
+  margin: 0 auto;*/
+  list-style: none;
+  text-align: left;
+}
+
+.grid li {
+  display: inline-block;
+  width: 306px;
+  margin: 0 5px 20px 5px;
+  /*padding: 20px;*/
+  text-align: left;
+  min-height: 310px;
+  border: 3px solid #e0e0e0;
+  position: relative;
+  vertical-align: top;
+  background: #fff;
+}
+.grid li .subtitulo{  margin: 0px 2px; text-align: center;font-weight: bold;color: #0098dd;}
+.grid li .titulo_destacado{padding: 15px 10px 5px 10px;min-height: 82px;color:#0098dd;}
+.grid li .titulo_destacado h3{font-size: 1.7em;font-weight:bold;text-align: center;}
+.grid li .datos{min-height: 72px;}
+.grid li .titulo_destacado a{color: #155690;}
+.grid li .titulo_destacado a:hover{color:#2897ae;}
+.grid figure {
+	margin: 0;
+	position: relative;
+}
+
+.grid figure img {
+	width: 100%;
+	height: auto;
+	display: block;
+	position:relative;
+	/*position: absolute;*/
+	/*clip: rect(0px,324px,243px,0px);*/
+}
+.grid figure  img.loguitos {width: 27px;display:inline-block;top: 60px;}
+.grid figure  img.banderitas {width: 20px;display:inline-block;top: 50px;}
+.grid figcaption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px;
+	background: rgba(40, 151, 174, 0.8);
+
+}
+
+.grid figcaption h3 {margin: 0;padding: 0;color: #fff;}
+.grid figcaption span{color:#fff;  font-size: 12px;line-height: 21px;}
+.grid figcaption a {
+	text-align: center;
+	font-weight: bold;
+	padding: 5px 10px;
+	border-radius: 2px;
+	display: inline-block;
+	background: #0088CC;
+	color: #fff;
+}
+
+/* Individual Caption Styles */
+
+/* Caption Style 3 */
+.cs-style-3 figure {
+	overflow: hidden;
+	width: 100%;
+	height: 243px;
+}
+
+.cs-style-3 figure img {
+	-webkit-transition: -webkit-transform 0.4s;
+	-moz-transition: -moz-transform 0.4s;
+	transition: transform 0.4s;
+}
+
+.no-touch .cs-style-3 figure:hover img,
+.cs-style-3 figure.cs-hover img {
+	-webkit-transform: translateY(-50px);
+	-moz-transform: translateY(-50px);
+	-ms-transform: translateY(-50px);
+	transform: translateY(-50px);
+}
+
+.cs-style-3 figcaption {
+	height: 100px;
+	width: 100%;
+	top: auto;
+	bottom: 0px;
+	opacity: 0;
+	-webkit-transform: translateY(100%);
+	-moz-transform: translateY(100%);
+	-ms-transform: translateY(100%);
+	transform: translateY(100%);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.1s 0.3s;
+	-moz-transition: -moz-transform 0.4s, opacity 0.1s 0.3s;
+	transition: transform 0.4s, opacity 0.1s 0.3s;
+}
+
+.no-touch .cs-style-3 figure:hover figcaption,
+.cs-style-3 figure.cs-hover figcaption {
+	opacity: 1;
+	-webkit-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+	-ms-transform: translateY(0px);
+	transform: translateY(0px);
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.1s;
+	-moz-transition: -moz-transform 0.4s, opacity 0.1s;
+	transition: transform 0.4s, opacity 0.1s;
+}
+
+.cs-style-3 figcaption a {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+.cs-style-3 figcaption a:hover {background: #003EfC}

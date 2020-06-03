@@ -1,0 +1,158 @@
+.ib-container{
+	position: relative;
+	display: block;
+	text-align:center;
+}
+.ib-container:before,
+.ib-container:after {
+    content:"";
+    display:table;
+}
+.ib-container:after {
+    clear:both;
+}
+.ib-container .anuncio{
+	display: inline-block;
+	width: 230px;
+	height: 360px;
+	background: #1E1E1E;
+  border: 3px ridge #333333;
+padding:0;
+	text-align: center;
+	text-transform: none;
+	margin: 10px 3px;
+	z-index: 1;
+	-webkit-backface-visibility: hidden;
+	/*box-shadow: 
+		0px 0px 0px 10px rgba(255,255,255,1), 
+		1px 1px 3px 10px rgba(0,0,0,0.2);*/
+	-webkit-transition: 
+		opacity 0.4s linear, 
+		-webkit-transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+	-moz-transition: 
+		opacity 0.4s linear, 
+		-moz-transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+	-o-transition: 
+		opacity 0.4s linear, 
+		-o-transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+	-ms-transition: 
+		opacity 0.4s linear, 
+		-ms-transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+	transition: 
+		opacity 0.4s linear, 
+		transform 0.4s ease-in-out, 
+		box-shadow 0.4s ease-in-out;
+
+}
+.thumbnail{position: relative;width: 225px;height: 187px;overflow: hidden;}
+.thumbnail img{width: 100%;height: auto;}
+.ib-container h3 a{
+	font-size: 16px;
+	font-weight: 400;
+	color: #000;
+	color: rgba(0, 0, 0, 1);
+	text-shadow: 0px 0px 0px rgba(0, 0, 0, 1);
+	opacity: 0.8;
+}
+.ib-container .anuncio .titulo{border-top: 1px solid #e0e0e0;  padding-bottom: 13px;min-height: 50px;}
+.ib-container .anuncio .ubicacion{border-bottom: 1px solid #e0e0e0;min-height: 36px;color: #FDC609;}
+.ib-container .anuncio .datos{min-height:36px;padding-top: 0px;}
+.ib-container .anuncio .datos span{color: #CCCCCC;}
+.ib-container .anuncio .titulo span{
+font-size: 1.5em;
+  font-family: 'Playball', cursive;
+  padding: 10px 6px;
+  display: block;
+  color: #FDC609;
+  text-shadow: 0px 0px 0px rgba(160, 160, 160, 1);
+  opacity: 1;
+}
+.ib-container .anuncio p{
+	font-family: Verdana, sans-serif;
+	font-size: 10px;
+	line-height: 13px;
+	color: #333;
+	color: rgba(51, 51, 51, 1);
+	text-shadow: 0px 0px 0px rgba(51, 51, 51, 1);
+	opacity: 0.8;
+}
+.ib-container h3 a,
+.ib-container .anuncio .titulo span,
+.ib-container .anuncio p{
+	-webkit-transition: 
+		opacity 0.2s linear, 
+		text-shadow 0.5s ease-in-out, 
+		color 0.5s ease-in-out;
+	-moz-transition: 
+		opacity 0.2s linear, 
+		text-shadow 0.5s ease-in-out, 
+		color 0.5s ease-in-out;
+	-o-transition: 
+		opacity 0.2s linear, 
+		text-shadow 0.5s ease-in-out, 
+		color 0.5s ease-in-out;
+	-ms-transition: 
+		opacity 0.2s linear, 
+		text-shadow 0.5s ease-in-out, 
+		color 0.5s ease-in-out;
+	transition: 
+		opacity 0.2s linear, 
+		text-shadow 0.5s ease-in-out, 
+		color 0.5s ease-in-out;
+}
+/* Hover Style for all the items: blur, scale down*/
+.ib-container .anuncio.blur{
+	/*box-shadow: 0px 0px 20px 10px rgba(255,255,255,1);*/
+	-webkit-transform: scale(0.9);
+	-moz-transform: scale(0.9);
+	-o-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	transform: scale(0.9);
+	opacity: 0.7;
+}
+.ib-container .anuncio.blur h3 a{
+	text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+	color: rgba(0, 0, 0, 0);
+	opacity: 0.5;
+}
+.ib-container .anuncio.blur .titulo span,
+.ib-container .anuncio.blur .ubicacion span
+{
+	text-shadow: 0px 0px 10px rgba(253, 198, 9, 0.9);
+	color: rgba(0, 0, 0, 0.2);
+	opacity: 0.5;
+}
+.ib-container .anuncio.blur .datos span{
+	text-shadow: 0px 0px 10px rgba(204, 204, 204, 0.9);
+	color: rgba(0, 0, 0, 0.2);
+	opacity: 0.5;
+}
+.ib-container .anuncio.blur  p{
+	text-shadow: 0px 0px 10px rgba(51, 51, 51, 0.9);
+	color: rgba(51, 51, 51, 0);
+	opacity: 0.5;
+}
+
+/* Hover Style for single item: scale up */
+.ib-container .anuncio.active{
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	transform: scale(1.2);
+	box-shadow: 1px 11px 15px 10px rgba(0,0,0,0.4);
+	z-index: 100;	
+	opacity: 1;
+}
+.ib-container .anuncio.active h3 a,
+.ib-container .anuncio.active .titulo span,
+.ib-container .anuncio.active p{
+	opacity; 1;
+}
+
+.loguitos{margin: 5px 0;}
+.loguitos img{margin: 0px 5px;}

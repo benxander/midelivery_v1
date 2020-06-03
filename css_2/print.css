@@ -1,0 +1,41 @@
+/*
+* { outline: 2px dotted red }
+* * { outline: 2px dotted green }
+* * * { outline: 2px dotted orange }
+* * * * { outline: 2px dotted blue }
+* * * * * { outline: 1px solid red }
+* * * * * * { outline: 1px solid green }
+* * * * * * * { outline: 1px solid orange }
+* * * * * * * * { outline: 1px solid blue }
+*/
+@media print {
+	body{color#000;}
+	h2 a{color#000;}
+	.cintillo{color:#000;  background: rgb(180, 199, 223);  text-shadow: none;}
+	.logo {width: 40%;}
+	.inmueble, h1, .inmueble .datos_proyecto{margin:0}
+    .rmm, #flags, .busqueda, .a_demo_four, .rg-view, .rg-thumbs, .rg-caption-wrapper, #rg-gallery,
+	#google_translate_element, #redes, .fotos, #mapa-google, #breve-descripcion, .titulo-qr,
+	.contenedor_der, .nav, .conversor, .contenedora{ display: none!important; }
+	.impresion{display:block}
+	.principal, .modelo, .titulo{width:100%}
+	#datos_anuncio, .contenedor_izq {  margin-left: 0px;width:100%;}
+	/*.datos_anuncio_dato{width:300px}*/
+	.location{text-align:left;}
+	.rg-image img{width:40%;float:left;}
+	h1, .price, .precio{font-size: 18px;font-weight: normal; text-shadow: none;text-align:left;}
+	#qr { margin-top: 0px; float:none!important;display:inline-block;}
+	#mapa-imprimir {display:block;}
+	#mapa-imprimir img{width:400px;}
+	#qr img{width:150px;}
+	.datos_anuncio_label, .precio{display: inline;}
+	#datos_anuncio, #foto_imp{display:inline-block;}
+
+	.content_mapa{display:inline-block;margin:10px}
+	.contenedor_izq, #datos_anuncio, .contenedora, .secundario{float:none!important;}
+	.saltopagina{ display:block; page-break-before:always!important; }
+	.salto{ page-break-after:always; float:none!important;}
+	.columna{display:inline-block; width:300px; vertical-align:top;}
+	.columna2{display:inline-block}
+	.fotos_imprimir{width:140px; vertical-align:top; margin-bottom:5px}
+}

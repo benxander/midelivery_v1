@@ -1,0 +1,176 @@
+/****************************************************************************/
+/*      MEDIAS
+/*****************************************************************************/
+/* For larger displays */
+@media (min-width: 1400px) {
+
+}
+@media (min-width: 1366px) {
+
+}
+@media (min-width: 1200px) {
+	.bx-wrapper .bx-caption span {padding: 8px!important;}
+	.footer-container #footer {width: 98%!important;}
+
+}
+@media (max-width: 1290px) {
+.ancho_centrado{width:96%;}
+	.py_der{width:28%!important;}
+
+
+	.secundario{width:36%}
+	.mapa, .modelo{width:100%!important;}
+}
+@media (max-width: 1240px) {
+
+	.contenedor_medio{width:65%;}
+}
+@media (max-width: 1168px) {
+.ancho_centrado, .middle{width:97%;}
+
+	.py_der{width:28%!important;}
+}
+@media (max-width: 1080px){
+
+}
+/* For PC - all devices and responsive browser windows **/
+@media (max-width: 1086px) {
+.contenedor_izq{width:68%;}
+}
+
+@media (max-width: 1024px) {
+	.container { width:100%;}
+	#cabecera_izquierda {width: 99%;}
+	.container > header img {width: 96%;}
+	.container_12{ width: 98%;}
+	.grid_12{ width: 98%; }
+	.desta  li{font-size: 1em;}
+	/*.desta ul {padding: 0 0 0 30px;}*/
+	#info{width:90%;}
+	.tamano_contacto {width:260px;}
+	.contenedor{width: 100%;min-height:850px;}
+	#patrocinados{width: 275px;margin-right: 0px!important;}
+	.busqueda{width:98%;}
+
+	.banner_lateral {width: 220px;float: left;margin: 2px;}
+	img.publicidad{display: inline-block;}
+	.contact-form{padding:10px}
+	#navegacion ul#anunciate { position: absolute;right: 5px;bottom: 56px;}
+
+}
+@media (max-width: 960px) {
+	#info{width:99%;}
+	.container > header {padding: 0 0em 0em!important;}
+	.banner_lateral{width: 200px;}
+	form.form-datos input, form.form-datos textarea {width: 95%;}
+	.contacto{width:97%; margin:6px;}
+	.formulario p{font-size:1.8em!important;}
+
+	.py_der{width:31%;}
+}
+@media (max-width: 800px) {
+	.titulo_pies {font-size:12px;}
+	/*.desta ul {padding: 0 0 0 20px;}*/
+	#info .info-inner4{width:50%;}
+	.tamano_contacto {width:190px;}
+	.contenedor_izq{width:98%;}
+	.contenedor_der{width:98%!important;}
+	.rg-image img{height:auto!important;}
+	.mapa, .modelo{width: 96%!important;}
+	#datos_anuncio{width:100%}
+	.publicidad {display: inline-block; width: 40%;}
+	.contact-form{padding:15px}
+	.contenedora{width:100%}
+	#navegacion nav{padding:0!important;}
+	.contenedor_medio{width: 98%;}
+	#patrocinados{width: 98%;  margin: 0;  padding-left: 5px;}
+}
+@media (max-width: 767px){
+	#navegacion ul#anunciate {right: 0px;bottom: 0;}
+
+}
+/* For smaller displays like laptops */
+@media (max-width: 732px) {
+	#mosaico img {width: 47%;}
+	.tamano_contacto {width:190px;}
+	img.publicidad{width: 270px;}
+	.morph-button-inflow-2 {	top: 80px!important;left: 30%!important;}
+	.caja-redes{width:initial!important;}
+	#caracteristicas td{float: left;min-width: 220px;}
+}
+/* For tablets & smart phones */
+@media (max-width: 644px) {
+	.bx-wrapper .bx-caption span {padding: 6px!important;}
+	#contenedor{width:90%!important;}
+	.contenedor{min-height:800px;}
+	#mapa{width:100%;}
+	.mapa, .modelo{display: inline-block;}
+	.telefono{ bottom: 5px!important;}
+	.cont_imagen{float:initial;}
+	.banner_lateral{width: 180px;margin: 2px;}
+	img.publicidad{width: 250px;}
+
+	.form-input-box {width: 100%;}
+	.flexigrid div.form-div input[type=text], .flexigrid div.form-div input[type=password], .flexigrid textarea{width: 97%!important;}
+	.video{width: 100%!important;}
+}
+@media (max-width: 600px) {
+	.proyectos .descripcion h2{margin:0px 0px 2px 0px!important;line-height: 30px!important;}
+	.titulo_pies {font-size:10px;}
+	.desta  li{font-size: 1.2em;}
+	/*.desta ul {padding: 0 0 0 15px;}*/
+	.powered{clear:both;}
+	.tamano_contacto {width:140px;}
+	img.publicidad{width: 40%;margin:10px}
+	.secundario{float:none!important;}
+	.principal, .secundario{width:100%}
+	 .inmueble{margin-left: 5px;}
+
+}
+/* smaller screen dropoff *******/
+@media only screen and (max-width: 550px) {
+	body{overflow-x:hidden}
+	.contenedor_der{width: 98%;}
+	.column{width: 100%;}
+	.form-input{width: 100%!important;}
+	#redes{width:100%;}
+	.middle_admin .ancho_centrado{width:100%;}
+}
+@media only screen and (max-width: 533px) {
+	.fuente_comun{line-height: 25px;}
+	/*.desta ul {padding: 0 0 0 5px;}*/
+	#info .info-inner1{float:left;width: 100%!important;}
+	#info .info-inner4{width:100%;}
+	.tamano_contacto {width:120px;}
+	.banner_lateral{width: 150px;}
+	img.publicidad{margin:5px}
+	#qr{display: block;text-align: center;}
+	.principal{width:99%!important;}
+	.a-btn-enviar {  left: 0; margin:0}
+	#patrocinados{display: none}
+}
+
+/* iPhone Landscape ********/
+@media only screen and (max-width: 480px) {
+	.fuente_comun{font-size:1em;}
+	.bx-wrapper .bx-caption span {font-size: .65em!important; padding: 5px!important;}
+	.tamano_contacto {width:90px;}
+	.publicidad {display: block; width: 98%;}
+	.proyectos{  text-align: center;}
+	.imagen_py {  display: block;  width: 68%;  margin: 0 auto;}
+	.descripcion{width: 100%;margin-top: 20px;}
+}
+@media only screen and (max-width: 440px) {
+	/*#info .info-inner1{width: initial!important;}*/
+	.tamano_contacto {display:none;}
+	.rg-view, .rg-thumbs{display:none}
+	.rg-view{  visibility: hidden;}
+}
+/* For Movil */
+@media (max-width: 360px) {
+	/*.desta ul {padding: 0 0 0 15px;}*/
+}
+/* iPhone portrait *******/
+@media only screen and (max-width: 320px) {
+
+}
