@@ -55,9 +55,9 @@
 				</div>
 
 				<div class="col-md-12">
-					<img id="siimage" src="<?= site_url('Secureimagetest/securimage') ?>" alt='captcha' />
+					<img id="siimage" src="<?= site_url('captcha2/securimage') ?>" alt='captcha' />
 				<!-- <img id="siimage" src="<?= site_url('captcha') ?>" alt='captcha' /> -->
-					<a tabindex="-1" style="border-style: none;" href="#" title="Refrescar Imagen" onclick="document.getElementById('siimage').src = './Secureimagetest/securimage'; this.blur(); return false"><img src="<?=base_url()?>images/boton_refrescar.png" alt="Recargar imagen" height="32" width="32" onclick="this.blur()" align="bottom" border="0" /></a>
+					<a tabindex="-1" style="border-style: none;" href="#" title="Refrescar Imagen" onclick="document.getElementById('siimage').src = './captcha2/securimage'; this.blur(); return false"><img src="<?=base_url()?>images/boton_refrescar.png" alt="Recargar imagen" height="32" width="32" onclick="this.blur()" align="bottom" border="0" /></a>
 				</div>
 				<div class="col-md-12 form-group">
 					<label for="captcha">Texto de la imagen:</label>
