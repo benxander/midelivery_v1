@@ -1,6 +1,6 @@
 <?php
 
-class Secureimagetest extends CI_Controller
+class Captcha2 extends CI_Controller
 {
 	public function __construct()
 	{

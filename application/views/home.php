@@ -328,10 +328,6 @@
 								<i class="icon-instagram" style="font-size:33px"></i>
 							</a>
 
-							<a target="_blank"
-								href="https://www.tripadvisor.es/Restaurant_Review-g187457-d3222765-Reviews-Sidreria_Salaberria_Sagardotegia-San_Sebastian_Donostia_Province_of_Guipuzcoa_Bas.html">
-								<img src="https://www.tripadvisor.es/img/cdsi/img2/branding/socialWidget/32x32_green-21690-2.png"/>
-							</a>
 
 
 					</div>
