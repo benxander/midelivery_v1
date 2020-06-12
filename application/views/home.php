@@ -225,7 +225,7 @@
 						<div class="col-md-8 col-md-offset-2">
 							<div class="probootstrap-slider-text text-center probootstrap-animate probootstrap-heading">
 							<div style="max-width:600px; margin: 0 auto;">
-								<img src="images/logo_salaberria.png" alt="Sidreria Salaberria">
+								<img src="<?=base_url('uploads/' . $imagen['logo_central'])?>" alt="Super Todotodo">
 							</div>
 							</div>
 						</div>
