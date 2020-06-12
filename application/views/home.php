@@ -203,11 +203,11 @@
 			<div id="navbar-collapse" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-left">
 					<li class="active"><a href="#" data-nav-section="home">Inicio</a></li>
-					<li><a href="#" data-nav-section="bar">Cafetería</a></li>
-					<li><a href="#" data-nav-section="restaurante">Restaurante</a></li>
-					<li><a href="#" data-nav-section="menu_sid">Carta</a></li>
-					<li><a href="#" data-nav-section="reservas">Reservas</a></li>
-					<li><a href="#" data-nav-section="ubicacion">Ubicación</a></li>
+					<li><a href="#" data-nav-section="carta-digital">Carta Digital</a></li>
+					<li><a href="#" data-nav-section="codigo-qr-pagina-web">Código QR</a></li>
+					<li><a href="#" data-nav-section="ejemplos">Ejemplos</a></li>
+					<li><a href="#" data-nav-section="pedidos">Pedidos</a></li>
+					<li><a href="#" data-nav-section="contacto">Contacto</a></li>
 				</ul>
 			</div>
 			<div id="google_translate_element" class="no_print traductor"></div>
@@ -262,16 +262,16 @@
 							<div class="sub-heading"><?=$row['contenido']?></div>
 						</div>
 						<?php
-							if($row['segmento_modulo'] === 'reservas'){
+							if($row['segmento_modulo'] === 'pedidos'){
 								$this->load->view('modulos/reserva');
 
-							}else if ( $row['segmento_modulo'] === 'carta' ){
+							}else if ( $row['segmento_modulo'] === 'ejemplos' ){
 								$this->load->view('modulos/carta');
 
-							}else if ( $row['segmento_modulo'] === 'menu_sid' ){
+							}else if ( $row['segmento_modulo'] === 'opciones' ){
 								$this->load->view('modulos/menu_sidreria');
 
-							}else if ( $row['segmento_modulo'] === 'ubicacion' ){
+							}else if ( $row['segmento_modulo'] === 'contacto' ){
 								$this->load->view('modulos/contacto');
 
 							}
