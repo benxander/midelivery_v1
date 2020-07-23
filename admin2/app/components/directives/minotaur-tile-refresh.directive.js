@@ -8,8 +8,9 @@
   /** @ngInject */
   function minotaurTileRefresh($timeout, cfpLoadingBar) {
     var directive = {
-      restrict: 'EA',
-      template: '<i class="fa fa-refresh"></i>Refresh',
+      restrict: 'E',
+      // template: '<i class="fa fa-refresh"></i>Refresh',
+      template: '<button class="btn btn-transparent"><i class="fa fa-refresh"></i></button>',
       link: function (scope, element) {
         var tile = element.parents('.tile');
         element.on('click', function(){

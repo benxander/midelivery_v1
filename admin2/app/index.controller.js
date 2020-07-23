@@ -141,18 +141,19 @@
     var arrSteps = [
         {
           cod_permiso: null,
-          element: 'minotaur-header .navbar-header',
+          element: 'minotaur-nav .nav-logo',
           intro: '<h2 class="header">El logo de su marca</h2> <p>Visualizaras tu logo desde aquí.</p>',
-        },
-        {
-          cod_permiso: null,
-          element: 'minotaur-header .main-search',
-          intro: '<h2 class="header">Buscador de pacientes</h2> <p>Busque a sus pacientes rapidamente. <br /> Desde cualquier opción siempre tendrá este cuadro visible.</p>'
+          position: 'right'
         },
         {
           cod_permiso: null,
           element: 'minotaur-header button.navigation-toggle',
           intro: '<h2 class="header">Desglosar el menú</h2> <p>Oculta o muestra el menú para mas comodidad de trabajo.</p>'
+        },
+        {
+          cod_permiso: null,
+          element: 'minotaur-header .main-search',
+          intro: '<h2 class="header">Buscador</h2> <p>Busque a sus elementos rapidamente. <br /> Desde cualquier opción siempre tendrá este cuadro visible.</p>'
         },
         {
           cod_permiso: null,
@@ -162,43 +163,37 @@
         {
           cod_permiso: 1,
           element: 'minotaur-nav .nav li.dashboard',
-          intro: '<h2 class="header">Dashboard</h2> <p> Consulta tus próximas citas, visualiza consolidados e ingresa a las funcionalidades desde los accesos directos. </p>',
+          intro: '<h2 class="header">Dashboard</h2> <p> Accesos directos. </p>',
           position: 'right'
         },
         {
           cod_permiso: 2,
-          element: 'minotaur-nav .nav li.profesional',
-          intro: '<h2 class="header">Profesionales</h2> <p> ¿Manejas un Centro Nutricionista? Gestiona a los profesionales que están a tu cargo. </p>',
+          element: 'minotaur-nav .nav li.empresa',
+          intro: '<h2 class="header">Clientes Corporativos</h2> <p> Restaurantes que adquieren el sistema. </p>',
           position: 'right'
         },
         {
           cod_permiso: 3,
-          element: 'minotaur-nav .nav li.paciente',
-          intro: '<h2 class="header">Pacientes</h2> <p> Gestiona a tus pacientes, revisa su historia clínica, compara sus atenciones, consulta su plan alimentario y mucho más. </p>',
+          element: 'minotaur-nav .nav li.carta',
+          intro: '<h2 class="header">Carta</h2> <p> Gestiona tu propia Carta digital. </p>',
           position: 'right'
         },
         {
           cod_permiso: 4,
-          element: 'minotaur-nav .nav li.citas',
-          intro: '<h2 class="header">Citas</h2> <p> - Gestiona tus citas desde nuestro potente calendario de reservas. Arrastra y suelta; es super sencillo. <br/> - Registre atenciones y genera fichas personalizados para cada usuario. <br/> - Genere las hojas de dieta del paciente </p>',
+          element: 'minotaur-nav .nav li.seccion',
+          intro: '<h2 class="header">Secciones</h2> <p> Gestiona tu propia base de datos de secciones que tendra tu carta digital. </p>',
           position: 'right'
         },
         {
           cod_permiso: 5,
-          element: 'minotaur-nav .nav li.empresa',
-          intro: '<h2 class="header">Clientes Corporativos</h2> <p> ¿Das tu servicio a clientes corporativos? Agrupa a tus pacientes por empresa y gestiona a tus clientes corporativos. </p>',
+          element: 'minotaur-nav .nav li.plato',
+          intro: '<h2 class="header">Platos</h2> <p> Gestiona tu propia base de datos de platos que incluiras en tus carta digital. </p>',
           position: 'right'
         },
         {
           cod_permiso: 6,
-          element: 'minotaur-nav .nav li.alimento',
-          intro: '<h2 class="header">Alimentos</h2> <p> Gestiona tu propia base de datos de alimentos con sus valores nutricionales. No te preocupes, tenemos gran cantidad de alimentos precargados para tí. </p>',
-          position: 'right'
-        },
-        {
-          cod_permiso: 7,
-          element: 'minotaur-nav .nav li.informe-empresarial',
-          intro: '<h2 class="header">Informe Empresarial</h2> <p> Entrega resultados. Genera reportes consolidados y gráficos estadísticos por cliente corporativo </p>',
+          element: 'minotaur-nav .nav li.usuario',
+          intro: '<h2 class="header">Usarios</h2> <p> Entrega resultados. Genera reportes consolidados y gráficos estadísticos por cliente corporativo </p>',
           position: 'right'
         },
         {
@@ -224,7 +219,7 @@
       });
     }
     $scope.CargaMenu = function() {
-      var opciones = ['opDashboard','opProfesionales','opPacientes','opCitas','opEmpresas','opAlimentos','opInformes','opConfiguracion'];
+      var opciones = ['opDashboard', 'opEmpresas','opCartas','opSecciones','opPlatos','opAlergenos','opUsuarios','opConfiguracion'];
       $scope.fArr.arrSteps = [];
       if($scope.fSessionCI.idgrupo == 1){
         $scope.fArr.valores = [true,true,true,true,true,true,true,true];

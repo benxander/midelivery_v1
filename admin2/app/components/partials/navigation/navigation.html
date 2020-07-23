@@ -26,34 +26,34 @@
         <i class="fa fa-building"></i>
       </a>
     </li>
-    <li ng-class="{'open active':$state.includes('profesional')}" ng-if="fArr.valores[1]" class="profesional">
-      <a ng-click="$state.reload();" ui-sref="profesional">
+    <li ng-class="{'open active':$state.includes('carta')}" ng-if="fArr.valores[1]" class="carta">
+      <a ng-click="$state.reload();" ui-sref="carta">
         <span class="nav-text">{{ 'Menu.CARTAS' | translate }}</span>
         <i class="fa fa-user-md"></i>
       </a>
     </li>
-    <li ng-class="{'active':$state.includes('paciente')}" ng-if="fArr.valores[2]" class="paciente">
-      <a ng-click="$state.reload();" ui-sref="paciente">
+    <li ng-class="{'active':$state.includes('seccion')}" ng-if="fArr.valores[2]" class="seccion">
+      <a ng-click="$state.reload();" ui-sref="seccion">
         <span class="nav-text">{{ 'Menu.SECCIONES' | translate }}  </span>
-        <i class="fa fa-users"></i>
+        <i class="fa fa-bar-chart-o"></i>
       </a>
     </li>
-    <li ng-class="{'active':$state.includes('citas')}" ng-if="fArr.valores[3]" class="citas">
-      <a ng-click="$state.reload();" ui-sref="citas">
+    <li ng-class="{'active':$state.includes('plato')}" ng-if="fArr.valores[3]" class="plato">
+      <a ng-click="$state.reload();" ui-sref="plato">
         <span class="nav-text">{{ 'Menu.PLATOS' | translate }}</span>
         <i class="fa fa-clock-o"></i>
       </a>
     </li>
-    <li ng-class="{'active':$state.includes('alimento')}" ng-if="fArr.valores[5]" class="alimento">
-      <a ng-click="$state.reload();" ui-sref="alimento">
+    <li ng-class="{'active':$state.includes('alergeno')}" ng-if="fArr.valores[5]" class="alergeno">
+      <a ng-click="$state.reload();" ui-sref="alergeno">
         <span class="nav-text">{{ 'Menu.ALERGENOS' | translate }}</span>
         <i class="fa fa-apple"></i>
       </a>
     </li>
-    <li ng-class="{'active':$state.includes('informe-empresarial')}" ng-if="fArr.valores[6]" class="informe-empresarial">
-      <a ng-click="$state.reload();" ui-sref="informe-empresarial">
+    <li ng-class="{'active':$state.includes('usuario')}" ng-if="fArr.valores[6]" class="usuario">
+      <a ng-click="$state.reload();" ui-sref="usuario">
         <span class="nav-text">{{ 'Menu.USUARIOS' | translate }}</span>
-        <i class="fa fa-bar-chart-o"></i>
+        <i class="fa fa-users"></i>
       </a>
     </li>
     <li ng-class="{'active':$state.includes('sys-configuracion')}" ng-if="fArr.valores[7]" class="sys-configuracion">

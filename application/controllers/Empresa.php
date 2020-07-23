@@ -12,7 +12,7 @@ class Empresa extends CI_Controller {
     }
 
 	/**
-	 * Método para listar todas la s empresas registradas.
+	 * Método para listar todas las empresas registradas.
 	 * Se usa en la vist principal de Mantenimiento de Empresas.
 	 *
 	 * @since 1.0.0 18-07-2020

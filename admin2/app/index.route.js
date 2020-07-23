@@ -21,7 +21,7 @@
         template: '<div ui-view></div>'
       })
       //login
-      .state('pages.login', { 
+      .state('pages.login', {
         url: '/login',
         templateUrl: 'app/pages/pages-login/pages-login.html',
         controller: 'LoginController',
@@ -36,59 +36,41 @@
         controller: 'EmpresaController',
         controllerAs: 'emp'
       })
-      //paciente
-      .state('paciente', {   
-        url: '/app/paciente',
-        templateUrl: 'app/pages/paciente/paciente.html',
-        controller: 'PacienteController',
-        controllerAs: 'pac' ,
-        params: {
-          search : false
-        }        
+      //carta
+      .state('carta', {
+        url: '/app/carta',
+        templateUrl: 'app/pages/carta/carta.html',
+        controller: 'CartaController as vm'
       })
-      .state('pacienteficha', {
-        url: '/app/paciente/ficha',
-        templateUrl: 'app/pages/paciente/paciente.html',
-        controller: 'PacienteController',
-        controllerAs: 'pac' ,
-        params: {
-          search : true
-        }
-      })      
-      //citas
-      .state('citas', {
-        url: '/app/citas',
-        templateUrl: 'app/pages/citas/citas.html',
-        controller: 'CitasController as vm'
-      })    
-      //alimentos 
-      .state('alimento', { 
-        url: '/app/alimento',
-        templateUrl: 'app/pages/alimento/alimento.html',
-        controller: 'AlimentoController as vm'
+
+      //secciones
+      .state('seccion', {
+        url: '/app/seccion',
+        templateUrl: 'app/pages/seccion/seccion.html',
+        controller: 'SeccionController as vm'
       })
-      //profesionales 
-      .state('profesional', { 
-        url: '/app/profesional',
-        templateUrl: 'app/pages/profesional/profesional.html',
-        controller: 'ProfesionalController as pro'
+      //alergenos
+      .state('alergeno', {
+        url: '/app/alergeno',
+        templateUrl: 'app/pages/alergeno/alergeno.html',
+        controller: 'AlergenoController as vm'
       })
-      //informe empresarial  
-      .state('informe-empresarial', { 
-        url: '/app/informe-empresarial',
-        templateUrl: 'app/pages/informe/informe-empresarial.html',
-        controller: 'InformeEmpresarialController as vm'
+      //informe empresarial
+      .state('usuario', {
+        url: '/app/usuario',
+        templateUrl: 'app/pages/usuario/usuario.html',
+        controller: 'UsuarioController as vm'
       })
-      // configuracion 
-      .state('sys-configuracion', { 
+      // configuracion
+      .state('sys-configuracion', {
         url: '/app/sys-configuracion',
         templateUrl: 'app/pages/configuracion/sys-configuracion.html',
         controller: 'ConfiguracionController as vm'
       });
-      
-    $urlRouterProvider.otherwise('/app/dashboard'); 
 
-    
+    $urlRouterProvider.otherwise('/app/dashboard');
+
+
   }
 
 })();

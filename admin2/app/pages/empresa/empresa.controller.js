@@ -67,7 +67,7 @@
         appScopeProvider: vm
       }
       vm.gridOptions.columnDefs = [
-        { field: 'idempresa', name:'idempresa', displayName: 'ID', width: 80, enableFiltering: false, },
+        { field: 'idempresa', name: 'idempresa', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC }},
         { field: 'nombre_negocio', name:'nombre_negocio', displayName: 'NOMBRE NEGOCIO', width: 200, },
         { field: 'razon_social', name:'razon_social', displayName: 'RAZON SOCIAL' },
         { field: 'telefono', name:'telefono', displayName: 'TELÉFONO', width: 150, },
