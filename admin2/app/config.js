@@ -1,0 +1,2 @@
+
+var directoryApp = 'admin2';

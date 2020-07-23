@@ -6,5 +6,6 @@ application/config/constants.php
 application/config/database.php
 assets/*
 uploads/*
+*/bower_components/*
 .vscode/
 .htaccess

@@ -1,0 +1,294 @@
+(function() {
+  'use strict';
+
+  angular
+    .module('minotaur')
+    .controller('EmpresaController', EmpresaController)
+    .service('EmpresaServices', EmpresaServices);
+
+  /** @ngInject */
+  function EmpresaController($scope,$uibModal,$timeout,$location,filterFilter,uiGridConstants,$document,alertify,EmpresaServices,pinesNotifications) {
+
+    var vm = this;
+    var params = $location.search();
+    vm.selectedItem = {};
+    vm.options = {};
+    vm.fDemo = {};
+    vm.fArr = {}; // contiene todos los arrays generados por las funciones
+
+    vm.fArr.listaPlanes = [
+      { id: 0, descripcion: '--Seleccione plan--' },
+      { id: 1, descripcion: 'CARTA DIGITAL 1' },
+      { id: 2, descripcion: 'CARTA DIGITAL 2' },
+      { id: 3, descripcion: 'CARTA DIGITAL 3' }
+    ];
+
+    vm.fArr.listaTiposPago = [
+      { id: 0, descripcion: '--Seleccione tipo pago--' },
+      { id: 1, descripcion: 'MENSUAL' },
+      { id: 2, descripcion: 'SEMESTRAL' },
+      { id: 3, descripcion: 'ANUAL' }
+    ];
+
+    vm.remove = function(scope) {
+      scope.remove();
+    };
+
+    vm.toggle = function(scope) {
+      scope.toggle();
+    };
+
+    vm.expandAll = function() {
+      vm.$broadcast('angular-ui-tree:expand-all');
+    };
+
+    // GRILLA PRINCIPAL
+      var paginationOptions = {
+        pageNumber: 1,
+        firstRow: 0,
+        pageSize: 10,
+        sort: uiGridConstants.DESC,
+        sortName: null,
+        search: null
+      };
+      vm.mySelectionGrid = [];
+      vm.gridOptions = {
+        paginationPageSizes: [10, 50, 100, 500, 1000],
+        paginationPageSize: 10,
+        enableFiltering: true,
+        enableSorting: true,
+        useExternalPagination: true,
+        useExternalSorting: true,
+        useExternalFiltering : true,
+        enableRowSelection: true,
+        enableRowHeaderSelection: false,
+        enableFullRowSelection: true,
+        multiSelect: false,
+        appScopeProvider: vm
+      }
+      vm.gridOptions.columnDefs = [
+        { field: 'idempresa', name:'idempresa', displayName: 'ID', width: 80, enableFiltering: false, },
+        { field: 'nombre_negocio', name:'nombre_negocio', displayName: 'NOMBRE NEGOCIO', width: 200, },
+        { field: 'razon_social', name:'razon_social', displayName: 'RAZON SOCIAL' },
+        { field: 'telefono', name:'telefono', displayName: 'TELÉFONO', width: 150, },
+        { field: 'contacto', name:'contacto', displayName: 'CONTACTO' },
+        { field: 'accion', name:'accion', displayName: 'ACCION', width: 80, enableFiltering: false,
+          cellTemplate:'<label class="btn btn-sm text-primary" ng-click="grid.appScope.btnEditar(row);$event.stopPropagation();" tooltip-placement="left" uib-tooltip="EDITAR"> <i class="fa fa-edit"></i> </label>'+
+          '<label class="btn btn-sm text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
+         },
+
+      ];
+      vm.gridOptions.onRegisterApi = function(gridApi) {
+        vm.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope,function(row){
+          vm.mySelectionGrid = gridApi.selection.getSelectedRows();
+        });
+        gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
+          vm.mySelectionGrid = gridApi.selection.getSelectedRows();
+        });
+        gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
+          paginationOptions.pageNumber = newPage;
+          paginationOptions.pageSize = pageSize;
+          paginationOptions.firstRow = (paginationOptions.pageNumber - 1) * paginationOptions.pageSize;
+          vm.getPaginationServerSide();
+        });
+        vm.gridApi.core.on.filterChanged( $scope, function(grid, searchColumns) {
+          var grid = this.grid;
+          paginationOptions.search = true;
+          paginationOptions.searchColumn = {
+            'nombre_negocio' : grid.columns[2].filters[0].term,
+            'razon_social' : grid.columns[3].filters[0].term,
+            'telefono' : grid.columns[4].filters[0].term,
+            'contacto' : grid.columns[5].filters[0].term,
+          };
+          vm.getPaginationServerSide();
+        });
+      }
+      paginationOptions.sortName = vm.gridOptions.columnDefs[0].name;
+      vm.getPaginationServerSide = function() {
+        vm.datosGrid = {
+          paginate : paginationOptions
+        };
+        EmpresaServices.sListarEmpresas(vm.datosGrid).then(function (rpta) {
+          vm.gridOptions.data = rpta.datos;
+          vm.gridOptions.totalItems = rpta.paginate.totalRows;
+          vm.mySelectionGrid = [];
+        });
+      }
+      vm.getPaginationServerSide();
+      /*---------- NUEvA EMPRESA--------*/
+      vm.btnNuevo = function () {
+        var modalInstance = $uibModal.open({
+          templateUrl: 'app/pages/empresa/empresa_formview_19072020.html',
+          controllerAs: 'mp',
+          size: 'lg',
+          backdropClass: 'splash splash-2 splash-ef-14',
+          windowClass: 'splash splash-2 splash-ef-14',
+          /*backdropClass: 'splash splash-ef-14',
+          windowClass: 'splash splash-ef-14',*/
+          // controller: 'ModalInstanceController',
+          controller: function($scope, $uibModalInstance, arrToModal ){
+            console.log('$scope', $scope);
+            var vm = this;
+            vm.fData = {};
+            vm.modoEdicion = false;
+            vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
+            vm.modalTitle = 'Registro de Empresas';
+            // BOTONES
+            vm.aceptar = function () {
+              EmpresaServices.sRegistrarEmpresa(vm.fData).then(function (rpta) {
+                if(rpta.flag == 1){
+                  $uibModalInstance.close(vm.fData);
+                  vm.getPaginationServerSide();
+                  var pTitle = 'OK!';
+                  var pType = 'success';
+                }else if( rpta.flag == 0 ){
+                  var pTitle = 'Advertencia!';
+                  var pType = 'warning';
+                }else{
+                  alert('Ocurrió un error');
+                }
+                pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
+              });
+            };
+            vm.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+          },
+          resolve: {
+            arrToModal: function() {
+              return {
+                getPaginationServerSide : vm.getPaginationServerSide
+              }
+            }
+          }
+        });
+      }
+      /*-------- BOTONES DE EDICION ----*/
+      vm.btnEditar = function(row){//datos personales
+        var modalInstance = $uibModal.open({
+          templateUrl: 'app/pages/empresa/empresa_formview_19072020.html',
+          controllerAs: 'mp',
+          size: 'lg',
+          backdropClass: 'splash splash-2 splash-ef-14',
+          windowClass: 'splash splash-2 splash-ef-14',
+          // controller: 'ModalInstanceController',
+          controller: function($scope, $uibModalInstance, arrToModal ){
+            var vm = this;
+            vm.fData = {};
+            vm.fData = arrToModal.seleccion;
+            // console.log("row",vm.fData);
+            vm.modoEdicion = true;
+            vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
+
+            vm.modalTitle = 'Edición de Empresas';
+            vm.aceptar = function () {
+              // console.log('edicion...', vm.fData);
+              $uibModalInstance.close(vm.fData);
+              EmpresaServices.sEditarEmpresa(vm.fData).then(function (rpta) {
+                if(rpta.flag == 1){
+                  vm.getPaginationServerSide();
+                  var pTitle = 'OK!';
+                  var pType = 'success';
+                }else if( rpta.flag == 0 ){
+                  var pTitle = 'Advertencia!';
+                  var pType = 'warning';
+                }else{
+                  alert('Ocurrió un error');
+                }
+                pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
+              });
+            };
+            vm.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+          },
+          resolve: {
+            arrToModal: function() {
+              return {
+                getPaginationServerSide : vm.getPaginationServerSide,
+                seleccion : row.entity
+              }
+            }
+          }
+        });
+      }
+      vm.btnAnular = function(row){
+        alertify.confirm("¿Realmente desea realizar la acción?", function (ev) {
+          ev.preventDefault();
+          EmpresaServices.sAnularEmpresa(row.entity).then(function (rpta) {
+            if(rpta.flag == 1){
+              vm.getPaginationServerSide();
+              var pTitle = 'OK!';
+              var pType = 'success';
+            }else if( rpta.flag == 0 ){
+              var pTitle = 'Advertencia!';
+              var pType = 'warning';
+            }else{
+              alert('Ocurrió un error');
+            }
+            pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
+          });
+        }, function(ev) {
+            ev.preventDefault();
+        });
+      }
+      if(params.param == 'nueva-empresa'){
+        vm.btnNuevo();
+      }
+  }
+  function EmpresaServices($http, $q, handle) {
+    return({
+        sListarEmpresas: sListarEmpresas,
+        sListarEmpresaCbo: sListarEmpresaCbo,
+        sRegistrarEmpresa: sRegistrarEmpresa,
+        sEditarEmpresa: sEditarEmpresa,
+        sAnularEmpresa: sAnularEmpresa,
+    });
+    function sListarEmpresas(pDatos) {
+      var datos = pDatos || {};
+      var request = $http({
+            method : "post",
+            url :  angular.patchURLCI + "Empresa/listar_empresas",
+            data : datos
+      });
+      return (request.then( handle.success,handle.error ));
+    }
+    function sListarEmpresaCbo(pDatos) {
+      var datos = pDatos || {};
+      var request = $http({
+            method : "post",
+            url :  angular.patchURLCI + "Empresa/listar_empresa_cbo",
+            data : datos
+      });
+      return (request.then( handle.success,handle.error ));
+    }
+    function sRegistrarEmpresa(pDatos) {
+      var datos = pDatos || {};
+      var request = $http({
+            method : "post",
+            url : angular.patchURLCI + "Empresa/registrar_empresa",
+            data : datos
+      });
+      return (request.then(handle.success,handle.error));
+    }
+    function sEditarEmpresa(pDatos) {
+      var datos = pDatos || {};
+      var request = $http({
+            method : "post",
+            url : angular.patchURLCI + "Empresa/editar_empresa",
+            data : datos
+      });
+      return (request.then(handle.success,handle.error));
+    }
+    function sAnularEmpresa(pDatos) {
+      var datos = pDatos || {};
+      var request = $http({
+            method : "post",
+            url : angular.patchURLCI + "Empresa/anular_empresa",
+            data : datos
+      });
+      return (request.then(handle.success,handle.error));
+    }
+  }
+})();

@@ -1,0 +1,16 @@
+{
+  "Menu": {
+    "DASHBOARD": "Dashboard",
+    "EMPRESAS": "Empresas",
+    "CARTAS": "Cartas",
+    "SECCIONES": "Secciones",
+    "PLATOS": "Platos",
+    "ALERGENOS": "Alergenos",
+    "USUARIOS": "Usuarios",
+    "ROLES": "Roles",
+    "ESTADISTICAS": "Estadísticas",
+    "INFORMES": "Informes Empresariales",
+    "CONFIGURACION": "Configuración"
+  }
+}
+
