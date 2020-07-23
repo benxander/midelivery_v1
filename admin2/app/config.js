@@ -1,2 +1,2 @@
 
-var directoryApp = 'admin2';
+var directoryApp = 'midelivery_v1';
