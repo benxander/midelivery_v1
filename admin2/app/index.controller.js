@@ -192,8 +192,20 @@
         },
         {
           cod_permiso: 6,
+          element: 'minotaur-nav .nav li.alergeno',
+          intro: '<h2 class="header">Alérgenos</h2> <p> Revisa los Alérgenos alimentarios principales. </p>',
+          position: 'right'
+        },
+        {
+          cod_permiso: 7,
           element: 'minotaur-nav .nav li.usuario',
-          intro: '<h2 class="header">Usarios</h2> <p> Entrega resultados. Genera reportes consolidados y gráficos estadísticos por cliente corporativo </p>',
+          intro: '<h2 class="header">Usuarios</h2> <p> Gestiona los usuarios del sistema </p>',
+          position: 'right'
+        },
+        {
+          cod_permiso: 7,
+          element: 'minotaur-nav .nav li.sys-configuracion',
+          intro: '<h2 class="header">Configuracion Web</h2> <p> Configura la web </p>',
           position: 'right'
         },
         {
@@ -205,7 +217,7 @@
         {
           cod_permiso: null,
           element: 'minotaur-nav .disfruta_de_la_plataforma',
-          intro: '<h2 class="header">¡Disfruta!</h2> <p> <b>¡FIN!</b> <br/> Esta plataforma ha sido hecha con mucho cariño, y estará actualizándose constantemente con nuevas funcionalidades para tí: Profesional de la Salud. :) </p>',
+          intro: '<h2 class="header">¡Disfruta!</h2> <p> <b>¡FIN!</b> <br/> Esta plataforma estará actualizándose constantemente con nuevas funcionalidades para tí. :) </p>',
           position: 'right'
         }
     ];
