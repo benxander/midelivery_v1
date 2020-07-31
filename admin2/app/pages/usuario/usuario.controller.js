@@ -17,6 +17,11 @@
 
     vm.fArr = {};
 
+    // Lista grupos
+    UsuarioServices.sListarGrupoCbo().then(function(rpta){
+      vm.fArr.listaGrupos = rpta.datos;
+    });
+
     // Grilla principal
     var paginationOptions = {
       pageNumber: 1,
@@ -44,6 +49,7 @@
     vm.gridOptions.columnDefs = [
       { field: 'idusuario', name: 'idusuario', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC } },
       { field: 'username', name: 'username', displayName: 'NOMBRE DE USUARIO' },
+      { field: 'grupo', name: 'grupo', displayName: 'GRUPO DE USUARIO', width: 150 },
       { field: 'ultimo_inicio_sesion', name: 'ultimo_inicio_sesion', displayName: 'ULT INICIO SESION', width: 130 },
 
       {
@@ -70,6 +76,7 @@
         paginationOptions.searchColumn = {
           'idusuario': grid.columns[1].filters[0].term,
           'username': grid.columns[2].filters[0].term,
+          'descripcion_gr': grid.columns[3].filters[0].term,
 
         };
         vm.getPaginationServerSide();
@@ -88,23 +95,26 @@
       });
     }
     vm.getPaginationServerSide();
-
+    // mantenimiento
     vm.btnNuevo = function () {
       var modalInstance = $uibModal.open({
-        templateUrl: 'app/pages/usuario/usuario_formview.html',
+        templateUrl: 'app/pages/usuario/usuario_formview.php',
         controllerAs: 'mp',
-        size: 'lg',
+        size: 'md',
         backdropClass: 'splash splash-2 splash-ef-14',
         windowClass: 'splash splash-2 splash-ef-14',
         /*backdropClass: 'splash splash-ef-14',
         windowClass: 'splash splash-ef-14',*/
         // controller: 'ModalInstanceController',
         controller: function ($scope, $uibModalInstance, arrToModal) {
-          console.log('$scope', $scope);
           var vm = this;
           vm.fData = {};
           vm.modoEdicion = false;
           vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
+          vm.fArr = arrToModal.fArr;
+          console.log('vm.fArr', vm.fArr);
+          vm.fData.grupo = vm.fArr.listaGrupos[0];
+
           vm.modalTitle = 'Registro de Usuarios';
           // BOTONES
           vm.aceptar = function () {
@@ -130,7 +140,8 @@
         resolve: {
           arrToModal: function () {
             return {
-              getPaginationServerSide: vm.getPaginationServerSide
+              getPaginationServerSide: vm.getPaginationServerSide,
+              fArr: vm.fArr
             }
           }
         }
@@ -146,7 +157,8 @@
         sListaUsuarioAutocomplete: sListaUsuarioAutocomplete,
         sMostrarUsuarioID: sMostrarUsuarioID,
         sCambiarClave: sCambiarClave,
-        sActualizarIntroNoMostrar: sActualizarIntroNoMostrar
+        sActualizarIntroNoMostrar: sActualizarIntroNoMostrar,
+        sListarGrupoCbo: sListarGrupoCbo
     });
     function sListarUsuarios(pDatos) {
       var datos = pDatos || {};
@@ -209,6 +221,13 @@
       var request = $http({
             method : "post",
             url : angular.patchURLCI+"Usuario/actualizar_intro_no_mostrar"
+      });
+      return (request.then(handle.success,handle.error));
+    }
+    function sListarGrupoCbo() {
+      var request = $http({
+            method : "post",
+            url : angular.patchURLCI+"Usuario/listar_grupo_cbo"
       });
       return (request.then(handle.success,handle.error));
     }

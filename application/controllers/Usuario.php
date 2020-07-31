@@ -43,6 +43,8 @@ class Usuario extends CI_Controller {
 					'idusuario' => $row['idusuario'],
 					'idgrupo' 	=> $row['idgrupo'],
 					'username' 	=> $row['username'],
+					'idgrupo' 	=> $row['idgrupo'],
+					'grupo' 	=> $row['grupo'],
 					'nombre_foto' 	=> $row['nombre_foto'],
 					'ultimo_inicio_sesion' 	=> formatoFechaReporte4($row['ultimo_inicio_sesion']),
 				)
@@ -90,7 +92,7 @@ class Usuario extends CI_Controller {
 		$arrData['message'] = 'Error al registrar los datos, inténtelo nuevamente';
     	$arrData['flag'] = 0;
     	// AQUI ESTARAN LAS VALIDACIONES
-    	if(empty($allInputs['pass']) || empty($allInputs['pass2'])){
+    	if(empty($allInputs['pass'])){
     		$arrData['message'] = 'faltan los datos de la contraseña.';
 			$arrData['flag'] = 0;
 			$this->output
@@ -107,20 +109,26 @@ class Usuario extends CI_Controller {
 			    ->set_output(json_encode($arrData));
 			return;
     	}
-    	if($allInputs['pass'] != $allInputs['pass2']){
-    		$arrData['message'] = 'Las contraseñas no son iguales.';
-			$arrData['flag'] = 0;
-			$this->output
-			    ->set_content_type('application/json')
-			    ->set_output(json_encode($arrData));
-			return;
-    	}
+
 
     	// INICIA EL REGISTRO
-		if($this->model_usuario->m_registrar($allInputs)){
+		$data = array(
+			'username' => $allInputs['username'],
+			'idconfiguracion' => 1,
+			'idgrupo' => $allInputs['grupo']['id'],
+			'pass' => do_hash($allInputs['pass'],'md5'),
+			'createdat' => date('Y-m-d H:i:s'),
+			'updatedat' => date('Y-m-d H:i:s')
+		);
+
+		if($idusuario = $this->model_usuario->m_registrar($data)){
 			$arrData['message'] = 'Se registraron los datos del usuario correctamente';
-			$arrData['datos'] = GetLastId('idusuario','usuario');
+			$arrData['datos'] = $idusuario;
     		$arrData['flag'] = 1;
+		}else{
+			$arrData['message'] = 'Ocurrió un error. Inténtelo nuevamente';
+			$arrData['datos'] = null;
+    		$arrData['flag'] = 0;
 		}
 		$this->output
 		    ->set_content_type('application/json')
@@ -214,6 +222,31 @@ class Usuario extends CI_Controller {
 		if($this->model_usuario->m_actualizar_intro_no_mostrar()){
 			$arrData['message'] = '';
     		$arrData['flag'] = 1;
+		}
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
+
+	public function listar_grupo_cbo()
+	{
+
+		$lista = $this->model_usuario->m_cargar_grupo();
+		$arrListado = array();
+		foreach ($lista as $row) {
+			array_push($arrListado,
+				array(
+					'id' => $row['idgrupo'],
+					'descripcion' => $row['descripcion_gr']
+				)
+			);
+		}
+
+    	$arrData['datos'] = $arrListado;
+    	$arrData['message'] = '';
+    	$arrData['flag'] = 1;
+		if(empty($lista)){
+			$arrData['flag'] = 0;
 		}
 		$this->output
 		    ->set_content_type('application/json')

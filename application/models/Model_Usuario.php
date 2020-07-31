@@ -6,20 +6,21 @@ class Model_usuario extends CI_Model {
 	}
 	public function m_cargar_usuarios($paramPaginate=FALSE){
 		$this->db->select("
-			idusuario,
-			idconfiguracion,
-			idgrupo,
-			username,
-			pass,
-			estado_us,
-			mostrar_info_contacto,
-			mostrar_info_cobro,
-			mostrar_intro,
-			nombre_foto,
-			ultimo_inicio_sesion
+			us.idusuario,
+			us.idconfiguracion,
+			us.username,
+			us.pass,
+			us.estado_us,
+			us.mostrar_info_contacto,
+			us.mostrar_info_cobro,
+			us.mostrar_intro,
+			us.nombre_foto,
+			us.ultimo_inicio_sesion,
+			gr.idgrupo,
+			gr.descripcion_gr AS grupo
 		", FALSE);
 		$this->db->from('usuario us');
-
+		$this->db->join('grupo gr', 'us.idgrupo = gr.idgrupo');
 		if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
 			foreach ($paramPaginate['searchColumn'] as $key => $value) {
 				if(! empty($value)){
@@ -39,6 +40,7 @@ class Model_usuario extends CI_Model {
 	public function m_count_usuarios($paramPaginate=FALSE){
 		$this->db->select('count(*) AS contador');
 		$this->db->from('usuario us');
+		$this->db->join('grupo gr', 'us.idgrupo = gr.idgrupo');
 		if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
 			foreach ($paramPaginate['searchColumn'] as $key => $value) {
 				if(! empty($value)){
@@ -86,18 +88,10 @@ class Model_usuario extends CI_Model {
 		$this->db->limit(1);
 		return $this->db->get()->row_array();
 	}
-	public function m_registrar($datos)
+	public function m_registrar($data)
 	{
-		$data = array(
-			'username' => $datos['username'],
-			'idconfiguracion' => 1,
-			'idgrupo' => 1,
-			// 'idgrupo' => $datos['idgrupo']['id'],
-			'pass' => do_hash($datos['pass'],'md5'),
-			'createdat' => date('Y-m-d H:i:s'),
-			'updatedat' => date('Y-m-d H:i:s')
-		);
-		return $this->db->insert('usuario', $data);
+		$this->db->insert('usuario', $data);
+		return $this->db->insert_id();
 	}
 	public function m_editar($datos){
 		$data = array(
@@ -139,5 +133,16 @@ class Model_usuario extends CI_Model {
 		);
 		$this->db->where('idusuario',$this->sessionVP['idusuario']);
 		return $this->db->update('usuario', $data);
+	}
+
+	public function m_cargar_grupo()
+	{
+		$this->db->select("
+			idgrupo,
+			descripcion_gr
+		", FALSE);
+		$this->db->from('grupo gr');
+		$this->db->order_by('gr.idgrupo', 'ASC');
+		return $this->db->get()->result_array();
 	}
 }
