@@ -49,10 +49,14 @@ class Empresa extends CI_Controller {
 					'contacto' 			=> $row['contacto'],
 					'email' 			=> $row['email'],
 					'idtipopago' 		=> $row['idtipopago'],
+					'idplan' 			=> $row['idplan'],
 					'estado_emp' 		=> $row['estado_emp'],
 					'codigo_postal' 	=> $row['codigo_postal'],
 					'dni_cif' 			=> $row['dni_cif'],
 					'direccion' 		=> $row['direccion'],
+					'idusuario' 		=> $row['idusuario'],
+					'descripcion_pl'	=> $row['descripcion_pl'],
+					'descripcion_tp'	=> $row['descripcion_tp']
 				)
 			);
 		}
@@ -102,7 +106,22 @@ class Empresa extends CI_Controller {
     	// AQUI ESTARAN LAS VALIDACIONES
 
     	// INICIA EL REGISTRO
-		if($this->model_empresa->m_registrar($allInputs)){
+
+		$data = array(
+			'nombre_negocio' => strtolower_total($allInputs['nombre_negocio']),
+			'razon_social' => strtoupper_total($allInputs['razon_social']),
+			'telefono' => empty($allInputs['telefono'])? NULL : $allInputs['telefono'],
+			'contacto' => empty($allInputs['contacto'])? NULL : $allInputs['contacto'],
+			'codigo_postal' => $allInputs['codigo_postal'],
+			'dni_cif' => $allInputs['dni_cif'],
+			'direccion' => $allInputs['direccion'],
+			'idtipopago' => $allInputs['tipo_pago']['id'],
+			'idplan' => $allInputs['plan']['id'],
+			'createdAt' => date('Y-m-d H:i:s'),
+			'updatedAt' => date('Y-m-d H:i:s')
+		);
+
+		if($this->model_empresa->m_registrar($data)){
 			$arrData['message'] = 'Se registraron los datos correctamente';
     		$arrData['flag'] = 1;
     		// $arrData['idempresa'] = GetLastId('idempresa','empresa');
@@ -116,7 +135,20 @@ class Empresa extends CI_Controller {
 		$arrData['message'] = 'Error al editar los datos, inténtelo nuevamente';
     	$arrData['flag'] = 0;
 
-		if($this->model_empresa->m_editar($allInputs)){
+		$data = array(
+			'nombre_negocio' => strtolower_total($allInputs['nombre_negocio']),
+			'razon_social' => strtoupper_total($allInputs['razon_social']),
+			'telefono' => empty($allInputs['telefono'])? NULL : $allInputs['telefono'],
+			'contacto' => empty($allInputs['contacto'])? NULL : $allInputs['contacto'],
+			'codigo_postal' => $allInputs['codigo_postal'],
+			'dni_cif' => $allInputs['dni_cif'],
+			'direccion' => $allInputs['direccion'],
+			'idtipopago' => $allInputs['tipo_pago']['id'],
+			'idplan' => $allInputs['plan']['id'],
+			'updatedAt' => date('Y-m-d H:i:s')
+		);
+
+		if($this->model_empresa->m_editar($data,$allInputs['idempresa'])){
 			$arrData['message'] = 'Se editaron los datos correctamente ';
     		$arrData['flag'] = 1;
 		}

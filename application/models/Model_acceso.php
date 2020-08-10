@@ -23,5 +23,15 @@ class Model_acceso extends CI_Model {
 		$this->db->limit(1);
 		return $this->db->get()->row_array();
 	}
+
+	public function m_actualizar_fecha_ultima_sesion($datos)
+	{
+		$data = array(
+			'ultimo_inicio_sesion' => date('Y-m-d H:i:s'),
+			'updatedAt' => date('Y-m-d H:i:s')
+		);
+		$this->db->where('idusuario',$datos['idusuario']);
+		return $this->db->update('usuario', $data);
+	}
 }
 ?>

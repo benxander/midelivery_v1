@@ -24,13 +24,13 @@ class Acceso extends CI_Controller {
 					$arrPerfilUsuario = array();
 					$arrPerfilUsuario = $this->model_config->m_cargar_configuracion_por_usuario($loggedUser);
 
-					$arrPerfilUsuario['nombre_foto'] = empty($arrPerfilUsuario['nombre_foto']) ? 'sin-imagen.png' : $arrPerfilUsuario['nombre_foto'];
+					$arrPerfilUsuario['nombre_foto'] = empty($arrPerfilUsuario['nombre_foto']) ? 'user.png' : $arrPerfilUsuario['nombre_foto'];
 					// GUARDAMOS EN EL LOG DE LOGEO LA SESION INICIADA.
 					//$this->model_acceso->m_registrar_log_sesion($arrPerfilUsuario);
 					// ACTUALIZAMOS EL ULTIMO LOGEO DEL USUARIO.
-					//$this->model_acceso->m_actualizar_fecha_ultima_sesion($arrPerfilUsuario);
 					$arrData['message'] = 'Usuario inició sesión correctamente';
 					if( isset($arrPerfilUsuario['idusuario']) ){
+						$this->model_acceso->m_actualizar_fecha_ultima_sesion($arrPerfilUsuario);
 						$this->session->set_userdata('sess_vp_'.substr(base_url(),-8,7),$arrPerfilUsuario);
 
 					}else{

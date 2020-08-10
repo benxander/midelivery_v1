@@ -36,19 +36,18 @@
     </li>
     <li>
       <div uib-dropdown>
-        <button id="profile" type="button" class="btn no-bg" uib-dropdown-toggle>
-          <!-- <span class="inline"> Profesional: Luis Luna </span> -->
-          <img ng-src="{{fSessionCI.directorio}}profesionales/{{fSessionCI.nombre_foto}}" class="img-responsive img-circle hidden-xs" alt="">
-          <span class="nav-text"><i class="fa fa-user"></i> {{fSessionCI.nombre}} </span>
+        <button id="profile" type="button" class="btn" uib-dropdown-toggle>
+          <img ng-src="assets/images/{{fSessionCI.nombre_foto}}" class="img-responsive img-circle hidden-xs" alt="">
+          <span class="nav-text"><i class="fa fa-user"></i> {{fSessionCI.username}} </span>
         </button>
         <div class="dropdown-menu with-arrow animated littleFadeInRight profile" uib-dropdown-menu role="menu" aria-labelledby="profile">
           <div class="media">
             <div class="media-left">
-              <img class="media-object img-circle" ng-src="{{fSessionCI.directorio}}profesionales/{{fSessionCI.nombre_foto}}" alt="">
+              <img class="media-object img-circle" ng-src="assets/images/{{fSessionCI.nombre_foto}}" alt="">
             </div>
             <div class="media-body">
-              <h4 class="text-sm uppercase-bold">{{fSessionCI.nombre}} {{fSessionCI.apellidos}}</h4>
-              <a href="javascript:;">{{fSessionCI.correo}}</a>
+              <h4 class="text-sm uppercase-bold">{{fSessionCI.empresa}}</h4>
+              <a href="javascript:;">{{fSessionCI.pagina_web}}</a>
               <ul class="list-unstyled">
                 <li><a href="javascript:;"><i class="fa fa-user"></i> {{ fSessionCI.username }} </a></li>
               </ul>

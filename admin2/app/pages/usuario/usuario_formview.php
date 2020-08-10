@@ -3,24 +3,24 @@
 </div>
 <div class="modal-body">
 	<section class="tile-body p-0">
-		<form name="formUsuario" role="form" novalidate class="form-validation">
+		<form name="formUsuario" role="form" novalidate class="form-validation" autocomplete="off">
 			<div class="row">
 
 				<div class="form-group col-xs-12">
-					<label for="username" class="control-label minotaur-label">
+					<label for="nombre" class="control-label minotaur-label">
 						Nombre de Usuario <small class="text-red">(*)</small>
 					</label>
 					<input
 						ng-model="mp.fData.username"
 						type="text"
-						name="username"
-						id="username"
+						name="nombre"
+						id="nombre"
 						class="form-control"
 						placeholder="Registre Nombre de Usuario"
 						autocomplete="off"
 						required
 					>
-					<div ng-messages="formUsuario.username.$error" ng-if="formUsuario.username.$dirty"
+					<div ng-messages="formUsuario.nombre.$error" ng-if="formUsuario.nombre.$dirty"
 						role="alert" class="help-block text-red">
 						<div ng-messages-include="app/components/templates/messages_tmpl.html"></div>
 					</div>
@@ -33,21 +33,22 @@
 
 				</div>
 
-				<div class="form-group col-xs-12">
-					<label for="password" class="control-label minotaur-label">
+				<div class="form-group col-xs-12" ng-if="!mp.modoEdicion">
+					<label for="pass" class="control-label minotaur-label">
 						Contraseña <small class="text-red">(*)</small>
 					</label>
+					<input type="text" style="display:none;">
 					<input
 						ng-model="mp.fData.pass"
-						type="pass"
-						name="password"
-						id="password"
+						type="password"
+						name="pass"
+						id="pass"
 						class="form-control"
 						placeholder="Ingrese una contraseña"
-						autocomplete="off"
+						autocomplete="new-password"
 						required
 					>
-					<div ng-messages="formUsuario.username.$error" ng-if="formUsuario.username.$dirty"
+					<div ng-messages="formUsuario.pass.$error" ng-if="formUsuario.pass.$dirty"
 						role="alert" class="help-block text-red">
 						<div ng-messages-include="app/components/templates/messages_tmpl.html"></div>
 					</div>

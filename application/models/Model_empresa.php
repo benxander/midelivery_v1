@@ -7,23 +7,29 @@ class Model_Empresa extends CI_Model {
 
 	public function m_cargar_empresas($paramPaginate=FALSE){
 		$this->db->select("
-			idempresa,
-			razon_social,
-			nombre_negocio,
-			idusuario,
-			telefono,
-			contacto,
-			email,
-			createdat,
-			updatedat,
-			idtipopago,
-			estado_emp,
-			codigo_postal,
-			dni_cif,
-			direccion
+			emp.idempresa,
+			emp.razon_social,
+			emp.nombre_negocio,
+			emp.idusuario,
+			emp.telefono,
+			emp.contacto,
+			emp.email,
+			emp.createdat,
+			emp.updatedat,
+			emp.idtipopago,
+			emp.idplan,
+			emp.estado_emp,
+			emp.codigo_postal,
+			emp.dni_cif,
+			emp.direccion,
+			emp.idusuario,
+			pl.descripcion_pl,
+			tp.descripcion_tp
 		", FALSE);
 
 		$this->db->from('empresa emp');
+		$this->db->join('plan pl', 'emp.idplan = pl.idplan','left');
+		$this->db->join('tipo_pago tp', 'emp.idtipopago = tp.idtipopago','left');
 		$this->db->where('emp.estado_emp', 1);
 		if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
 			foreach ($paramPaginate['searchColumn'] as $key => $value) {
@@ -62,33 +68,12 @@ class Model_Empresa extends CI_Model {
 		$this->db->where('emp.idconfiguracion', $this->sessionVP['idconfiguracion']);
 		return $this->db->get()->result_array();
 	}
-	public function m_registrar($datos)
+	public function m_registrar($data)
 	{
-		$data = array(
-			'nombre_negocio' => strtolower_total($datos['nombre_negocio']),
-			'razon_social' => strtoupper_total($datos['razon_social']),
-			'telefono' => empty($datos['telefono'])? NULL : $datos['telefono'],
-			'contacto' => empty($datos['contacto'])? NULL : $datos['contacto'],
-			'codigo_postal' => $datos['codigo_postal'],
-			'dni_cif' => $datos['dni_cif'],
-			'direccion' => $datos['direccion'],
-			'createdAt' => date('Y-m-d H:i:s'),
-			'updatedAt' => date('Y-m-d H:i:s')
-		);
 		return $this->db->insert('empresa', $data);
 	}
-	public function m_editar($datos){
-		$data = array(
-			'nombre_negocio' => strtolower_total($datos['nombre_negocio']),
-			'razon_social' => strtoupper_total($datos['razon_social']),
-			'telefono' => empty($datos['telefono'])? NULL : $datos['telefono'],
-			'contacto' => empty($datos['contacto'])? NULL : $datos['contacto'],
-			'codigo_postal' => $datos['codigo_postal'],
-			'dni_cif' => $datos['dni_cif'],
-			'direccion' => $datos['direccion'],
-			'updatedAt' => date('Y-m-d H:i:s')
-		);
-		$this->db->where('idempresa',$datos['idempresa']);
+	public function m_editar($data,$id){
+		$this->db->where('idempresa',$id);
 		return $this->db->update('empresa', $data);
 	}
 

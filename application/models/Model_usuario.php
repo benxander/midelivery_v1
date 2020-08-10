@@ -17,7 +17,7 @@ class Model_usuario extends CI_Model {
 			us.nombre_foto,
 			us.ultimo_inicio_sesion,
 			gr.idgrupo,
-			gr.descripcion_gr AS grupo
+			gr.descripcion_gr
 		", FALSE);
 		$this->db->from('usuario us');
 		$this->db->join('grupo gr', 'us.idgrupo = gr.idgrupo');
@@ -93,13 +93,8 @@ class Model_usuario extends CI_Model {
 		$this->db->insert('usuario', $data);
 		return $this->db->insert_id();
 	}
-	public function m_editar($datos){
-		$data = array(
-			'username' => $datos['username'],
-			'idgrupo' => $datos['idgrupo']['id'],
-			'updatedAt' => date('Y-m-d H:i:s')
-		);
-		$this->db->where('idusuario',$datos['idusuario']);
+	public function m_editar($data,$id){
+		$this->db->where('idusuario',$id);
 		return $this->db->update('usuario', $data);
 	}
 

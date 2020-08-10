@@ -15,6 +15,7 @@
       'pascalprecht.translate',
       'cfp.loadingBar',
       'ngAlertify',
+      'oitozero.ngSweetAlert',
       // 'FBAngular',
       // 'daterangepicker',
       // 'ui.sortable',

@@ -40,6 +40,9 @@
 			                <div ng-messages-include="app/components/templates/messages_tmpl.html"></div>
 			              </div>
 			            </div>
+			        </div>
+
+					<div class="row">
 			            <div class="form-group col-md-6">
 			              <label for="direccion" class="control-label minotaur-label">DIRECCIÓN <small class="text-red">(*)</small> </label>
 			              <input
@@ -129,17 +132,40 @@
 			            </div>
 
 						<div class="form-group col-md-3 mb-md ">
-							<label class="control-label mb-n"> Plan: <small class="text-danger">(*)</small> </label>
-							<select class="form-control" ng-model="fData.plan"
-								ng-options="item as item.descripcion for item in fArr.listaPlanes" required></select>
+							<label class="control-label minotaur-label"> Plan: <small class="text-danger">(*)</small> </label>
+							<select class="form-control" ng-model="mp.fData.plan"
+								ng-options="item as item.descripcion for item in mp.fArr.listaPlanes" required></select>
 						</div>
 
 						<div class="form-group col-md-3 mb-md ">
-							<label class="control-label mb-n"> Opción de Pago: <small class="text-danger">(*)</small> </label>
-							<select class="form-control" ng-model="fData.tipo_pago"
-								ng-options="item as item.descripcion for item in fArr.listaTiposPago" required></select>
+							<label class="control-label minotaur-label"> Opción de Pago: <small class="text-danger">(*)</small> </label>
+							<select class="form-control" ng-model="mp.fData.tipo_pago"
+								ng-options="item as item.descripcion for item in mp.fArr.listaTiposPago" required></select>
 						</div>
 					</div>
+
+					<div class="row">
+						<div class="form-group col-md-6 mb-md ">
+							<label class="control-label minotaur-label"> Usuario: </label>
+							<div class="input-group">
+								<span class="input-group-btn ">
+									<input type="text" class="form-control" style="width:40px;margin-right:4px;" ng-model="mp.fData.idusuario" placeholder="ID" readonly="true" />
+								</span>
+								<input
+									ng-model="mp.fData.usuario"
+									type="text"
+									class="form-control"
+									ng-enter="mp.verPopupListaUsuarios()"
+									placeholder="Presione ENTER o Seleccionar"
+									ng-change="mp.fData.idusuario=null"
+									autocomplete="off"
+								/>
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" ng-click="mp.verPopupListaUsuarios()">Seleccionar</button>
+								</span>
+							</div>
+						</div>
+		    		</div>
 		    	</div>
 
 		    </div>

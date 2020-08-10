@@ -7,7 +7,16 @@
     .service('EmpresaServices', EmpresaServices);
 
   /** @ngInject */
-  function EmpresaController($scope,$uibModal,$timeout,$location,filterFilter,uiGridConstants,$document,alertify,EmpresaServices,pinesNotifications) {
+  function EmpresaController(
+    $scope,
+    $uibModal,
+    $location,
+    uiGridConstants,
+    alertify,
+    SweetAlert,
+    EmpresaServices,
+    pinesNotifications
+  ) {
 
     var vm = this;
     var params = $location.search();
@@ -29,6 +38,8 @@
       { id: 2, descripcion: 'SEMESTRAL' },
       { id: 3, descripcion: 'ANUAL' }
     ];
+
+
 
     vm.remove = function(scope) {
       scope.remove();
@@ -68,13 +79,14 @@
       }
       vm.gridOptions.columnDefs = [
         { field: 'idempresa', name: 'idempresa', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC }},
-        { field: 'nombre_negocio', name:'nombre_negocio', displayName: 'NOMBRE NEGOCIO', width: 200, },
-        { field: 'razon_social', name:'razon_social', displayName: 'RAZON SOCIAL' },
+        { field: 'nombre_negocio', name:'nombre_negocio', displayName: 'NOMBRE NEGOCIO' },
+        // { field: 'razon_social', name:'razon_social', displayName: 'RAZON SOCIAL' },
         { field: 'telefono', name:'telefono', displayName: 'TELÉFONO', width: 150, },
-        { field: 'contacto', name:'contacto', displayName: 'CONTACTO' },
+        { field: 'descripcion_pl', name:'descripcion_pl', displayName: 'PLAN', minWidth: 150, width:150 },
+        { field: 'descripcion_tp', name: 'descripcion_tp', displayName: 'TIPO PAGO', minWidth: 120, width: 120},
         { field: 'accion', name:'accion', displayName: 'ACCION', width: 80, enableFiltering: false,
-          cellTemplate:'<label class="btn btn-sm text-primary" ng-click="grid.appScope.btnEditar(row);$event.stopPropagation();" tooltip-placement="left" uib-tooltip="EDITAR"> <i class="fa fa-edit"></i> </label>'+
-          '<label class="btn btn-sm text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
+          cellTemplate:'<label class="btn text-primary" ng-click="grid.appScope.btnEditar(row);$event.stopPropagation();" tooltip-placement="left" uib-tooltip="EDITAR"> <i class="fa fa-edit"></i> </label>'+
+          '<label class="btn text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
          },
 
       ];
@@ -116,23 +128,26 @@
         });
       }
       vm.getPaginationServerSide();
-      /*---------- NUEvA EMPRESA--------*/
+      /*---------- NUEVA EMPRESA--------*/
       vm.btnNuevo = function () {
-        var modalInstance = $uibModal.open({
-          templateUrl: 'app/pages/empresa/empresa_formview_19072020.html',
+        $uibModal.open({
+          templateUrl: 'app/pages/empresa/empresa_formview.php',
           controllerAs: 'mp',
           size: 'lg',
-          backdropClass: 'splash splash-2 splash-ef-14',
-          windowClass: 'splash splash-2 splash-ef-14',
-          /*backdropClass: 'splash splash-ef-14',
-          windowClass: 'splash splash-ef-14',*/
-          // controller: 'ModalInstanceController',
+          backdropClass: 'splash splash-2 splash-info splash-ef-12',
+          windowClass: 'splash splash-2 splash-ef-12',
+          backdrop: 'static',
+          keyboard: false,
           controller: function($scope, $uibModalInstance, arrToModal ){
             console.log('$scope', $scope);
             var vm = this;
             vm.fData = {};
             vm.modoEdicion = false;
             vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
+            vm.fArr = arrToModal.fArr;
+            vm.verPopupListaUsuarios = arrToModal.verPopupListaUsuarios;
+            vm.fData.plan = vm.fArr.listaPlanes[0];
+            vm.fData.tipo_pago = vm.fArr.listaTiposPago[0];
             vm.modalTitle = 'Registro de Empresas';
             // BOTONES
             vm.aceptar = function () {
@@ -152,13 +167,15 @@
               });
             };
             vm.cancel = function () {
-              $uibModalInstance.dismiss('cancel');
+              $uibModalInstance.close();
             };
           },
           resolve: {
             arrToModal: function() {
               return {
-                getPaginationServerSide : vm.getPaginationServerSide
+                getPaginationServerSide : vm.getPaginationServerSide,
+                verPopupListaUsuarios : vm.verPopupListaUsuarios,
+                fArr: vm.fArr,
               }
             }
           }
@@ -166,13 +183,14 @@
       }
       /*-------- BOTONES DE EDICION ----*/
       vm.btnEditar = function(row){//datos personales
-        var modalInstance = $uibModal.open({
-          templateUrl: 'app/pages/empresa/empresa_formview_19072020.html',
+        $uibModal.open({
+          templateUrl: 'app/pages/empresa/empresa_formview.php',
           controllerAs: 'mp',
           size: 'lg',
-          backdropClass: 'splash splash-2 splash-ef-14',
-          windowClass: 'splash splash-2 splash-ef-14',
-          // controller: 'ModalInstanceController',
+          backdropClass: 'splash splash-2 splash-info splash-ef-12',
+          windowClass: 'splash splash-2 splash-ef-12',
+          backdrop: 'static',
+          keyboard: false,
           controller: function($scope, $uibModalInstance, arrToModal ){
             var vm = this;
             vm.fData = {};
@@ -180,6 +198,26 @@
             // console.log("row",vm.fData);
             vm.modoEdicion = true;
             vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
+            vm.fArr = arrToModal.fArr;
+            vm.verPopupListaUsuarios = arrToModal.verPopupListaUsuarios;
+            // planes
+            var objIndex = vm.fArr.listaPlanes.filter(function (obj) {
+              return obj.id == vm.fData.idplan;
+            }).shift();
+            if (objIndex) {
+              vm.fData.plan = objIndex;
+            } else {
+              vm.fData.plan = vm.fArr.listaPlanes[0];
+            }
+            // tipo pago
+            objIndex = vm.fArr.listaTiposPago.filter(function (obj) {
+              return obj.id == vm.fData.idtipopago;
+            }).shift();
+            if (objIndex) {
+              vm.fData.tipo_pago = objIndex;
+            } else {
+              vm.fData.tipo_pago = vm.fArr.listaTiposPago[0];
+            }
 
             vm.modalTitle = 'Edición de Empresas';
             vm.aceptar = function () {
@@ -207,6 +245,8 @@
             arrToModal: function() {
               return {
                 getPaginationServerSide : vm.getPaginationServerSide,
+                verPopupListaUsuarios: vm.verPopupListaUsuarios,
+                fArr: vm.fArr,
                 seleccion : row.entity
               }
             }
@@ -232,6 +272,10 @@
         }, function(ev) {
             ev.preventDefault();
         });
+      }
+
+      vm.verPopupListaUsuarios = function(){
+        console.log('Usuarios');
       }
       if(params.param == 'nueva-empresa'){
         vm.btnNuevo();
