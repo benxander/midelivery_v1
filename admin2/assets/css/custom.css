@@ -427,7 +427,7 @@ section.tile-body{
     border-radius: 5px;
 }
 
-.waterMarkEmptyData {
+/* .waterMarkEmptyData {
     position: absolute;
     top : 80px;
     opacity: 0.25;
@@ -435,7 +435,7 @@ section.tile-body{
     width: 100%;
     text-align: center;
     z-index: 1000;
-}
+} */
 
 
 .card.card-container-2{

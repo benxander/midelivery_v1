@@ -155,13 +155,13 @@
 									ng-model="mp.fData.usuario"
 									type="text"
 									class="form-control"
-									ng-enter="mp.verPopupListaUsuarios()"
+									ng-enter="mp.verPopupListaUsuarios(mp.fData)"
 									placeholder="Presione ENTER o Seleccionar"
 									ng-change="mp.fData.idusuario=null"
 									autocomplete="off"
 								/>
 								<span class="input-group-btn">
-									<button class="btn btn-default" type="button" ng-click="mp.verPopupListaUsuarios()">Seleccionar</button>
+									<button class="btn btn-default" type="button" ng-click="mp.verPopupListaUsuarios(mp.fData)">Seleccionar</button>
 								</span>
 							</div>
 						</div>

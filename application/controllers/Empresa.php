@@ -55,6 +55,7 @@ class Empresa extends CI_Controller {
 					'dni_cif' 			=> $row['dni_cif'],
 					'direccion' 		=> $row['direccion'],
 					'idusuario' 		=> $row['idusuario'],
+					'usuario' 			=> $row['username'],
 					'descripcion_pl'	=> $row['descripcion_pl'],
 					'descripcion_tp'	=> $row['descripcion_tp']
 				)
@@ -112,6 +113,7 @@ class Empresa extends CI_Controller {
 			'razon_social' => strtoupper_total($allInputs['razon_social']),
 			'telefono' => empty($allInputs['telefono'])? NULL : $allInputs['telefono'],
 			'contacto' => empty($allInputs['contacto'])? NULL : $allInputs['contacto'],
+			'idusuario' => empty($allInputs['idusuario'])? NULL : $allInputs['idusuario'],
 			'codigo_postal' => $allInputs['codigo_postal'],
 			'dni_cif' => $allInputs['dni_cif'],
 			'direccion' => $allInputs['direccion'],
@@ -140,6 +142,7 @@ class Empresa extends CI_Controller {
 			'razon_social' => strtoupper_total($allInputs['razon_social']),
 			'telefono' => empty($allInputs['telefono'])? NULL : $allInputs['telefono'],
 			'contacto' => empty($allInputs['contacto'])? NULL : $allInputs['contacto'],
+			'idusuario' => empty($allInputs['idusuario'])? NULL : $allInputs['idusuario'],
 			'codigo_postal' => $allInputs['codigo_postal'],
 			'dni_cif' => $allInputs['dni_cif'],
 			'direccion' => $allInputs['direccion'],

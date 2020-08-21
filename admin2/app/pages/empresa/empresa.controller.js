@@ -15,6 +15,7 @@
     alertify,
     SweetAlert,
     EmpresaServices,
+    UsuarioServices,
     pinesNotifications
   ) {
 
@@ -80,11 +81,12 @@
       vm.gridOptions.columnDefs = [
         { field: 'idempresa', name: 'idempresa', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC }},
         { field: 'nombre_negocio', name:'nombre_negocio', displayName: 'NOMBRE NEGOCIO' },
-        // { field: 'razon_social', name:'razon_social', displayName: 'RAZON SOCIAL' },
+        { field: 'usuario', name:'username', displayName: 'USUARIO', width: 120 },
         { field: 'telefono', name:'telefono', displayName: 'TELÉFONO', width: 150, },
         { field: 'descripcion_pl', name:'descripcion_pl', displayName: 'PLAN', minWidth: 150, width:150 },
         { field: 'descripcion_tp', name: 'descripcion_tp', displayName: 'TIPO PAGO', minWidth: 120, width: 120},
-        { field: 'accion', name:'accion', displayName: 'ACCION', width: 80, enableFiltering: false,
+        {
+          field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false,
           cellTemplate:'<label class="btn text-primary" ng-click="grid.appScope.btnEditar(row);$event.stopPropagation();" tooltip-placement="left" uib-tooltip="EDITAR"> <i class="fa fa-edit"></i> </label>'+
           '<label class="btn text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
          },
@@ -274,8 +276,60 @@
         });
       }
 
-      vm.verPopupListaUsuarios = function(){
+      vm.verPopupListaUsuarios = function(data){
         console.log('Usuarios');
+        $uibModal.open({
+          templateUrl: 'app/pages/configuracion/plantilla_popup_grilla.php',
+          controllerAs: 'mp',
+          size: 'md',
+          controller: function($scope,$uibModalInstance, arrToModal){
+            var vm = this;
+            vm.titulo = 'Usuario.';
+
+            vm.fData = arrToModal.fData;
+            console.log('fdata', vm.fData);
+            vm.mySelectionComboGrid = [];
+            vm.gridComboOptions = {
+              enableFiltering: false,
+              enableSorting: false,
+              useExternalPagination: false,
+              useExternalSorting: false,
+              useExternalFiltering: false,
+              enableRowSelection: true,
+              enableRowHeaderSelection: false,
+              enableFullRowSelection: true,
+              multiSelect: false,
+              appScopeProvider: vm
+            }
+            vm.gridComboOptions.columnDefs = [
+              { field: 'id', displayName: 'ID', maxWidth: 80 },
+              { field: 'descripcion', displayName: 'DESCRIPCIÓN' }
+
+            ];
+            vm.gridComboOptions.onRegisterApi = function (gridApi) {
+              vm.gridApi = gridApi;
+              gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+                vm.mySelectionComboGrid = gridApi.selection.getSelectedRows();
+                vm.fData.idusuario = vm.mySelectionComboGrid[0].id;
+                vm.fData.usuario = vm.mySelectionComboGrid[0].descripcion;
+
+                $uibModalInstance.close();
+              });
+            }
+
+            UsuarioServices.sListarUsuarioDisp().then(function (rpta) {
+              vm.gridComboOptions.data = rpta.datos;
+              vm.mySelectionComboGrid = [];
+            });
+          },
+          resolve:{
+            arrToModal: function(){
+              return {
+                fData : data
+              }
+            }
+          }
+        });
       }
       if(params.param == 'nueva-empresa'){
         vm.btnNuevo();

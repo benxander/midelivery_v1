@@ -140,4 +140,18 @@ class Model_usuario extends CI_Model {
 		$this->db->order_by('gr.idgrupo', 'ASC');
 		return $this->db->get()->result_array();
 	}
+
+	public function m_cargar_usuario_empresa_disp()
+	{
+		$this->db->select("
+			us.idusuario,
+			us.username
+		", FALSE);
+		$this->db->from('usuario us');
+		$this->db->join('empresa emp', 'us.idusuario = emp.idusuario','left');
+		$this->db->where('us.idgrupo', '2');
+		$this->db->where('emp.idempresa IS NULL');
+		$this->db->order_by('us.idusuario', 'ASC');
+		return $this->db->get()->result_array();
+	}
 }

@@ -10,7 +10,6 @@ class Model_Empresa extends CI_Model {
 			emp.idempresa,
 			emp.razon_social,
 			emp.nombre_negocio,
-			emp.idusuario,
 			emp.telefono,
 			emp.contacto,
 			emp.email,
@@ -22,14 +21,16 @@ class Model_Empresa extends CI_Model {
 			emp.codigo_postal,
 			emp.dni_cif,
 			emp.direccion,
-			emp.idusuario,
 			pl.descripcion_pl,
-			tp.descripcion_tp
+			tp.descripcion_tp,
+			us.idusuario,
+			us.username
 		", FALSE);
 
 		$this->db->from('empresa emp');
 		$this->db->join('plan pl', 'emp.idplan = pl.idplan','left');
 		$this->db->join('tipo_pago tp', 'emp.idtipopago = tp.idtipopago','left');
+		$this->db->join('usuario us', 'emp.idusuario = us.idusuario','left');
 		$this->db->where('emp.estado_emp', 1);
 		if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
 			foreach ($paramPaginate['searchColumn'] as $key => $value) {
