@@ -6,11 +6,13 @@
     "SECCIONES": "Secciones",
     "PLATOS": "Platos",
     "ALERGENOS": "Alergenos",
-    "USUARIOS": "Usuarios",
     "ROLES": "Roles",
     "ESTADISTICAS": "Estadísticas",
     "INFORMES": "Informes Empresariales",
-    "CONFIGURACION": "Configuración"
+    "CONFIGURACION": "Configuración",
+    "SEGURIDAD": "Seguridad",
+    "USUARIOS": "Usuarios",
+    "GRUPOS": "Grupos"
   }
 }
 
