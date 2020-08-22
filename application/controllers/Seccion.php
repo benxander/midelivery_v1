@@ -58,4 +58,63 @@ class Seccion extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode($arrData));
 	}
+
+	// MANTENIMIENTO
+	public function registrar_seccion()
+	{
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+		$arrData['message'] = 'Error al registrar los datos, inténtelo nuevamente';
+    	$arrData['flag'] = 0;
+
+
+    	// INICIA EL REGISTRO
+		$data = array(
+			'descripcion_sec' => strtoupper_total($allInputs['descripcion_sec']),
+			'imagen_sec' => null
+		);
+
+		if($idseccion = $this->model_seccion->m_registrar($data)){
+			$arrData['message'] = 'Se registraron los datos correctamente';
+			$arrData['datos'] = $idseccion;
+    		$arrData['flag'] = 1;
+		}else{
+			$arrData['message'] = 'Ocurrió un error. Inténtelo nuevamente';
+			$arrData['datos'] = null;
+    		$arrData['flag'] = 0;
+		}
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
+	public function editar_seccion(){
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+		$arrData['message'] = 'Error al editar los datos, inténtelo nuevamente';
+    	$arrData['flag'] = 0;
+
+		$data = array(
+			'descripcion_sec' => strtoupper_total($allInputs['descripcion_sec']),
+			'imagen_sec' => null
+		);
+
+		if($this->model_seccion->m_editar($data,$allInputs['idseccion'])){
+			$arrData['message'] = 'Se editaron los datos correctamente ';
+    		$arrData['flag'] = 1;
+		}
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
+	public function anular_seccion(){
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+		$arrData['message'] = 'Error al anular los datos, inténtelo nuevamente';
+    	$arrData['flag'] = 0;
+
+		if($this->model_seccion->m_anular($allInputs)){
+			$arrData['message'] = 'Se anularon los datos correctamente';
+    		$arrData['flag'] = 1;
+		}
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
 }

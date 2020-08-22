@@ -112,7 +112,7 @@
         backdropClass: 'splash splash-2 splash-info splash-ef-12',
         windowClass: 'splash splash-2 splash-ef-12',
         backdrop: 'static',
-        keyboard: false,
+        keyboard: true,
         controller: function ($scope, $uibModalInstance, arrToModal) {
           var vm = this;
           vm.fData = {};
@@ -163,10 +163,10 @@
         backdropClass: 'splash splash-2 splash-info splash-ef-12',
         windowClass: 'splash splash-2 splash-ef-12',
         backdrop: 'static',
-        keyboard: false,
+        keyboard: true,
         controller: function ($scope, $uibModalInstance, arrToModal) {
           var vm = this;
-          vm.fData = row.entity;
+          vm.fData = angular.copy(row.entity);
           vm.modoEdicion = true;
           vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
           vm.fArr = arrToModal.fArr;

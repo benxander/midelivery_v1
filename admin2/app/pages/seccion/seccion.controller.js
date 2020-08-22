@@ -10,12 +10,8 @@
 	function SeccionController(
 		$scope,
 		$uibModal,
-		$timeout,
-		$location,
-		filterFilter,
 		uiGridConstants,
-		$document,
-		alertify,
+		SweetAlert,
 		SeccionServices,
 		pinesNotifications
 	) {
@@ -52,7 +48,7 @@
 			{ field: 'descripcion_sec', name: 'descripcion_sec', displayName: 'NOMBRE DE SECCION' },
 
 			{
-				field: 'accion', name: 'accion', displayName: 'ACCION', width: 80, enableFiltering: false,
+				field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false,
 				cellTemplate: '<label class="btn text-primary" ng-click="grid.appScope.btnEditar(row);$event.stopPropagation();" tooltip-placement="left" uib-tooltip="EDITAR"> <i class="fa fa-edit"></i> </label>' +
 					'<label class="btn text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
 			},
@@ -93,13 +89,143 @@
 			});
 		}
 		vm.getPaginationServerSide();
+		// mantenimiento
+		vm.btnNuevo = function () {
+			$uibModal.open({
+				templateUrl: 'app/pages/seccion/seccion_formview.php',
+				controllerAs: 'mp',
+				size: 'md',
+				backdropClass: 'splash splash-2 splash-info splash-ef-12',
+				windowClass: 'splash splash-2 splash-ef-12',
+				backdrop: 'static',
+				keyboard: true,
+				controller: function ($scope, $uibModalInstance, arrToModal) {
+					var vm = this;
+					vm.fData = {};
+					vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
 
+					vm.modalTitle = 'Registro de Secciones';
+					// BOTONES
+					vm.aceptar = function () {
+						SeccionServices.sRegistrarSeccion(vm.fData).then(function (rpta) {
+							if (rpta.flag == 1) {
+								$uibModalInstance.close();
+								vm.getPaginationServerSide();
+								var pTitle = 'OK!';
+								var pType = 'success';
+							} else if (rpta.flag == 0) {
+								var pTitle = 'Advertencia!';
+								var pType = 'warning';
+							} else {
+								alert('Ocurrió un error');
+							}
+							pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
+						});
+					};
+					vm.cancel = function () {
+						$uibModalInstance.close();
+					};
+				},
+				resolve: {
+					arrToModal: function () {
+						return {
+							getPaginationServerSide: vm.getPaginationServerSide,
+						}
+					}
+				}
+			});
+		}
+		vm.btnEditar = function (row) {
+			$uibModal.open({
+				templateUrl: 'app/pages/seccion/seccion_formview.php',
+				controllerAs: 'mp',
+				size: 'md',
+				backdropClass: 'splash splash-2 splash-info splash-ef-12',
+				windowClass: 'splash splash-2 splash-ef-12',
+				backdrop: 'static',
+				keyboard: true,
+				controller: function ($scope, $uibModalInstance, arrToModal) {
+					var vm = this;
+					vm.fData = angular.copy(row.entity);
+					vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
+
+					vm.modalTitle = 'Edición de Secciones';
+					// BOTONES
+					vm.aceptar = function () {
+						SeccionServices.sEditarSeccion(vm.fData).then(function (rpta) {
+							if (rpta.flag == 1) {
+								$uibModalInstance.close();
+								vm.getPaginationServerSide();
+								var pTitle = 'OK!';
+								var pType = 'success';
+							} else if (rpta.flag == 0) {
+								var pTitle = 'Advertencia!';
+								var pType = 'warning';
+							} else {
+								alert('Ocurrió un error');
+							}
+							pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
+						});
+					};
+					vm.cancel = function () {
+						$uibModalInstance.close();
+					};
+				},
+				resolve: {
+					arrToModal: function () {
+						return {
+							getPaginationServerSide: vm.getPaginationServerSide,
+						}
+					}
+				}
+			});
+		}
+
+		vm.btnAnular = function (row) {
+			SweetAlert.swal(
+				{
+					title: "Confirmación?",
+					text: "¿Realmente desea eliminar la sección?",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#038dcc",
+					// confirmButtonText: "Si, Generar!",
+					// cancelButtonText: "No, Cancelar!",
+					closeOnConfirm: true,
+					closeOnCancel: false
+				},
+				function (isConfirm) {
+					if (isConfirm) {
+						vm.anularSeccion(row.entity);
+					} else {
+						SweetAlert.swal("Cancelado", "La operación ha sido cancelada", "error");
+					}
+				});
+		}
+		vm.anularSeccion = function (row) {
+			SeccionServices.sAnularSeccion(row).then(function (rpta) {
+				if (rpta.flag == 1) {
+					vm.getPaginationServerSide();
+					var pTitle = 'OK!';
+					var pType = 'success';
+				} else if (rpta.flag == 0) {
+					var pTitle = 'Advertencia!';
+					var pType = 'warning';
+				} else {
+					alert('Ocurrió un error');
+				}
+				pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
+			});
+		}
 
 	}
 
 	function SeccionServices($http, $q, handle){
 		return({
-			sListarSecciones: sListarSecciones
+			sListarSecciones: sListarSecciones,
+			sRegistrarSeccion: sRegistrarSeccion,
+			sEditarSeccion: sEditarSeccion,
+			sAnularSeccion: sAnularSeccion,
 		});
 
 		function sListarSecciones(pDatos) {
@@ -107,6 +233,33 @@
 			var request = $http({
 				method: 'post',
 				url: angular.patchURLCI + 'Seccion/listar_secciones',
+				data: datos
+			});
+			return (request.then(handle.success, handle.error));
+		}
+		function sRegistrarSeccion(pDatos) {
+			var datos = pDatos || {};
+			var request = $http({
+				method: 'post',
+				url: angular.patchURLCI + 'Seccion/registrar_seccion',
+				data: datos
+			});
+			return (request.then(handle.success, handle.error));
+		}
+		function sEditarSeccion(pDatos) {
+			var datos = pDatos || {};
+			var request = $http({
+				method: 'post',
+				url: angular.patchURLCI + 'Seccion/editar_seccion',
+				data: datos
+			});
+			return (request.then(handle.success, handle.error));
+		}
+		function sAnularSeccion(pDatos) {
+			var datos = pDatos || {};
+			var request = $http({
+				method: 'post',
+				url: angular.patchURLCI + 'Seccion/anular_seccion',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));
