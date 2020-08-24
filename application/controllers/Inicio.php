@@ -474,6 +474,11 @@ class Inicio extends CI_Controller {
             echo "<option value='' selected='selected'>Selecciona primero un módulo</option>";
         }
     }
+
+	public function iconos()
+	{
+		$this->load->view('modulos/iconos');
+	}
 }
 
 /* End of file inicio.php */

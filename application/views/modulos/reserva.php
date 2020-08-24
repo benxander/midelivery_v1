@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12 probootstrap-animate">
-		<h3 class="secondary-heading">Formulario de Reservas</h3>
+		<h3 style="color: #fff;">Formulario de Solicitud</h3>
 		<?php echo validation_errors(); ?>
 		<form id="form_reserva" method="post" class="probootstrap-form validate" action="<?=base_url()?>inicio/reserva">
 			<div class="row">
@@ -8,7 +8,7 @@
 					<div class="form-group">
 					<label for="nombre">Nombre <span class="">(*)</span></label>
 					<div class="form-field">
-						<i class="icon icon-user2"></i>
+						<i class="icon icon-user-check"></i>
 						<input
 							type="text"
 							id="nombre"
@@ -26,7 +26,7 @@
 					<div class="form-group">
 					<label for="telefono">Teléfono <span class="">(*)</span></label>
 					<div class="form-field">
-						<i class="icon icon-phone"></i>
+						<i class="icon icon-mobile"></i>
 						<input
 							type="tel"
 							id="telefono"
@@ -60,38 +60,30 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group">
-						<label for="fecha">Fecha <span class="">(*)</span></label>
-						<div class="form-field">
-							<i class="icon icon-calendar"></i>
-							<input
-								id="date"
-								name="fecha"
-								class="form-control"
-								placeholder="dd/mm/aaaa"
-								required
-							>
-						</div>
+					<label for="empresa">Nombre de su Negocio <span class="">(*)</span></label>
+					<div class="form-field">
+						<i class="icon icon-office"></i>
+						<input
+							type="empresa"
+							id="empresa"
+							name="empresa"
+							class="form-control"
+							placeholder="En una sola palabra"
+							required
+						>
+					</div>
 					</div>
 				</div>
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label for="hora">Hora <span class="">(*)</span></label>
+						<label for="plan">Plan <span class="">(*)</span></label>
 						<div class="form-field">
-							<i class="icon icon-clock"></i>
-							<select name="hora" id="hora" class="form-control" required>
-								<option value="1330">13:30</option>
-								<option value="1400">14:00</option>
-								<option value="1430">14:30</option>
-								<option value="1500">15:00</option>
-								<option value="1530">15:30</option>
-								<option disabled>──────────</option>
-								<option value="2030">20:30</option>
-								<option value="2100">21:00</option>
-								<option value="2130">21:30</option>
-								<option value="2200">22:00</option>
-								<option value="2230">22:30</option>
-								<option value="2300">23:00</option>
+							<i class="icon icon-documents"></i>
+							<select name="plan" id="plan" class="form-control" required>
+								<option value="1">PLAN 1</option>
+								<option value="2">PLAN 2</option>
+								<option value="3">PLAN 3</option>
 							</select>
 						</div>
 					</div>
@@ -99,18 +91,14 @@
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label for="comensal">Comensales <span class="">(*)</span></label>
+						<label for="modo_pago">Modo Pago <span class="">(*)</span></label>
 						<div class="form-field">
-							<input
-								type="number"
-								id="comensal"
-								name="comensal"
-								class="form-control"
-								min="1"
-								value="1"
-								style="padding-right:12px !important"
-								required
-							>
+							<i class="icon icon-coin-euro"></i>
+							<select name="modo_pago" id="modo_pago" class="form-control" required>
+								<option value="1">MENSUAL</option>
+								<option value="2">SEMESTRAL</option>
+								<option value="3">ANUAL</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -121,12 +109,12 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<label for="date">Comentario</label>
+						<label for="date">Comentario (Opcional)</label>
 						<div class="form-field">
 							<textarea class="form-control" name="comentario" rows="10"></textarea>
 						</div>
 					</div>
-					<p>La reserva será confirmada o rechazada mediante un mensaje por email</p>
+					<p>Tras recibir su solicitud recibirá un email con las instrucciones para disponer de su carta digital</p>
 
 
 					<div class="line checkbox">
