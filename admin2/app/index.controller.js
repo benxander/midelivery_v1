@@ -231,13 +231,13 @@
       });
     }
     $scope.CargaMenu = function() {
-      var opciones = ['opDashboard', 'opEmpresas','opCartas','opSecciones','opPlatos','opAlergenos','opUsuarios','opConfiguracion'];
+      var opciones = ['opDashboard', 'opEmpresas', 'opCartas', 'opAlergenos', 'opSeguridad', 'opConfiguracion', 'opSecciones', 'opPlatos'];
       $scope.fArr.arrSteps = [];
       if($scope.fSessionCI.idgrupo == 1){
-        $scope.fArr.valores = [true,true,true,true,true,true,true,true];
+        $scope.fArr.valores = [true,true,true,true,true,true,false,false];
       }
       if($scope.fSessionCI.idgrupo == 2){
-        $scope.fArr.valores = [true,false,true,true,true,true,true,false];
+        $scope.fArr.valores = [true,false,false,false,false,false,true,true];
       }
       if($scope.fSessionCI.idgrupo == 3){
         $scope.fArr.valores = [true,false,true,true,false,true,false,false];
