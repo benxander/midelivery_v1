@@ -16,7 +16,7 @@
     <i class="fa fa-bars"></i>
   </button>
 </div>
-<div class="main-search hidden-xs">
+<div class="main-search hidden-xs" ng-if="fSessionCI.idgrupo == 1">
   <form>
     <input type="text" class="form-control" placeholder="Buscar Empresa..." ng-model="fArr.fBusqueda">
     <button class="btn" ng-click="buscarPaciente(fArr.fBusqueda);">

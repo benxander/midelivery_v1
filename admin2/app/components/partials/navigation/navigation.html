@@ -26,9 +26,9 @@
         <i class="fa fa-building"></i>
       </a>
     </li>
-    <li ng-class="{'open active':$state.includes('carta')}" ng-if="fArr.valores[2]" class="carta">
-      <a ng-click="$state.reload();" ui-sref="carta">
-        <span class="nav-text">{{ 'Menu.CARTAS' | translate }}</span>
+    <li ng-class="{'open active':$state.includes('plan')}" ng-if="fArr.valores[2]" class="plan">
+      <a ng-click="$state.reload();" ui-sref="plan">
+        <span class="nav-text">{{ 'Menu.PLANES' | translate }}</span>
         <i class="fa fa-book"></i>
       </a>
     </li>
@@ -68,16 +68,22 @@
       </a>
     </li>
     <!-- Perfil empresa -->
-    <li ng-class="{'active':$state.includes('seccion')}" ng-if="fArr.valores[6]" class="seccion">
-      <a ng-click="$state.reload();" ui-sref="seccion">
-        <span class="nav-text">{{ 'Menu.SECCIONES' | translate }} </span>
+    <li ng-class="{'active':$state.includes('categoria')}" ng-if="fArr.valores[6]" class="categoria">
+      <a ng-click="$state.reload();" ui-sref="categoria">
+        <span class="nav-text">{{ 'Menu.CATEGORIAS' | translate }} </span>
         <i class="fa fa-bar-chart-o"></i>
       </a>
     </li>
-    <li ng-class="{'active':$state.includes('plato')}" ng-if="fArr.valores[7]" class="plato">
-      <a ng-click="$state.reload();" ui-sref="plato">
-        <span class="nav-text">{{ 'Menu.PLATOS' | translate }}</span>
+    <li ng-class="{'active':$state.includes('producto')}" ng-if="fArr.valores[7]" class="producto">
+      <a ng-click="$state.reload();" ui-sref="producto">
+        <span class="nav-text">{{ 'Menu.PRODUCTOS' | translate }}</span>
         <i class="fa fa-coffee"></i>
+      </a>
+    </li>
+    <li ng-class="{'active':$state.includes('qr')}" ng-if="fArr.valores[7]" class="qr">
+      <a ng-click="$state.reload();" ui-sref="qr">
+        <span class="nav-text">QR</span>
+        <i class="fa fa-qrcode"></i>
       </a>
     </li>
 

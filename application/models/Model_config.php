@@ -25,13 +25,26 @@ class Model_config extends CI_Model {
 			us.username,
 			us.idgrupo,
 			us.nombre_foto,
-			cf.idconfiguracion,
-			cf.empresa,
-			cf.pagina_web,
-			cf.logo_imagen
+
 		", FALSE);
 		$this->db->from('usuario us');
-		$this->db->join('w_configuracion cf', 'us.idconfiguracion = cf.idconfiguracion');
+		if ($datos['idgrupo'] == 1){
+			$this->db->select("
+				cf.idconfiguracion,
+				cf.empresa,
+				cf.pagina_web,
+				cf.logo_imagen
+			", FALSE);
+			$this->db->join('w_configuracion cf', 'us.idconfiguracion = cf.idconfiguracion');
+		}elseif ($datos['idgrupo'] == 2) {
+			$this->db->select("
+				emp.idempresa,
+				emp.razon_social AS empresa,
+				emp.pagina_web,
+				emp.logo_imagen
+			", FALSE);
+			$this->db->join('empresa emp', 'us.idusuario = emp.idusuario');
+		}
 		$this->db->where('us.idusuario', $datos['idusuario']);
 		$this->db->limit(1);
 		return $this->db->get()->row_array();

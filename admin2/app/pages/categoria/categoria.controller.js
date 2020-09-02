@@ -3,16 +3,16 @@
 
 	angular
 		.module('minotaur')
-		.controller('SeccionController', SeccionController)
-		.service('SeccionServices', SeccionServices);
+		.controller('CategoriaController', CategoriaController)
+		.service('CategoriaServices', CategoriaServices);
 
 	/** @ngInject */
-	function SeccionController(
+	function CategoriaController(
 		$scope,
 		$uibModal,
 		uiGridConstants,
 		SweetAlert,
-		SeccionServices,
+		CategoriaServices,
 		pinesNotifications
 	) {
 		var vm = this;
@@ -44,8 +44,8 @@
 			appScopeProvider: vm
 		}
 		vm.gridOptions.columnDefs = [
-			{ field: 'idseccion', name: 'idseccion', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC }},
-			{ field: 'descripcion_sec', name: 'descripcion_sec', displayName: 'NOMBRE DE SECCION' },
+			{ field: 'idcategoria', name: 'idcategoria', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC }},
+			{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'NOMBRE DE CATEGORIA' },
 
 			{
 				field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false,
@@ -69,8 +69,8 @@
 				var grid = this.grid;
 				paginationOptions.search = true;
 				paginationOptions.searchColumn = {
-					'idseccion': grid.columns[1].filters[0].term,
-					'descripcion_sec': grid.columns[2].filters[0].term,
+					'idcategoria': grid.columns[1].filters[0].term,
+					'descripcion_cat': grid.columns[2].filters[0].term,
 
 				};
 				vm.getPaginationServerSide();
@@ -82,7 +82,7 @@
 			vm.datosGrid = {
 				paginate: paginationOptions
 			};
-			SeccionServices.sListarSecciones(vm.datosGrid).then(function (rpta) {
+			CategoriaServices.sListarCategorias(vm.datosGrid).then(function (rpta) {
 				vm.gridOptions.data = rpta.datos;
 				vm.gridOptions.totalItems = rpta.paginate.totalRows;
 				vm.mySelectionGrid = [];
@@ -92,7 +92,7 @@
 		// mantenimiento
 		vm.btnNuevo = function () {
 			$uibModal.open({
-				templateUrl: 'app/pages/seccion/seccion_formview.php',
+				templateUrl: 'app/pages/categoria/categoria_formview.php',
 				controllerAs: 'mp',
 				size: 'md',
 				backdropClass: 'splash splash-2 splash-info splash-ef-12',
@@ -104,10 +104,10 @@
 					vm.fData = {};
 					vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
 
-					vm.modalTitle = 'Registro de Secciones';
+					vm.modalTitle = 'Registro de Categorias';
 					// BOTONES
 					vm.aceptar = function () {
-						SeccionServices.sRegistrarSeccion(vm.fData).then(function (rpta) {
+						CategoriaServices.sRegistrarCategoria(vm.fData).then(function (rpta) {
 							if (rpta.flag == 1) {
 								$uibModalInstance.close();
 								vm.getPaginationServerSide();
@@ -137,7 +137,7 @@
 		}
 		vm.btnEditar = function (row) {
 			$uibModal.open({
-				templateUrl: 'app/pages/seccion/seccion_formview.php',
+				templateUrl: 'app/pages/categoria/categoria_formview.php',
 				controllerAs: 'mp',
 				size: 'md',
 				backdropClass: 'splash splash-2 splash-info splash-ef-12',
@@ -149,10 +149,10 @@
 					vm.fData = angular.copy(row.entity);
 					vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
 
-					vm.modalTitle = 'Edición de Secciones';
+					vm.modalTitle = 'Edición de Categorias';
 					// BOTONES
 					vm.aceptar = function () {
-						SeccionServices.sEditarSeccion(vm.fData).then(function (rpta) {
+						CategoriaServices.sEditarCategoria(vm.fData).then(function (rpta) {
 							if (rpta.flag == 1) {
 								$uibModalInstance.close();
 								vm.getPaginationServerSide();
@@ -185,7 +185,7 @@
 			SweetAlert.swal(
 				{
 					title: "Confirmación?",
-					text: "¿Realmente desea eliminar la sección?",
+					text: "¿Realmente desea eliminar la categoria?",
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#038dcc",
@@ -196,14 +196,14 @@
 				},
 				function (isConfirm) {
 					if (isConfirm) {
-						vm.anularSeccion(row.entity);
+						vm.anularCategoria(row.entity);
 					} else {
 						SweetAlert.swal("Cancelado", "La operación ha sido cancelada", "error");
 					}
 				});
 		}
-		vm.anularSeccion = function (row) {
-			SeccionServices.sAnularSeccion(row).then(function (rpta) {
+		vm.anularCategoria = function (row) {
+			CategoriaServices.sAnularCategoria(row).then(function (rpta) {
 				if (rpta.flag == 1) {
 					vm.getPaginationServerSide();
 					var pTitle = 'OK!';
@@ -220,46 +220,46 @@
 
 	}
 
-	function SeccionServices($http, $q, handle){
+	function CategoriaServices($http, $q, handle){
 		return({
-			sListarSecciones: sListarSecciones,
-			sRegistrarSeccion: sRegistrarSeccion,
-			sEditarSeccion: sEditarSeccion,
-			sAnularSeccion: sAnularSeccion,
+			sListarCategorias: sListarCategorias,
+			sRegistrarCategoria: sRegistrarCategoria,
+			sEditarCategoria: sEditarCategoria,
+			sAnularCategoria: sAnularCategoria,
 		});
 
-		function sListarSecciones(pDatos) {
+		function sListarCategorias(pDatos) {
 			var datos = pDatos || {};
 			var request = $http({
 				method: 'post',
-				url: angular.patchURLCI + 'Seccion/listar_secciones',
+				url: angular.patchURLCI + 'Categoria/listar_categorias',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));
 		}
-		function sRegistrarSeccion(pDatos) {
+		function sRegistrarCategoria(pDatos) {
 			var datos = pDatos || {};
 			var request = $http({
 				method: 'post',
-				url: angular.patchURLCI + 'Seccion/registrar_seccion',
+				url: angular.patchURLCI + 'Categoria/registrar_categoria',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));
 		}
-		function sEditarSeccion(pDatos) {
+		function sEditarCategoria(pDatos) {
 			var datos = pDatos || {};
 			var request = $http({
 				method: 'post',
-				url: angular.patchURLCI + 'Seccion/editar_seccion',
+				url: angular.patchURLCI + 'Categoria/editar_categoria',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));
 		}
-		function sAnularSeccion(pDatos) {
+		function sAnularCategoria(pDatos) {
 			var datos = pDatos || {};
 			var request = $http({
 				method: 'post',
-				url: angular.patchURLCI + 'Seccion/anular_seccion',
+				url: angular.patchURLCI + 'Categoria/anular_categoria',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));

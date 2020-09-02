@@ -36,18 +36,24 @@
         controller: 'EmpresaController',
         controllerAs: 'emp'
       })
-      //carta
-      .state('carta', {
-        url: '/app/carta',
-        templateUrl: 'app/pages/carta/carta.html',
-        controller: 'CartaController as vm'
+      //planes
+      .state('plan', {
+        url: '/app/plan',
+        templateUrl: 'app/pages/plan/plan.html',
+        controller: 'PlanController as vm'
       })
 
-      //secciones
-      .state('seccion', {
-        url: '/app/seccion',
-        templateUrl: 'app/pages/seccion/seccion.html',
-        controller: 'SeccionController as vm'
+      //categorias
+      .state('categoria', {
+        url: '/app/categoria',
+        templateUrl: 'app/pages/categoria/categoria.html',
+        controller: 'CategoriaController as vm'
+      })
+      //productos
+      .state('producto', {
+        url: '/app/producto',
+        templateUrl: 'app/pages/producto/producto.html',
+        controller: 'ProductoController as vm'
       })
       //alergenos
       .state('alergeno', {
@@ -55,7 +61,13 @@
         templateUrl: 'app/pages/alergeno/alergeno.html',
         controller: 'AlergenoController as vm'
       })
-      //informe empresarial
+      //qr
+      .state('qr', {
+        url: '/app/qr',
+        templateUrl: 'app/pages/qr/qr.html',
+        controller: 'QrController as vm'
+      })
+      //usuario
       .state('usuario', {
         url: '/app/usuario',
         templateUrl: 'app/pages/usuario/usuario.html',

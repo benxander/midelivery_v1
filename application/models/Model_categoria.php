@@ -1,18 +1,19 @@
 <?php
-class Model_seccion extends CI_Model {
+class Model_categoria extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
 	}
-	public function m_cargar_secciones($paramPaginate=FALSE){
+	public function m_cargar_categorias($paramPaginate=FALSE){
 		$this->db->select("
-			sec.idseccion,
-			sec.descripcion_sec,
-			sec.imagen_sec
+			cat.idcategoria,
+			cat.descripcion_cat,
+			cat.imagen_cat
 		", FALSE);
 
-		$this->db->from('seccion sec');
-		$this->db->where('sec.estado_sec', 1);
+		$this->db->from('categoria cat');
+		$this->db->where('cat.estado_cat', 1);
+		$this->db->where('cat.idempresa', $this->sessionVP['idempresa']);
 
 		if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
 			foreach ($paramPaginate['searchColumn'] as $key => $value) {
@@ -30,9 +31,11 @@ class Model_seccion extends CI_Model {
 		}
 		return $this->db->get()->result_array();
 	}
-	public function m_count_secciones($paramPaginate=FALSE){
+	public function m_count_categorias($paramPaginate=FALSE){
 		$this->db->select('count(*) AS contador');
-		$this->db->from('seccion sec');
+		$this->db->from('categoria cat');
+		$this->db->where('cat.estado_cat', 1);
+		$this->db->where('cat.idempresa', $this->sessionVP['idempresa']);
 		if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
 			foreach ($paramPaginate['searchColumn'] as $key => $value) {
 				if(! empty($value)){
@@ -46,20 +49,20 @@ class Model_seccion extends CI_Model {
 
 	public function m_registrar($data)
 	{
-		$this->db->insert('seccion', $data);
+		$this->db->insert('categoria', $data);
 		return $this->db->insert_id();
 	}
 	public function m_editar($data,$id){
-		$this->db->where('idseccion',$id);
-		return $this->db->update('seccion', $data);
+		$this->db->where('idcategoria',$id);
+		return $this->db->update('categoria', $data);
 	}
 
 	public function m_anular($datos)
 	{
 		$data = array(
-			'estado_sec' => 0,
+			'estado_cat' => 0,
 		);
-		$this->db->where('idseccion',$datos['idseccion']);
-		return $this->db->update('seccion', $data);
+		$this->db->where('idcategoria',$datos['idcategoria']);
+		return $this->db->update('categoria', $data);
 	}
 }

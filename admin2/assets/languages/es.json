@@ -2,9 +2,9 @@
   "Menu": {
     "DASHBOARD": "Dashboard",
     "EMPRESAS": "Empresas",
-    "CARTAS": "Cartas",
-    "SECCIONES": "Secciones",
-    "PLATOS": "Platos",
+    "PLANES": "Planes",
+    "CATEGORIAS": "Categorias",
+    "PRODUCTOS": "Productos de la Carta",
     "ALERGENOS": "Alergenos",
     "ROLES": "Roles",
     "ESTADISTICAS": "Estadísticas",
