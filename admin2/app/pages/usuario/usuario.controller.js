@@ -119,7 +119,6 @@
           vm.modoEdicion = false;
           vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
           vm.fArr = arrToModal.fArr;
-          console.log('vm.fArr', vm.fArr);
           vm.fData.grupo = vm.fArr.listaGrupos[0];
 
           vm.modalTitle = 'Registro de Usuarios';
@@ -170,9 +169,6 @@
           vm.modoEdicion = true;
           vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
           vm.fArr = arrToModal.fArr;
-          console.log('fData', vm.fData);
-
-          // vm.fData.grupo = vm.fArr.listaGrupos[0];
 
           var objIndex = vm.fArr.listaGrupos.filter(function (obj) {
             return obj.id == vm.fData.grupo.idgrupo;

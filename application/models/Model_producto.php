@@ -1,17 +1,21 @@
 <?php
-class Model_categoria extends CI_Model {
+class Model_producto extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
 	}
-	public function m_cargar_categorias($paramPaginate=FALSE){
+	public function m_cargar_productos($paramPaginate=FALSE){
 		$this->db->select("
+			pr.idproducto,
+			pr.descripcion_pr,
+			pr.precio,
 			cat.idcategoria,
-			cat.descripcion_cat,
-			cat.imagen_cat
+			cat.descripcion_cat
 		", FALSE);
 
-		$this->db->from('categoria cat');
+		$this->db->from('producto pr');
+		$this->db->join('categoria cat', 'pr.idcategoria = cat.idcategoria');
+		$this->db->where('pr.estado_pr', 1);
 		$this->db->where('cat.estado_cat', 1);
 		$this->db->where('cat.idempresa', $this->sessionVP['idempresa']);
 
@@ -31,15 +35,18 @@ class Model_categoria extends CI_Model {
 				$this->db->limit($paramPaginate['pageSize'],$paramPaginate['firstRow'] );
 			}
 		}else{
-			$this->db->order_by('idcategoria', 'ASC');
+			$this->db->order_by('idproducto', 'ASC');
 		}
 		return $this->db->get()->result_array();
 	}
-	public function m_count_categorias($paramPaginate=FALSE){
+	public function m_count_productos($paramPaginate=FALSE){
 		$this->db->select('count(*) AS contador');
-		$this->db->from('categoria cat');
+		$this->db->from('producto pr');
+		$this->db->join('categoria cat', 'pr.idcategoria = cat.idcategoria');
+		$this->db->where('pr.estado_pr', 1);
 		$this->db->where('cat.estado_cat', 1);
 		$this->db->where('cat.idempresa', $this->sessionVP['idempresa']);
+
 		if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
 			foreach ($paramPaginate['searchColumn'] as $key => $value) {
 				if(! empty($value)){
@@ -53,20 +60,20 @@ class Model_categoria extends CI_Model {
 
 	public function m_registrar($data)
 	{
-		$this->db->insert('categoria', $data);
+		$this->db->insert('producto', $data);
 		return $this->db->insert_id();
 	}
 	public function m_editar($data,$id){
-		$this->db->where('idcategoria',$id);
-		return $this->db->update('categoria', $data);
+		$this->db->where('idproducto',$id);
+		return $this->db->update('producto', $data);
 	}
 
 	public function m_anular($datos)
 	{
 		$data = array(
-			'estado_cat' => 0,
+			'estado_pr' => 0,
 		);
-		$this->db->where('idcategoria',$datos['idcategoria']);
-		return $this->db->update('categoria', $data);
+		$this->db->where('idproducto',$datos['idproducto']);
+		return $this->db->update('producto', $data);
 	}
 }

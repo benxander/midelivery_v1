@@ -3,21 +3,27 @@
 
 	angular
 		.module('minotaur')
-		.controller('CategoriaController', CategoriaController)
-		.service('CategoriaServices', CategoriaServices);
+		.controller('ProductoController', ProductoController)
+		.service('ProductoServices', ProductoServices);
 
 	/** @ngInject */
-	function CategoriaController(
+	function ProductoController(
 		$scope,
 		$uibModal,
 		uiGridConstants,
 		SweetAlert,
+		ProductoServices,
 		CategoriaServices,
 		pinesNotifications
 	) {
 		var vm = this;
 
 		vm.fArr = {};
+
+		// Lista de categorias
+		CategoriaServices.sListarCategoriasCbo().then(function (rpta) {
+			vm.fArr.listaCategorias = rpta.datos;
+		});
 
 		// Grilla principal
 		var paginationOptions = {
@@ -44,8 +50,10 @@
 			appScopeProvider: vm
 		}
 		vm.gridOptions.columnDefs = [
-			{ field: 'idcategoria', name: 'idcategoria', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC }},
-			{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'NOMBRE DE CATEGORIA' },
+			{ field: 'idproducto', name: 'idproducto', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC } },
+			{ field: 'descripcion_pr', name: 'descripcion_pr', displayName: 'NOMBRE DE PRODUCTO' },
+			{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'CATEGORIA' },
+			{ field: 'precio', name: 'precio', displayName: 'PRECIO', width: 120, enableFiltering: false, enableColumnMenu: false, },
 
 			{
 				field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false,
@@ -69,8 +77,9 @@
 				var grid = this.grid;
 				paginationOptions.search = true;
 				paginationOptions.searchColumn = {
-					'idcategoria': grid.columns[1].filters[0].term,
-					'descripcion_cat': grid.columns[2].filters[0].term,
+					'idproducto': grid.columns[1].filters[0].term,
+					'descripcion_pr': grid.columns[2].filters[0].term,
+					'descripcion_cat': grid.columns[3].filters[0].term,
 
 				};
 				vm.getPaginationServerSide();
@@ -82,7 +91,7 @@
 			vm.datosGrid = {
 				paginate: paginationOptions
 			};
-			CategoriaServices.sListarCategorias(vm.datosGrid).then(function (rpta) {
+			ProductoServices.sListarProductos(vm.datosGrid).then(function (rpta) {
 				vm.gridOptions.data = rpta.datos;
 				vm.gridOptions.totalItems = rpta.paginate.totalRows;
 				vm.mySelectionGrid = [];
@@ -92,7 +101,7 @@
 		// mantenimiento
 		vm.btnNuevo = function () {
 			$uibModal.open({
-				templateUrl: 'app/pages/categoria/categoria_formview.php',
+				templateUrl: 'app/pages/producto/producto_formview.php',
 				controllerAs: 'mp',
 				size: 'md',
 				backdropClass: 'splash splash-2 splash-info splash-ef-12',
@@ -103,11 +112,13 @@
 					var vm = this;
 					vm.fData = {};
 					vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
+					vm.fArr = arrToModal.fArr;
+					vm.fData.categoria = vm.fArr.listaCategorias[0];
 
-					vm.modalTitle = 'Registro de Categorias';
+					vm.modalTitle = 'Registro de Productos';
 					// BOTONES
 					vm.aceptar = function () {
-						CategoriaServices.sRegistrarCategoria(vm.fData).then(function (rpta) {
+						ProductoServices.sRegistrarProducto(vm.fData).then(function (rpta) {
 							if (rpta.flag == 1) {
 								$uibModalInstance.close();
 								vm.getPaginationServerSide();
@@ -130,6 +141,7 @@
 					arrToModal: function () {
 						return {
 							getPaginationServerSide: vm.getPaginationServerSide,
+							fArr: vm.fArr
 						}
 					}
 				}
@@ -137,7 +149,7 @@
 		}
 		vm.btnEditar = function (row) {
 			$uibModal.open({
-				templateUrl: 'app/pages/categoria/categoria_formview.php',
+				templateUrl: 'app/pages/producto/producto_formview.php',
 				controllerAs: 'mp',
 				size: 'md',
 				backdropClass: 'splash splash-2 splash-info splash-ef-12',
@@ -149,10 +161,21 @@
 					vm.fData = angular.copy(row.entity);
 					vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
 
-					vm.modalTitle = 'Edición de Categorias';
+					vm.fArr = arrToModal.fArr;
+
+					var objIndex = vm.fArr.listaCategorias.filter(function (obj) {
+						return obj.id == vm.fData.categoria.idcategoria;
+					}).shift();
+					if (objIndex) {
+						vm.fData.categoria = objIndex;
+					} else {
+						vm.fData.categoria = vm.fArr.listaCategorias[0];
+					}
+
+					vm.modalTitle = 'Edición de Productos';
 					// BOTONES
 					vm.aceptar = function () {
-						CategoriaServices.sEditarCategoria(vm.fData).then(function (rpta) {
+						ProductoServices.sEditarProducto(vm.fData).then(function (rpta) {
 							if (rpta.flag == 1) {
 								$uibModalInstance.close();
 								vm.getPaginationServerSide();
@@ -175,6 +198,7 @@
 					arrToModal: function () {
 						return {
 							getPaginationServerSide: vm.getPaginationServerSide,
+							fArr: vm.fArr
 						}
 					}
 				}
@@ -185,7 +209,7 @@
 			SweetAlert.swal(
 				{
 					title: "Confirmación?",
-					text: "¿Realmente desea eliminar la categoria?",
+					text: "¿Realmente desea eliminar el producto?",
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#038dcc",
@@ -196,14 +220,14 @@
 				},
 				function (isConfirm) {
 					if (isConfirm) {
-						vm.anularCategoria(row.entity);
+						vm.anularProducto(row.entity);
 					} else {
 						SweetAlert.swal("Cancelado", "La operación ha sido cancelada", "error");
 					}
 				});
 		}
-		vm.anularCategoria = function (row) {
-			CategoriaServices.sAnularCategoria(row).then(function (rpta) {
+		vm.anularProducto = function (row) {
+			ProductoServices.sAnularProducto(row).then(function (rpta) {
 				if (rpta.flag == 1) {
 					vm.getPaginationServerSide();
 					var pTitle = 'OK!';
@@ -220,56 +244,46 @@
 
 	}
 
-	function CategoriaServices($http, $q, handle){
-		return({
-			sListarCategorias: sListarCategorias,
-			sListarCategoriasCbo: sListarCategoriasCbo,
-			sRegistrarCategoria: sRegistrarCategoria,
-			sEditarCategoria: sEditarCategoria,
-			sAnularCategoria: sAnularCategoria,
+	function ProductoServices($http, $q, handle) {
+		return ({
+			sListarProductos: sListarProductos,
+			sRegistrarProducto: sRegistrarProducto,
+			sEditarProducto: sEditarProducto,
+			sAnularProducto: sAnularProducto,
 		});
 
-		function sListarCategorias(pDatos) {
+		function sListarProductos(pDatos) {
 			var datos = pDatos || {};
 			var request = $http({
 				method: 'post',
-				url: angular.patchURLCI + 'Categoria/listar_categorias',
+				url: angular.patchURLCI + 'Producto/listar_productos',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));
 		}
-		function sListarCategoriasCbo(pDatos) {
+		function sRegistrarProducto(pDatos) {
 			var datos = pDatos || {};
 			var request = $http({
 				method: 'post',
-				url: angular.patchURLCI + 'Categoria/listar_categorias_cbo',
+				url: angular.patchURLCI + 'Producto/registrar_producto',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));
 		}
-		function sRegistrarCategoria(pDatos) {
+		function sEditarProducto(pDatos) {
 			var datos = pDatos || {};
 			var request = $http({
 				method: 'post',
-				url: angular.patchURLCI + 'Categoria/registrar_categoria',
+				url: angular.patchURLCI + 'Producto/editar_producto',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));
 		}
-		function sEditarCategoria(pDatos) {
+		function sAnularProducto(pDatos) {
 			var datos = pDatos || {};
 			var request = $http({
 				method: 'post',
-				url: angular.patchURLCI + 'Categoria/editar_categoria',
-				data: datos
-			});
-			return (request.then(handle.success, handle.error));
-		}
-		function sAnularCategoria(pDatos) {
-			var datos = pDatos || {};
-			var request = $http({
-				method: 'post',
-				url: angular.patchURLCI + 'Categoria/anular_categoria',
+				url: angular.patchURLCI + 'Producto/anular_producto',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));
