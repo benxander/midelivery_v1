@@ -14,6 +14,7 @@
 		SweetAlert,
 		ProductoServices,
 		CategoriaServices,
+		AlergenoServices,
 		pinesNotifications
 	) {
 		var vm = this;
@@ -23,6 +24,11 @@
 		// Lista de categorias
 		CategoriaServices.sListarCategoriasCbo().then(function (rpta) {
 			vm.fArr.listaCategorias = rpta.datos;
+		});
+
+		// Lista de alergenos
+		AlergenoServices.sListarAlergenosCbo().then(function (rpta) {
+			vm.fArr.listaAlergenos = rpta.datos;
 		});
 
 		// Grilla principal
@@ -114,6 +120,7 @@
 					vm.getPaginationServerSide = arrToModal.getPaginationServerSide;
 					vm.fArr = arrToModal.fArr;
 					vm.fData.categoria = vm.fArr.listaCategorias[0];
+					vm.fData.alergenos = [];
 
 					vm.modalTitle = 'Registro de Productos';
 					// BOTONES

@@ -1,3 +1,6 @@
+<style>
+.splash .modal-content{overflow:visible}
+</style>
 <div class="modal-header">
 	<h4 class="modal-title">{{mp.modalTitle}}</h4>
 </div>
@@ -30,6 +33,21 @@
 						ng-options="item as item.descripcion for item in mp.fArr.listaCategorias" required></select>
 
 				</div>
+
+				<div class="form-group col-xs-12">
+					<label class="control-label minotaur-label">Alérgenos</label>
+					<div class="">
+						<select multiple
+							chosen="{width: '100%'}"
+							data-placeholder-text-multiple="'Elige 1 o más alérgenos'"
+							no-results-text="'No hay resultados para ...'"
+  							ng-model="mp.fData.alergenos"
+  							ng-options="item.id as item.descripcion for item in mp.fArr.listaAlergenos"
+						>
+							<option value=""></option>
+						</select>
+					</div>
+					</div>
 
 				<div class="form-group col-xs-12">
 					<label for="precio" class="control-label minotaur-label">

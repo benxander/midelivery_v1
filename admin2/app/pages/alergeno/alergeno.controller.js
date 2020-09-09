@@ -102,7 +102,8 @@
 
 	function AlergenoServices($http, $q, handle) {
 		return ({
-			sListarAlergenos: sListarAlergenos
+			sListarAlergenos: sListarAlergenos,
+			sListarAlergenosCbo: sListarAlergenosCbo
 		});
 
 		function sListarAlergenos(pDatos) {
@@ -110,6 +111,15 @@
 			var request = $http({
 				method: 'post',
 				url: angular.patchURLCI + 'Alergeno/listar_alergenos',
+				data: datos
+			});
+			return (request.then(handle.success, handle.error));
+		}
+		function sListarAlergenosCbo(pDatos) {
+			var datos = pDatos || {};
+			var request = $http({
+				method: 'post',
+				url: angular.patchURLCI + 'Alergeno/listar_alergenos_cbo',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));

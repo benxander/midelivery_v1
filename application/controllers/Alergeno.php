@@ -64,4 +64,27 @@ class Alergeno extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode($arrData));
 	}
+
+	public function listar_alergenos_cbo()
+	{
+		$lista = $this->model_alergeno->m_cargar_alergenos();
+		$arrListado = array();
+
+		foreach ($lista as $row) {
+			array_push($arrListado,
+				array(
+					'id' 			=> $row['idalergeno'],
+					'descripcion' 	=> $row['nombre'],
+				)
+			);
+		}
+
+    	$arrData['datos'] = $arrListado;
+    	$arrData['message'] = '';
+    	$arrData['flag'] = 1;
+
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
 }

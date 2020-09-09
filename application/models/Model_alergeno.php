@@ -14,19 +14,23 @@ class Model_alergeno extends CI_Model {
 
 		$this->db->from('alergeno');
 
-		if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
-			foreach ($paramPaginate['searchColumn'] as $key => $value) {
-				if(! empty($value)){
-					$this->db->like($key ,strtoupper_total($value) ,FALSE);
+		if($paramPaginate){
+			if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
+				foreach ($paramPaginate['searchColumn'] as $key => $value) {
+					if(! empty($value)){
+						$this->db->like($key ,strtoupper_total($value) ,FALSE);
+					}
 				}
 			}
-		}
 
-		if( $paramPaginate['sortName'] ){
-			$this->db->order_by($paramPaginate['sortName'], $paramPaginate['sort']);
-		}
-		if( $paramPaginate['firstRow'] || $paramPaginate['pageSize'] ){
-			$this->db->limit($paramPaginate['pageSize'],$paramPaginate['firstRow'] );
+			if( $paramPaginate['sortName'] ){
+				$this->db->order_by($paramPaginate['sortName'], $paramPaginate['sort']);
+			}
+			if( $paramPaginate['firstRow'] || $paramPaginate['pageSize'] ){
+				$this->db->limit($paramPaginate['pageSize'],$paramPaginate['firstRow'] );
+			}
+		}else{
+			$this->db->order_by('nombre', 'ASC');
 		}
 		return $this->db->get()->result_array();
 	}

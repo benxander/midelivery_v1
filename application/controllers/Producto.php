@@ -47,6 +47,7 @@ class Producto extends CI_Controller {
 					'descripcion_pr' 	=> $row['descripcion_pr'],
 					'idcategoria' 		=> $row['idcategoria'],
 					'descripcion_cat' 	=> $row['descripcion_cat'],
+					'alergenos'			=> explode(",", $row['alergenos']),
 					'precio' 			=> $row['precio'],
 					'categoria' 	=> array(
 						'idcategoria' => $row['idcategoria'],
@@ -79,6 +80,7 @@ class Producto extends CI_Controller {
 		$data = array(
 			'descripcion_pr' => strtoupper_total($allInputs['descripcion_pr']),
 			'idcategoria' => $allInputs['categoria']['id'],
+			'alergenos' => implode(",",$allInputs['alergenos']),
 			'precio' => $allInputs['precio'],
 			'createdat' => date('Y-m-d H:i:s'),
 			'updatedat' => date('Y-m-d H:i:s')
@@ -106,6 +108,7 @@ class Producto extends CI_Controller {
 			'descripcion_pr' => strtoupper_total($allInputs['descripcion_pr']),
 			'idcategoria' => $allInputs['categoria']['id'],
 			'precio' => $allInputs['precio'],
+			'alergenos' => implode(",",$allInputs['alergenos']),
 			'updatedat' => date('Y-m-d H:i:s')
 		);
 

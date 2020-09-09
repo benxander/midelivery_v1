@@ -8,6 +8,7 @@ class Model_producto extends CI_Model {
 		$this->db->select("
 			pr.idproducto,
 			pr.descripcion_pr,
+			pr.alergenos,
 			pr.precio,
 			cat.idcategoria,
 			cat.descripcion_cat
