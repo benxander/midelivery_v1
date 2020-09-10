@@ -39,6 +39,7 @@ class Model_config extends CI_Model {
 		}elseif ($datos['idgrupo'] == 2) {
 			$this->db->select("
 				emp.idempresa,
+				emp.nombre_negocio,
 				emp.razon_social AS empresa,
 				emp.pagina_web,
 				emp.logo_imagen

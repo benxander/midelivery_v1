@@ -3,6 +3,7 @@
 class Inicio extends CI_Controller {
 	public function __construct() {
         parent::__construct();
+		$this->sessionVP = @$this->session->userdata('sess_vp_'.substr(base_url(),-8,7));
 		$this->load->library(
 			array(
 				'pagination',
@@ -33,9 +34,9 @@ class Inicio extends CI_Controller {
 	}
 	public function index()
 	{
-		ini_set('xdebug.var_display_max_depth', 10);
-	    ini_set('xdebug.var_display_max_children', 1024);
-		ini_set('xdebug.var_display_max_data', 1024);
+		// ini_set('xdebug.var_display_max_depth', 10);
+	    // ini_set('xdebug.var_display_max_children', 1024);
+		// ini_set('xdebug.var_display_max_data', 1024);
 		$lista_imagenes = obtener_imagenes();
 		foreach ($lista_imagenes as $key => $value) {
 			$imagen[$value['nombre']] = $value['imagen'];
@@ -234,8 +235,6 @@ class Inicio extends CI_Controller {
 	}
 
 
-
-
 	/**
 	 * Muestra el contenido de una Ficha
 	 * @param  string
@@ -274,6 +273,16 @@ class Inicio extends CI_Controller {
 
 	public function qr($data="https://www.hementxe.com"){
 		$this->load->library('ciqrcode');
+		header("Content-Type: image/png");
+		$params['data'] = $data;
+		$params['level'] = 'H';
+		$params['size'] = 7;
+		$this->ciqrcode->generate($params);
+	}
+	public function qr_code(){
+		$this->load->library('ciqrcode');
+		$data = base_url() . 'c/' . $this->sessionVP['nombre_negocio'];
+		// $data = $this->sessionVP['nombre_negocio'];
 		header("Content-Type: image/png");
 		$params['data'] = $data;
 		$params['level'] = 'H';

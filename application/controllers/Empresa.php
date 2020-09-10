@@ -172,4 +172,53 @@ class Empresa extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode($arrData));
 	}
+
+	// CARTA DIGITAL
+
+	public function carta_digital($negocio)
+	{
+
+
+		$arrEmpresa = $this->model_empresa->m_cargar_empresa_por_negocio($negocio);
+
+		$arrCartaDigital = $this->model_empresa->m_cargar_carta_digital($arrEmpresa);
+
+		$arrCategoria = array();
+		foreach ($arrCartaDigital as $row) {
+			$arrCategoria[$row['idcategoria']] = array(
+				'idcategoria'	=> $row['idcategoria'],
+				'categoria'	=> $row['categoria'],
+				'imagen_cat'	=> $row['imagen_cat'],
+				'productos'	=> array()
+			);
+		}
+
+		foreach ($arrCategoria as $key => $value) {
+			$arrAux = array();
+			foreach ($arrCartaDigital as $row) {
+				if( $key == $row['idcategoria'] ){
+					array_push($arrAux,
+						array(
+							'idproducto'	=> $row['idproducto'],
+							'producto'		=> $row['producto'],
+							'precio'		=> $row['precio'],
+							'alergenos'		=> $row['alergenos'],
+						)
+					);
+				}
+			}
+			$arrCategoria[$key]['productos'] = $arrAux;
+		}
+		$arrCategoria = array_values($arrCategoria);
+
+		$datos = array(
+			'nombre_negocio' => $negocio,
+			'razon_social'	=> $arrEmpresa['razon_social'],
+			'telefono'	=> $arrEmpresa['telefono'],
+			'categoria_carta' => $arrCategoria
+		);
+
+		$this->load->view('carta_digital_view',$datos);
+	}
+
 }

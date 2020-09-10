@@ -87,5 +87,51 @@ class Model_Empresa extends CI_Model {
 		$this->db->where('idempresa',$datos['idempresa']);
 		return $this->db->update('empresa', $data);
 	}
+
+	public function m_cargar_empresa_por_negocio($negocio)
+	{
+		$this->db->select("
+			emp.idempresa,
+			emp.razon_social,
+			emp.nombre_negocio,
+			emp.telefono,
+			emp.contacto,
+			emp.email,
+			emp.createdat,
+			emp.updatedat,
+			emp.idtipopago,
+			emp.idplan,
+			emp.estado_emp,
+			emp.codigo_postal,
+			emp.dni_cif,
+			emp.direccion,
+			emp.idusuario
+		", FALSE);
+
+		$this->db->from('empresa emp');
+		$this->db->where('nombre_negocio', $negocio);
+		$this->db->limit('1');
+		return $this->db->get()->row_array();
+	}
+
+	public function m_cargar_carta_digital($datos)
+	{
+		$this->db->select("
+			cat.idcategoria,
+			cat.descripcion_cat AS categoria,
+			cat.imagen_cat,
+			pr.idproducto,
+			pr.descripcion_pr AS producto,
+			pr.precio,
+			pr.alergenos
+		", FALSE);
+		$this->db->from('categoria cat');
+		$this->db->join('producto pr', 'cat.idcategoria = pr.idcategoria');
+		$this->db->where('cat.idempresa', $datos['idempresa']);
+		$this->db->where('cat.estado_cat', 1);
+		$this->db->where('pr.estado_pr', 1);
+		$this->db->order_by('cat.idcategoria', 'ASC');
+		return $this->db->get()->result_array();
+	}
 }
 ?>

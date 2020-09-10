@@ -5,7 +5,7 @@
     window.location.origin = window.location.protocol+"//"+window.location.host;
   }
   var dirWebRoot =  window.location.origin + '/'+directoryApp;
-  angular.patchURLCI = dirWebRoot+'index.php/';
+  angular.patchURLCI = dirWebRoot;
 
 
   angular

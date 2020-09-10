@@ -65,5 +65,7 @@ $route['aviso-legal'] = "paginas_dinamicas/desarrollar/aviso-legal";
 $route['politica-de-privacidad'] = "paginas_dinamicas/desarrollar/politica-de-privacidad";
 $route['politica-de-cookies'] = "paginas_dinamicas/desarrollar/politica-de-cookies";
 
+$route['c/(:any)'] = "empresa/carta_digital/$1";
+
 
 $route['translate_uri_dashes'] = FALSE;

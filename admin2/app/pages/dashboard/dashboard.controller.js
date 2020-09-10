@@ -42,7 +42,7 @@
     }
     $timeout(function() {
       if( $scope.fSessionCI.idusuario ){
-        console.log('Usuario logeado');
+        console.log('Usuario logueado');
         // vm.listarProxCitas();
         // vm.listarInformeGeneral();
       }
