@@ -17,13 +17,19 @@ class CentralReportes extends CI_Controller {
 		$this->pdf = new Fpdfext();
 
 		$this->pdf->AddPage('P','A4');
+		$xTotal = $this->pdf->GetPageWidth();
+		$yTotal = $this->pdf->GetPageHeight();
+		$margin = 5;
+		$tamaño = 50;
+		$this->pdf->SetMargins($margin,$margin,($xTotal/2)+$margin);
+	
 		$this->pdf->SetFont('Arial','',12);
 		$this->pdf->Ln(10);
 		$this->pdf->SetFont('Arial','B',10);
-		$this->pdf->Cell(18,4,utf8_decode(base_url().'/inicio/qr_code/'.$this->sessionVP['nombre_negocio']),0,0,'L');
+		$this->pdf->Cell(18,4,utf8_decode($this->sessionVP['empresa']),0,0,'L');
 		$this->pdf->Ln(10);
 
-		$this->pdf->Image(base_url().'/inicio/qr_code/'.$this->sessionVP['nombre_negocio'],50, $this->pdf->GetY(),50,50,'png');
+		$this->pdf->Image(base_url().'/inicio/qr_code/'.$this->sessionVP['nombre_negocio'],(($xTotal-$tamaño)/2), $this->pdf->GetY(),$tamaño,$tamaño,'png');
 
 		$arrData['message'] = 'ERROR';
 		$arrData['flag'] = 0;
