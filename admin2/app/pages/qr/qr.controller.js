@@ -21,6 +21,7 @@
 	) {
 		var vm = this;
 		$timeout(function () {
+			vm.rutaCI = angular.patchURLCI;
 			vm.direccionCarta = angular.patchURLCI + 'c/' + $scope.fSessionCI.nombre_negocio;
 
 		}, 1000);
