@@ -16,14 +16,14 @@ class CentralReportes extends CI_Controller {
 
 		$this->pdf = new Fpdfext();
 
-		$this->pdf->AddPage('L','A4');
+		$this->pdf->AddPage('P','A4');
 		$this->pdf->SetFont('Arial','',12);
-		
+		$this->pdf->Ln(10);
 		$this->pdf->SetFont('Arial','B',10);
-		$this->pdf->Cell(18,4,utf8_decode('Codigo QR'),0,0,'L');
-		$this->pdf->Ln(4);
+		$this->pdf->Cell(18,4,utf8_decode(base_url().'/inicio/qr_code/'.$this->sessionVP['nombre_negocio']),0,0,'L');
+		$this->pdf->Ln(10);
 
-		$this->pdf->Image(base_url().'/inicio/qr_code/'.$this->sessionVP['nombre_negocio'],10, $this->pdf->GetY(),100,100,'png');
+		$this->pdf->Image(base_url().'/inicio/qr_code/'.$this->sessionVP['nombre_negocio'],50, $this->pdf->GetY(),100,100,'png');
 
 		$arrData['message'] = 'ERROR';
 		$arrData['flag'] = 0;
