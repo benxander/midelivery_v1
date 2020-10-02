@@ -23,7 +23,7 @@ class CentralReportes extends CI_Controller {
 		$this->pdf->Cell(18,4,utf8_decode(base_url().'/inicio/qr_code/'.$this->sessionVP['nombre_negocio']),0,0,'L');
 		$this->pdf->Ln(10);
 
-		$this->pdf->Image(base_url().'/inicio/qr_code/'.$this->sessionVP['nombre_negocio'],50, $this->pdf->GetY(),100,100,'png');
+		$this->pdf->Image(base_url().'/inicio/qr_code/'.$this->sessionVP['nombre_negocio'],50, $this->pdf->GetY(),50,50,'png');
 
 		$arrData['message'] = 'ERROR';
 		$arrData['flag'] = 0;
