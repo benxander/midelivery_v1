@@ -279,10 +279,15 @@ class Inicio extends CI_Controller {
 		$params['size'] = 7;
 		$this->ciqrcode->generate($params);
 	}
-	public function qr_code(){
+	public function qr_code($nombre_negocio = null){
 		$this->load->library('ciqrcode');
-		$data = base_url() . 'c/' . $this->sessionVP['nombre_negocio'];
-		// $data = $this->sessionVP['nombre_negocio'];
+		$sesion = $this->session->userdata('sess_vp_'.substr(base_url(),-8,7));
+		
+		if(!empty($this->sessionVP['nombre_negocio'])){
+			$nombre_negocio = $this->sessionVP['nombre_negocio'];
+		}
+
+		$data = base_url() . 'c/' . $nombre_negocio;
 		header("Content-Type: image/png");
 		$params['data'] = $data;
 		$params['level'] = 'H';
