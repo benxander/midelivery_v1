@@ -129,7 +129,9 @@
   /** @ngInject */
   function MainController($translate, $scope, $timeout, $state, rootServices, $uibModal,UsuarioServices,$location,pinesNotifications) {
     var vm = this;
-
+    
+    $scope.fSessionCI = {};
+    $scope.isLoggedIn = false;
     $scope.metodos = {};
     $scope.fArr = {};
     $scope.fArr.boolAutoStart = false;
@@ -313,9 +315,7 @@
     }
     vm.changeLanguage('es');
 
-    $scope.fSessionCI = {};
-
-    $scope.isLoggedIn = false;
+    
     $scope.logOut = function() {
       $scope.isLoggedIn = false;
       $scope.captchaValido = false;

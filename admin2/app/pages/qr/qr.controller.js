@@ -11,20 +11,26 @@
 		$scope,
 		$uibModal,
 		$timeout,
-		$location,
-		filterFilter,
-		uiGridConstants,
-		$document,
-		alertify,
-		QrServices,
-		pinesNotifications
+		ModalReporteFactory
 	) {
 		var vm = this;
 		$timeout(function () {
-			vm.rutaCI = angular.patchURLCI;
+			vm.codigoQR = angular.patchURLCI + '/inicio/qr_code';
 			vm.direccionCarta = angular.patchURLCI + 'c/' + $scope.fSessionCI.nombre_negocio;
 
 		}, 1000);
+
+		vm.btnImprimir = function(){
+            var arrParams = {
+              titulo: 'CODIGO QR',
+              datos:{
+                salida    : 'pdf',
+                titulo    : 'CODIGO QR',
+			  },
+			  url: angular.patchURLCI+'CentralReportes/imprimir_qr'
+            }
+            ModalReporteFactory.getPopupReporte(arrParams);
+          }
 	}
 
 	function QrServices($http, $q, handle) {
