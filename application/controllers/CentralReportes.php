@@ -20,7 +20,7 @@ class CentralReportes extends CI_Controller {
 		$xTotal = $this->pdf->GetPageWidth();
 		$yTotal = $this->pdf->GetPageHeight();
 		$margin = 5;
-		$tamaño = 50;
+		$tamaño = 100;
 		$this->pdf->SetMargins($margin,$margin,($xTotal/2)+$margin);
 	
 		$this->pdf->SetFont('Arial','',12);

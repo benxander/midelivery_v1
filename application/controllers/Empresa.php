@@ -173,7 +173,11 @@ class Empresa extends CI_Controller {
 		    ->set_output(json_encode($arrData));
 	}
 
-	// CARTA DIGITAL
+	/** CARTA DIGITAL
+	 * 
+	 * @Creado: 09/09/2020
+	 * @author Ing. Ruben Guevara <rguevarac@hotmail.es>
+	 */ 
 
 	public function carta_digital($negocio)
 	{

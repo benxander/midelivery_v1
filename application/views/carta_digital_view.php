@@ -6,13 +6,18 @@
 	<title>Carta Digital | <?= $razon_social?></title>
 	<link rel="stylesheet" href="<?=base_url();?>css/styles-merged.css">
 	<link rel="stylesheet" href="<?=base_url();?>css/style.min.css">
+	<style>
+		li:nth-child(odd) { background: #024c63 }
+		li:nth-child(even) { background: #0a7a9d}
+		li{padding: 15px}
+	</style>
 </head>
 <body>
 	<h1 style="text-align:center"><?php echo $razon_social ?></h1>
 
     <div class="col-md-12">
 		<div class="panel-group" id="accordion8" role="tablist" aria-multiselectable="false" >
-			<? foreach($categoria_carta AS $row): ?>
+			<?php foreach($categoria_carta AS $row): ?>
 			<div class="panel panel-default">
 				<div class="panel-heading" role="tab" id="acordion2<?=$row['idcategoria']?>">
 					<h4 class="panel-title">
@@ -30,15 +35,24 @@
 				</div>
 				<div id="2<?=$row['categoria']?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="acordion2<?=$row['idcategoria']?>">
 					<div class="panel-body">
-						<ul>
-						<? foreach ($row['productos'] as $row2): ?>
-								<li><?= $row2['producto'] ?></li>
-						<? endforeach; ?>
+						<ul style="list-style-type: none;">
+						<?php foreach ($row['productos'] as $row2): ?>
+							<li>
+								<div class="pull-left"><?= $row2['producto'] ?></div>
+								<div class="pull-right"><?= $row2['precio'] ?> €</div>
+								<div style="clear:both"></div>
+								<?php if(!empty($row2['alergenos'])): ?>
+								<div style="font-size: 0.9em;color: red;">
+								<i class="fa fa-edit"></i>Presencia de Alérgenos <button class="btn btn-danger btn-xs">Ver Más</button>
+								</div>
+								<?php endif;?>
+							</li>
+						<?php endforeach; ?>
 						</ul>
 					</div>
 				</div>
 			</div>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 
 		</div>
 
