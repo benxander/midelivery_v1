@@ -2402,8 +2402,8 @@ a:hover,a:focus{
 }
 #accordion8 .panel-title button:after,
 #accordion8 .panel-title button.collapsed:after{
-    content: "\e92b";
     font-family: "icomoon";
+    content: "\e92b";
     font-weight: 900;
     width: 30px;
     height: 30px;
@@ -2414,6 +2414,10 @@ a:hover,a:focus{
     position: absolute;
     top: 25%;
     left: -13px;
+}
+#accordion8 .panel-title button.collapsed:after{
+  font-family: "icomoon";
+  content: "\e928";
 }
 #accordion8 .panel-green .panel-title button:after,
 #accordion8 .panel-green .panel-title button.collapsed:after{
@@ -2426,10 +2430,6 @@ a:hover,a:focus{
     background: #024c63;
 }
 
-#accordion8 .panel-title button.collapsed:after{
-    content: "\e928";
-    background: rgb(82, 95, 58);;
-}
 #accordion8 .panel-title button.collapsed:hover{
     background: #f1f1f1;
     color: #007d00;
@@ -2479,15 +2479,3 @@ div.line:last-child {
 .error{color:red}
 .warning{color:#fbff0d;}
 .form-control.warning{color:red!important}
-@media screen and (max-width: 910px) {
-  .promocion{
-    width: 300px;
-    display: inline-block;
-  }
-  .panel-body{
-    padding: 15px!important;
-  }
-  .panel-body ul{
-    padding-inline-start: 20px!important;
-  }
-}
