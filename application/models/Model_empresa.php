@@ -105,7 +105,9 @@ class Model_Empresa extends CI_Model {
 			emp.codigo_postal,
 			emp.dni_cif,
 			emp.direccion,
-			emp.idusuario
+			emp.idusuario,
+			emp.modelo_carta,
+			emp.color_carta
 		", FALSE);
 
 		$this->db->from('empresa emp');

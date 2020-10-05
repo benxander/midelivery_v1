@@ -174,10 +174,10 @@ class Empresa extends CI_Controller {
 	}
 
 	/** CARTA DIGITAL
-	 * 
+	 *
 	 * @Creado: 09/09/2020
 	 * @author Ing. Ruben Guevara <rguevarac@hotmail.es>
-	 */ 
+	 */
 
 	public function carta_digital($negocio)
 	{
@@ -193,6 +193,7 @@ class Empresa extends CI_Controller {
 				'idcategoria'	=> $row['idcategoria'],
 				'categoria'	=> $row['categoria'],
 				'imagen_cat'	=> $row['imagen_cat'],
+				'color'			=> $arrEmpresa['color_carta'],
 				'productos'	=> array()
 			);
 		}
