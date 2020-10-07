@@ -80,6 +80,12 @@
         <i class="fa fa-coffee"></i>
       </a>
     </li>
+    <li ng-class="{'active':$state.includes('apariencia')}" ng-if="fArr.valores[7]" class="apariencia">
+      <a ng-click="$state.reload();" ui-sref="apariencia">
+        <span class="nav-text">Apariencia</span>
+        <i class="fa fa-paint-brush"></i>
+      </a>
+    </li>
     <li ng-class="{'active':$state.includes('qr')}" ng-if="fArr.valores[7]" class="qr">
       <a ng-click="$state.reload();" ui-sref="qr">
         <span class="nav-text">QR</span>

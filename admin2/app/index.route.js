@@ -55,6 +55,12 @@
         templateUrl: 'app/pages/producto/producto.html',
         controller: 'ProductoController as vm'
       })
+      //Apariencia
+      .state('apariencia', {
+        url: '/app/apariencia',
+        templateUrl: 'app/pages/apariencia/apariencia.html',
+        controller: 'AparienciaController as vm'
+      })
       //alergenos
       .state('alergeno', {
         url: '/app/alergeno',
