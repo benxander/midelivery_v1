@@ -13,6 +13,7 @@
 		$timeout
 	) {
 		var vm = this;
+		vm.fData = {}
 
 		vm.listaColores = [
 			{
@@ -72,6 +73,13 @@
 			},
 		]
 
+		vm.fData.modelo = 1;
+		vm.fData.idcolor = vm.listaColores[5]['idcolor'];
+
+		vm.btnGuardar = function(){
+			console.log('modelo ', vm.fData.modelo);
+			console.log('color ', vm.fData.idcolor);
+		}
 
 
 	}

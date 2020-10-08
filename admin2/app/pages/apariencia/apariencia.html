@@ -1,3 +1,58 @@
+<style>
+.color-list{
+  margin: 0 -.25em;
+  list-style: none;
+  padding-left: 0;
+}
+.color-list li {
+  margin-bottom: .25em;
+  margin-right: .25em;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  color: #fff;
+}
+.color-list li:active{
+	border: #cf0909;
+}
+.color-list li.white {
+    color: #595959;
+}
+.color>div {
+  border: 1px solid lightgrey;
+  border-radius: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+.color>div>div {
+  display: inline-block;
+  height: 60px;
+}
+.color.active>div:after {
+    text-align: center;
+    content: "\f00c";
+    font-family: FontAwesome;
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    vertical-align: middle;
+}
+.minotaur-radio .input-indicator{
+	position:  relative !important;
+	left: 62px;
+}
+.modelo{
+	display: inline-block;
+}
+</style>
 <div class="page page-ui pull-to-header">
 	<ol class="breadcrumb bg-white">
 		<li><a ui-sref="dashboard">Dashboard</a></li>
@@ -16,16 +71,35 @@
 				<!-- /tile header -->
 				<!-- tile body -->
 				<!-- PANEL PRINCIPAL -->
-				<section class="tile-body col-sm-12 pr-md pl-md">
-					<div class="col-md-6">
-						<label class="minotaur-label block" >Color</label>
-						<ul class="color-list" style="list-style-type: none;">
-							<li ng-repeat="itemColor in vm.listaColores" class="color pull-left"
+				<section class="tile-body pr-md pl-md">
+					<div class="col-md-12 mb-lg">
+						<label class="minotaur-label block" >Seleccionar Modelo</label>
+						<div class="modelo">
+							<label class="checkbox minotaur-radio minotaur-radio-lg" style="height: 280px;">
+								<img src="assets/images/modelo_1.jpg" alt="" style="height: 100%;">
+								<input name="modeloRadio" type="radio" uib-btn-radio ="'1'" ng-model="vm.fData.modelo" >
+								<div class="input-indicator"></div>
+							</label>
+						</div>
+						<div class="modelo">
+							<label class="checkbox minotaur-radio minotaur-radio-lg" style="height: 280px;">
+								<img src="assets/images/modelo_2.jpg" alt="" style="height: 100%;">
+								<input name="modeloRadio" type="radio" uib-btn-radio ="'2'" ng-model="vm.fData.modelo">
+								<div class="input-indicator"></div>
+							</label>
+						</div>
+
+					</div>
+					<hr class="line-dashed line-full" />
+					<div class="col-md-12 mt-lg">
+						<label class="minotaur-label block" >Seleccionar Color</label>
+						<ul class="color-list">
+							<li ng-repeat="itemColor in vm.listaColores" class="color"
 								title="{{itemColor.nombre}}"
-								ng-model="vm.temporal.idcolor" uib-btn-radio="'{{itemColor.idcolor}}'"
+								ng-model="vm.fData.idcolor" uib-btn-radio="'{{itemColor.idcolor}}'"
 								ng-click="vm.cambiaColor(itemColor);">
-								<div style="width: 60px;height: 60px;">
-									<div style="background-color: {{itemColor.hexa}}; width: 100%;height: 100%;margin: 12px;border-radius: 50%;"></div>
+								<div>
+									<div style="width: 100%;height: 100%;" ng-style="{'background-color': itemColor.hexa}"></div>
 								</div>
 							</li>
 						</ul>
@@ -34,6 +108,11 @@
 				</section>
 
 				<!-- /tile body -->
+				<hr class="line-dashed line-full clear" />
+				<section class="tile-footer mt-lg">
+					<button class="btn btn-success" ng-click="vm.btnGuardar();">Guardar</button>
+				</section>
+
 			</div>
 			<!-- /tile -->
 		</div>
