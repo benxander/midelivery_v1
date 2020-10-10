@@ -9,76 +9,34 @@
 	/** @ngInject */
 	function AparienciaController(
 		$scope,
-		$uibModal,
-		$timeout
+		pinesNotifications,
+		AparienciaServices
 	) {
 		var vm = this;
-		vm.fData = {}
+		vm.fData = {};
 
-		vm.listaColores = [
-			{
-				idcolor: 1,
-				nombre: 'Rojo',
-				hexa: '#EB1B29'
-			},
-			{
-				idcolor: 2,
-				nombre: 'Anaranjado',
-				hexa: '#F6781E'
-			},
-			{
-				idcolor: 3,
-				nombre: 'Anaranjado2',
-				hexa: '#FA9C14'
-			},
-			{
-				idcolor: 4,
-				nombre: 'Amarillo',
-				hexa: '#FDDB03'
-			},
-			{
-				idcolor: 5,
-				nombre: 'Verde Lima',
-				hexa: '#AFDB24'
-			},
-			{
-				idcolor: 6,
-				nombre: 'Verde',
-				hexa: '#40BB4F'
-			},
-			{
-				idcolor: 7,
-				nombre: 'Verde2',
-				hexa: '#01A870'
-			},
-			{
-				idcolor: 8,
-				nombre: 'Azul',
-				hexa: '#1679CB'
-			},
-			{
-				idcolor: 9,
-				nombre: 'Lila',
-				hexa: '#525CB3'
-			},
-			{
-				idcolor: 10,
-				nombre: 'Morado',
-				hexa: '#7A2995'
-			},
-			{
-				idcolor: 11,
-				nombre: 'Fucsia',
-				hexa: '#C91091'
-			},
-		]
+		// Lista de colores
+		AparienciaServices.sCargarColores().then(function (rpta) {
+			vm.listaColores = rpta.datos;
+		});
 
-		vm.fData.modelo = 1;
-		vm.fData.idcolor = vm.listaColores[5]['idcolor'];
 
 		vm.btnGuardar = function(){
 			console.log('modelo ', vm.fData.modelo);
 			console.log('color ', vm.fData.idcolor);
+			AparienciaServices.sGuardarApariencia(vm.fData).then(function (rpta) {
+				if (rpta.flag == 1) {
+					var pTitle = 'OK!';
+					var pType = 'success';
+				} else if (rpta.flag == 0) {
+					var pTitle = 'Advertencia!';
+					var pType = 'warning';
+				} else {
+					alert('Ocurrió un error');
+				}
+				pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
+			});
+
 		}
 
 
@@ -86,14 +44,24 @@
 
 	function AparienciaServices($http, $q, handle) {
 		return ({
-			sCargarColores: sCargarColores
+			sCargarColores: sCargarColores,
+			sGuardarApariencia: sGuardarApariencia,
 		});
 
 		function sCargarColores(pDatos) {
 			var datos = pDatos || {};
 			var request = $http({
 				method: 'post',
-				url: angular.patchURLCI + 'Inicio/qr',
+				url: angular.patchURLCI + 'Empresa/cargar_colores',
+				data: datos
+			});
+			return (request.then(handle.success, handle.error));
+		}
+		function sGuardarApariencia(pDatos) {
+			var datos = pDatos || {};
+			var request = $http({
+				method: 'post',
+				url: angular.patchURLCI + 'Empresa/guardar_apariencia',
 				data: datos
 			});
 			return (request.then(handle.success, handle.error));

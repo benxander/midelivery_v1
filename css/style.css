@@ -2360,6 +2360,7 @@ a:hover,a:focus{
     border-radius: 0;
     border: none;
 }
+#accordion8 .panel-title {background: #e4e4e4;}
 #accordion8 .panel-title button{
     display: block;
     padding: 20px 30px 20px 50px;
@@ -2370,34 +2371,40 @@ a:hover,a:focus{
     border-radius: 5px;
     width: 100%;
 }
-#accordion8 .panel-green .panel-title button{
-    background: #ffffff;
-    color: #007d00;
-    border: 1px solid #007d00;
-}
-#accordion8 .panel-green .panel-title button:hover{
-  background: #083608!important;
-  color: #fff!important;
-}
-#accordion8 .panel-blue .panel-title button{
-    background: #ffffff;
-    color: #024c63;
-    border: 1px solid #024c63;
-}
-#accordion8 .panel-blue .panel-title button:hover{
-  background: #022b38!important;
-  color: #fff!important;
-}
+#accordion8 .panel-red .panel-title button{background: #ffffff; color: #EB1B29; border: 1px solid #EB1B29;}
+#accordion8 .panel-orange .panel-title button{background: #ffffff; color: #F6781E; border: 1px solid #F6781E;}
+#accordion8 .panel-orange2 .panel-title button{background: #ffffff; color: #FA9C14; border: 1px solid #FA9C14;}
+#accordion8 .panel-yellow .panel-title button{background: #ffffff; color: #FDDB03; border: 1px solid #FDDB03;}
+#accordion8 .panel-light-green .panel-title button{background: #ffffff; color: #AFDB24; border: 1px solid #AFDB24;}
+#accordion8 .panel-green .panel-title button{background: #ffffff; color: #40BB4F; border: 1px solid #40BB4F;}
+#accordion8 .panel-green2 .panel-title button{background: #ffffff; color: #01A870; border: 1px solid #01A870;}
+#accordion8 .panel-blue .panel-title button{background: #ffffff; color: #1679CB; border: 1px solid #1679CB;}
+#accordion8 .panel-lila .panel-title button{background: #ffffff; color: #525CB3; border: 1px solid #525CB3;}
+#accordion8 .panel-purple .panel-title button{background: #ffffff; color:#7A2995; border: 1px solid#7A2995;}
+#accordion8 .panel-fucsia .panel-title button{background: #ffffff; color: #C91091; border: 1px solid #C91091;}
+
+#accordion8 .panel-red .panel-title button:hover{background: #610b11!important; color: #fff!important;}
+#accordion8 .panel-orange .panel-title button:hover{background: #66320e!important; color: #fff!important;}
+#accordion8 .panel-orange2 .panel-title button:hover{background: #5a3807!important; color: #fff!important;}
+#accordion8 .panel-yellow .panel-title button:hover{background: #494002!important; color: #fff!important;}
+#accordion8 .panel-light-green .panel-title button:hover{background: #4e610f!important; color: #fff!important;}
+#accordion8 .panel-green .panel-title button:hover{background: #083608!important; color: #fff!important;}
+#accordion8 .panel-green2 .panel-title button:hover{background: #015539!important; color: #fff!important;}
+#accordion8 .panel-blue .panel-title button:hover{ background: #022b38!important; color: #fff!important;}
+#accordion8 .panel-lila .panel-title button:hover{ background: #2d3264!important; color: #fff!important;}
+#accordion8 .panel-purple .panel-title button:hover{ background: #391346!important; color: #fff!important;}
+#accordion8 .panel-fucsia .panel-title button:hover{ background: #6b094e!important; color: #fff!important;}
+
 #accordion8 .panel-green .panel-title button.collapsed{
     background: #fff;
     color: #696969;
-    border: 1px solid #007d00;
+    border: 1px solid #40BB4F;
     border-radius: 5px;
 }
 #accordion8 .panel-blue .panel-title button.collapsed{
     /* background: #fff; */
     color: #696969;
-    border: 1px solid #024c63;
+    border: 1px solid #1679CB;
     /* border-radius: 5px; */
 }
 #accordion8 .panel-title button:after,
@@ -2419,26 +2426,27 @@ a:hover,a:focus{
   font-family: "icomoon";
   content: "\e928";
 }
-#accordion8 .panel-green .panel-title button:after,
-#accordion8 .panel-green .panel-title button.collapsed:after{
-    color: #fff;
-    background: #007d00;
-}
-#accordion8 .panel-blue .panel-title button:after,
-#accordion8 .panel-blue .panel-title button.collapsed:after{
-    color: #fff;
-    background: #024c63;
-}
+#accordion8 .panel-red .panel-title button:after,#accordion8 .panel-red .panel-title button.collapsed:after{color: #fff;background: #EB1B29;}
+#accordion8 .panel-orange .panel-title button:after,#accordion8 .panel-orange .panel-title button.collapsed:after{color: #fff;background: #F6781E;}
+#accordion8 .panel-orange2 .panel-title button:after,#accordion8 .panel-orange2 .panel-title button.collapsed:after{color: #fff;background: #FA9C14;}
+#accordion8 .panel-yellow .panel-title button:after,#accordion8 .panel-yellow .panel-title button.collapsed:after{color: #fff;background: #FDDB03;}
+#accordion8 .panel-light-green .panel-title button:after,#accordion8 .panel-light-green .panel-title button.collapsed:after{color: #fff;background: #AFDB24;}
+#accordion8 .panel-green .panel-title button:after,#accordion8 .panel-green .panel-title button.collapsed:after{color: #fff;background: #40BB4F;}
+#accordion8 .panel-green2 .panel-title button:after,#accordion8 .panel-green2 .panel-title button.collapsed:after{color: #fff;background: #01A870;}
+#accordion8 .panel-blue .panel-title button:after,#accordion8 .panel-blue .panel-title button.collapsed:after{color: #fff;background: #1679CB;}
+#accordion8 .panel-lila .panel-title button:after,#accordion8 .panel-lila .panel-title button.collapsed:after{color: #fff;background: #525CB3;}
+#accordion8 .panel-purple .panel-title button:after,#accordion8 .panel-purple .panel-title button.collapsed:after{color: #fff;background: #7A2995;}
+#accordion8 .panel-fucsia .panel-title button:after,#accordion8 .panel-fucsia .panel-title button.collapsed:after{color: #fff;background: #C91091;}
 
 #accordion8 .panel-title button.collapsed:hover{
     background: #f1f1f1;
-    color: #007d00;
+    color: #40BB4F;
 }
 #accordion8 .panel-body{
     font-size: 14px;
     /* color: #fff; */
     line-height: 25px;
-    /* background: #007d00; */
+    /* background: #40BB4F; */
     padding: 0px;
     border: none;
     transition: all 0.5s ease 0s;
@@ -2450,11 +2458,30 @@ a:hover,a:focus{
 }
 #accordion8 .panel-body li{padding: 15px 15px 15px 50px }
 
-#accordion8 .panel-green .panel-body li:nth-child(odd) { color:#ffffff; background: #007d00 }
-#accordion8 .panel-green .panel-body li:nth-child(even) { color:#ffffff; background: #87ab87}
+#accordion8 .panel-red .panel-body li:nth-child(odd) { color:#ffffff; background: #EB1B29 }
+#accordion8 .panel-orange .panel-body li:nth-child(odd) { color:#ffffff; background: #F6781E }
+#accordion8 .panel-orange2 .panel-body li:nth-child(odd) { color:#ffffff; background: #FA9C14 }
+#accordion8 .panel-yellow .panel-body li:nth-child(odd) { color:#ffffff; background: #FDDB03 }
+#accordion8 .panel-light-green .panel-body li:nth-child(odd) { color:#ffffff; background: #AFDB24 }
+#accordion8 .panel-green .panel-body li:nth-child(odd) { color:#ffffff; background: #40BB4F }
+#accordion8 .panel-green2 .panel-body li:nth-child(odd) { color:#ffffff; background: #01A870 }
+#accordion8 .panel-blue .panel-body li:nth-child(odd) { color:#ffffff; background: #1679CB }
+#accordion8 .panel-lila .panel-body li:nth-child(odd) { color:#ffffff; background: #525CB3 }
+#accordion8 .panel-purple .panel-body li:nth-child(odd) { color:#ffffff; background: #7A2995 }
+#accordion8 .panel-fucsia .panel-body li:nth-child(odd) { color:#ffffff; background: #C91091 }
 
-#accordion8 .panel-blue .panel-body li:nth-child(odd) { color:#ffffff; background: #024c63 }
-#accordion8 .panel-blue .panel-body li:nth-child(even) { color:#ffffff; background: #0a7a9d}
+#accordion8 .panel-red .panel-body li:nth-child(even) { color:#ffffff; background: #E0A9AD }
+#accordion8 .panel-orange .panel-body li:nth-child(even) { color:#ffffff; background: #F9B98B }
+#accordion8 .panel-orange2 .panel-body li:nth-child(even) { color:#ffffff; background: #ECC58D }
+#accordion8 .panel-yellow .panel-body li:nth-child(even) { color:#ffffff; background: #BDB47B }
+#accordion8 .panel-light-green .panel-body li:nth-child(even) { color:#ffffff; background: #AEBF76 }
+#accordion8 .panel-green .panel-body li:nth-child(even) { color:#ffffff; background: #90D098 }
+#accordion8 .panel-green2 .panel-body li:nth-child(even) { color:#ffffff; background: #30D29B }
+#accordion8 .panel-blue .panel-body li:nth-child(even) { color:#ffffff; background: #27AAD4 }
+#accordion8 .panel-lila .panel-body li:nth-child(even) { color:#ffffff; background: #7178b5 }
+#accordion8 .panel-purple .panel-body li:nth-child(even) { color:#ffffff; background: #9542B1 }
+#accordion8 .panel-fucsia .panel-body li:nth-child(even) { color:#ffffff; background: #EC38B6 }
+
 
 input[type="checkbox"], input[type="radio"] {
 	display: inline-block!important;

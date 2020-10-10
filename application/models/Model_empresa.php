@@ -107,10 +107,12 @@ class Model_Empresa extends CI_Model {
 			emp.direccion,
 			emp.idusuario,
 			emp.modelo_carta,
-			emp.color_carta
+			emp.idcolor,
+			co.clase
 		", FALSE);
 
 		$this->db->from('empresa emp');
+		$this->db->join('color co', 'emp.idcolor = co.idcolor');
 		$this->db->where('nombre_negocio', $negocio);
 		$this->db->limit('1');
 		return $this->db->get()->row_array();
@@ -133,6 +135,19 @@ class Model_Empresa extends CI_Model {
 		$this->db->where('cat.estado_cat', 1);
 		$this->db->where('pr.estado_pr', 1);
 		$this->db->order_by('cat.idcategoria', 'ASC');
+		return $this->db->get()->result_array();
+	}
+
+	public function m_cargar_colores()
+	{
+		$this->db->select("
+			idcolor,
+			nombre,
+			hexa,
+			clase
+		", FALSE);
+		$this->db->from('color co');
+		$this->db->order_by('co.idcolor', 'ASC');
 		return $this->db->get()->result_array();
 	}
 }

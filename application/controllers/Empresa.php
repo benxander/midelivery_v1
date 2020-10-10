@@ -193,7 +193,7 @@ class Empresa extends CI_Controller {
 				'idcategoria'	=> $row['idcategoria'],
 				'categoria'	=> $row['categoria'],
 				'imagen_cat'	=> $row['imagen_cat'],
-				'color'			=> $arrEmpresa['color_carta'],
+				'color'			=> $arrEmpresa['clase'],
 				'productos'	=> array()
 			);
 		}
@@ -225,5 +225,45 @@ class Empresa extends CI_Controller {
 
 		$this->load->view('carta_digital_view',$datos);
 	}
+
+	public function guardar_apariencia()
+	{
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+
+		$data = array(
+			'modelo_carta' => $allInputs['modelo'],
+			'idcolor' => $allInputs['idcolor']
+		);
+
+		$idempresa = $this->sessionVP['idempresa'];
+
+		if($this->model_empresa->m_editar($data, $idempresa)){
+			$arrData['message'] = 'Se editaron los datos correctamente ';
+    		$arrData['flag'] = 1;
+		}
+
+
+
+		$arrData['message'] = 'Se registraron los datos correctamente';
+    	$arrData['flag'] = 1;
+
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
+
+	public function cargar_colores()
+	{
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+		$lista = $this->model_empresa->m_cargar_colores();
+
+		$arrData['datos'] = $lista;
+    	$arrData['message'] = '';
+    	$arrData['flag'] = 1;
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
+
 
 }
