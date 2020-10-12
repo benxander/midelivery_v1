@@ -222,8 +222,11 @@ class Empresa extends CI_Controller {
 			'telefono'	=> $arrEmpresa['telefono'],
 			'categoria_carta' => $arrCategoria
 		);
-
-		$this->load->view('carta_digital_view',$datos);
+		if($arrEmpresa['modelo_carta'] == 2){
+			$this->load->view('carta_digital2_view',$datos);
+		}else{
+			$this->load->view('carta_digital_view',$datos);
+		}
 	}
 
 	public function guardar_apariencia()

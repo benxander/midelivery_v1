@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Carta Digital | <?= $razon_social?></title>
 	<link rel="stylesheet" href="<?=base_url();?>css/styles-merged.css">
-	<link rel="stylesheet" href="<?=base_url();?>css/style.css">
+	<link rel="stylesheet" href="<?=base_url();?>css/style_carta1.css">
 
 </head>
 <body>
