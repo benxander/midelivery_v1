@@ -177,11 +177,11 @@
 			<div id="navbar-collapse" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-left">
 					<li><a href="#" data-nav-section="home">Inicio</a></li>
-					<li><a href="#" data-nav-section="bar">Bar</a></li>
-					<li><a href="#" data-nav-section="restaurante">Restaurante</a></li>
-					<li><a href="#" data-nav-section="carta">Carta</a></li>
-					<li><a href="#" data-nav-section="reservas">Reservas</a></li>
-					<li><a href="#" data-nav-section="ubicacion">Ubicación</a></li>
+					<li><a href="#" data-nav-section="carta-digital">Carta Digital</a></li>
+					<li><a href="#" data-nav-section="codigo-qr-pagina-web">Código QR</a></li>
+					<li><a href="#" data-nav-section="ejemplos">Ejemplos</a></li>
+					<li><a href="#" data-nav-section="pedidos">Pedidos</a></li>
+					<li><a href="#" data-nav-section="contacto">Contacto</a></li>
 				</ul>
 			</div>
 			<div id="google_translate_element" class="no_print traductor"></div>
