@@ -4,7 +4,7 @@ class Model_producto extends CI_Model {
 	{
 		parent::__construct();
 	}
-	public function m_cargar_productos($paramPaginate=FALSE){
+	public function m_cargar_productos($paramPaginate=FALSE,$paramDatos){
 		$this->db->select("
 			pr.idproducto,
 			pr.descripcion_pr,
@@ -19,7 +19,9 @@ class Model_producto extends CI_Model {
 		$this->db->where('pr.estado_pr', 1);
 		$this->db->where('cat.estado_cat', 1);
 		$this->db->where('cat.idempresa', $this->sessionVP['idempresa']);
-
+		if($paramDatos['categoria']['id'] != 0){
+			$this->db->where('cat.idcategoria', $paramDatos['categoria']['id']);
+		}
 		if($paramPaginate){
 			if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
 				foreach ($paramPaginate['searchColumn'] as $key => $value) {
@@ -40,14 +42,16 @@ class Model_producto extends CI_Model {
 		}
 		return $this->db->get()->result_array();
 	}
-	public function m_count_productos($paramPaginate=FALSE){
+	public function m_count_productos($paramPaginate=FALSE,$paramDatos){
 		$this->db->select('count(*) AS contador');
 		$this->db->from('producto pr');
 		$this->db->join('categoria cat', 'pr.idcategoria = cat.idcategoria');
 		$this->db->where('pr.estado_pr', 1);
 		$this->db->where('cat.estado_cat', 1);
 		$this->db->where('cat.idempresa', $this->sessionVP['idempresa']);
-
+		if($paramDatos['categoria']['id'] != 0){
+			$this->db->where('cat.idcategoria', $paramDatos['categoria']['id']);
+		}
 		if( isset($paramPaginate['search'] ) && $paramPaginate['search'] ){
 			foreach ($paramPaginate['searchColumn'] as $key => $value) {
 				if(! empty($value)){

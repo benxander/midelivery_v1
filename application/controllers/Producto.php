@@ -23,22 +23,23 @@ class Producto extends CI_Controller {
 	{
 		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
 		$paramPaginate = $allInputs['paginate'];
+		$paramDatos = $allInputs['data'];
 
-		$lista = $this->model_producto->m_cargar_productos($paramPaginate);
+		$lista = $this->model_producto->m_cargar_productos($paramPaginate,$paramDatos);
 		$arrListado = array();
 
 		if(empty($lista)){
 			$arrData['flag'] = 0;
 			$arrData['datos'] = $arrListado;
     		$arrData['paginate']['totalRows'] = 0;
-			$arrData['message'] = 'No hay ninguna producto registrada';
+			$arrData['message'] = 'No hay ningún producto registrado';
 			$this->output
 				->set_content_type('application/json')
 				->set_output(json_encode($arrData));
 			return;
 		}
 
-		$totalRows = $this->model_producto->m_count_productos($paramPaginate);
+		$totalRows = $this->model_producto->m_count_productos($paramPaginate,$paramDatos);
 
 		foreach ($lista as $row) {
 			array_push($arrListado,

@@ -15,15 +15,21 @@
 		ProductoServices,
 		CategoriaServices,
 		AlergenoServices,
-		pinesNotifications
+		pinesNotifications,
+		blockUI
 	) {
 		var vm = this;
 
 		vm.fArr = {};
+		vm.filtro = {};
 
 		// Lista de categorias
 		CategoriaServices.sListarCategoriasCbo().then(function (rpta) {
 			vm.fArr.listaCategorias = rpta.datos;
+			vm.categorias = rpta.datos;
+			vm.categorias.splice(0,0,{ id: 0, descripcion: 'Todas' });
+			vm.filtro.categoria = vm.categorias[0];
+			vm.getPaginationServerSide(true);
 		});
 
 		// Lista de alergenos
@@ -56,9 +62,9 @@
 			appScopeProvider: vm
 		}
 		vm.gridOptions.columnDefs = [
-			{ field: 'idproducto', name: 'idproducto', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC } },
+			{ field: 'idproducto', name: 'idproducto', displayName: 'ID PRODUCTO', width: 80, sort: { direction: uiGridConstants.DESC } },
+			{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'CATEGORIA', enableFiltering: false, enableColumnMenu: false },
 			{ field: 'descripcion_pr', name: 'descripcion_pr', displayName: 'NOMBRE DE PRODUCTO' },
-			{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'CATEGORIA' },
 			{ field: 'precio', name: 'precio', displayName: 'PRECIO', width: 120, enableFiltering: false, enableColumnMenu: false, },
 
 			{
@@ -77,33 +83,40 @@
 				paginationOptions.pageNumber = newPage;
 				paginationOptions.pageSize = pageSize;
 				paginationOptions.firstRow = (paginationOptions.pageNumber - 1) * paginationOptions.pageSize;
-				vm.getPaginationServerSide();
+				vm.getPaginationServerSide(true);
 			});
 			vm.gridApi.core.on.filterChanged($scope, function (grid, searchColumns) {
 				var grid = this.grid;
 				paginationOptions.search = true;
 				paginationOptions.searchColumn = {
 					'idproducto': grid.columns[1].filters[0].term,
-					'descripcion_pr': grid.columns[2].filters[0].term,
-					'descripcion_cat': grid.columns[3].filters[0].term,
+					'descripcion_pr': grid.columns[3].filters[0].term
 
 				};
-				vm.getPaginationServerSide();
+				vm.getPaginationServerSide(true);
 			});
 		}
 
 		paginationOptions.sortName = vm.gridOptions.columnDefs[0].name;
-		vm.getPaginationServerSide = function () {
+
+		vm.getPaginationServerSide = function (loader) {
+			if(loader){
+				blockUI.start('Cargando datos...');
+			}
 			vm.datosGrid = {
-				paginate: paginationOptions
+				paginate: paginationOptions,
+				data: vm.filtro
 			};
 			ProductoServices.sListarProductos(vm.datosGrid).then(function (rpta) {
+				if(loader){
+					blockUI.stop();
+				}
 				vm.gridOptions.data = rpta.datos;
 				vm.gridOptions.totalItems = rpta.paginate.totalRows;
 				vm.mySelectionGrid = [];
 			});
 		}
-		vm.getPaginationServerSide();
+		
 		// mantenimiento
 		vm.btnNuevo = function () {
 			$uibModal.open({
@@ -128,7 +141,7 @@
 						ProductoServices.sRegistrarProducto(vm.fData).then(function (rpta) {
 							if (rpta.flag == 1) {
 								$uibModalInstance.close();
-								vm.getPaginationServerSide();
+								vm.getPaginationServerSide(true);
 								var pTitle = 'OK!';
 								var pType = 'success';
 							} else if (rpta.flag == 0) {
@@ -185,7 +198,7 @@
 						ProductoServices.sEditarProducto(vm.fData).then(function (rpta) {
 							if (rpta.flag == 1) {
 								$uibModalInstance.close();
-								vm.getPaginationServerSide();
+								vm.getPaginationServerSide(true);
 								var pTitle = 'OK!';
 								var pType = 'success';
 							} else if (rpta.flag == 0) {
@@ -236,7 +249,7 @@
 		vm.anularProducto = function (row) {
 			ProductoServices.sAnularProducto(row).then(function (rpta) {
 				if (rpta.flag == 1) {
-					vm.getPaginationServerSide();
+					vm.getPaginationServerSide(true);
 					var pTitle = 'OK!';
 					var pType = 'success';
 				} else if (rpta.flag == 0) {

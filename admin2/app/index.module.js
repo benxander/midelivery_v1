@@ -41,6 +41,7 @@
       // 'ui.footable',
       'angular-intro',
       'ui.calendar',
+      'blockUI'
       // 'highcharts-ng'
     ]);
 

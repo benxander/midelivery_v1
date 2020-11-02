@@ -13,7 +13,7 @@
 				<section class="tile-header">
 					<h1 class="heading">Productos</h1>
 					<div class="controls">
-						<minotaur-tile-refresh ng-click="vm.getPaginationServerSide();"></minotaur-tile-refresh>
+						<minotaur-tile-refresh ng-click="vm.getPaginationServerSide(false);"></minotaur-tile-refresh>
 					</div>
 				</section>
 				<!-- /tile header -->
@@ -22,8 +22,13 @@
 				<section class="tile-body col-sm-12 pr-md pl-md">
 					<div>
 						<ul class="form-group demo-btns list-unstyled">
-							<li class="pull-right" style="margin-bottom: 10px;"><button type="button"
-									class="btn btn-success" ng-click='vm.btnNuevo()'>Nuevo</button></li>
+							<li class="form-group pull-left" style="margin-bottom: 10px;">
+								<label class="m-n"> CATEGORIA </label>
+                      			<select class="form-control input-sm block" ng-model="vm.filtro.categoria" ng-change="vm.getPaginationServerSide(true); $event.preventDefault();" ng-options="item as item.descripcion for item in vm.fArr.listaCategorias" > </select>
+							</li>
+							<li class="pull-right" style="margin-bottom: 10px;">
+								<button type="button" class="btn btn-success" ng-click='vm.btnNuevo()'>Nuevo</button>
+							</li>
 						</ul>
 					</div>
 					<div id="grid1" ui-grid="vm.gridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-pagination
