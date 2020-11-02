@@ -28,18 +28,7 @@
         correo: 'pizzita@pizzapepito.com'
       }
     ]
-    vm.listarInformeGeneral = function() {
-      InformeGeneralServices.sListarInformeGeneral().then(function(rpta) {
-        if( rpta.flag == 1 ){
-          vm.fData.cantPacAtendidos = rpta.datos.pac_atendidos.cantidad;
-          vm.fData.cantAteRealizadas = rpta.datos.atenciones_realizadas.cantidad;
-        }else{
-          vm.fData = {};
-          vm.fData.cantPacAtendidos = 0;
-          vm.fData.cantAteRealizadas = 0;
-        }
-      });
-    }
+    
     $timeout(function() {
       if( $scope.fSessionCI.idusuario ){
         console.log('Usuario logueado');

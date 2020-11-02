@@ -61,11 +61,21 @@
       </ul>
 
     </li>
-    <li ng-class="{'active':$state.includes('sys-configuracion')}" ng-if="fArr.valores[5]" class="sys-configuracion">
-      <a ng-click="$state.reload();" ui-sref="sys-configuracion">
+
+    <li ng-class="{'active':$state.includes('carta-demo')}" ng-if="fArr.valores[5]">
+      <a href="javascript:;">
         <span class="nav-text">{{ 'Menu.CONFIGURACION' | translate }}</span>
         <i class="fa fa-wrench"></i>
       </a>
+      <ul>
+        <li ng-class="{'active':$state.includes('carta-demo')}" class="carta-demo">
+          <a ng-click="$state.reload();" ui-sref="carta-demo">
+            <span class="nav-text">CARTAS DEMO</span>
+            <i class="fa fa-book"></i>
+          </a>
+        </li>
+        
+      </ul>
     </li>
     <!-- Perfil empresa -->
     <li ng-class="{'active':$state.includes('categoria')}" ng-if="fArr.valores[6]" class="categoria">

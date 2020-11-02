@@ -80,10 +80,16 @@
         controller: 'UsuarioController as vm'
       })
       // configuracion
-      .state('sys-configuracion', {
-        url: '/app/sys-configuracion',
-        templateUrl: 'app/pages/configuracion/sys-configuracion.html',
-        controller: 'ConfiguracionController as vm'
+      // .state('sys-configuracion', {
+      //   url: '/app/sys-configuracion',
+      //   templateUrl: 'app/pages/configuracion/sys-configuracion.html',
+      //   controller: 'ConfiguracionController as vm'
+      // });
+
+      .state('carta-demo', {
+        url: '/app/carta-demo',
+        templateUrl: 'app/pages/configuracion/carta-demo.html',
+        controller: 'CartaDemoController as vm'
       });
 
     $urlRouterProvider.otherwise('/app/dashboard');
