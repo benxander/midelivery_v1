@@ -150,5 +150,22 @@ class Model_Empresa extends CI_Model {
 		$this->db->order_by('co.idcolor', 'ASC');
 		return $this->db->get()->result_array();
 	}
+
+	public function m_cargar_cartas_demo()
+	{
+		$this->db->select("
+			emp.idempresa,
+			emp.razon_social,
+
+			emp.idcolor,
+			concat('Modelo ', emp.modelo_carta) AS modelo_carta,
+			co.nombre AS color,
+			co.hexa
+		", FALSE);
+		$this->db->from('empresa emp');
+		$this->db->join('color co', 'emp.idcolor = co.idcolor');
+		$this->db->where('emp.estado_emp', 2);
+		return $this->db->get()->result_array();
+	}
 }
 ?>

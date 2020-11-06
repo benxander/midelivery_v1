@@ -268,5 +268,23 @@ class Empresa extends CI_Controller {
 		    ->set_output(json_encode($arrData));
 	}
 
+	/** CARTAS DEMO
+	 *
+	 * @Creado: 05/11/2020
+	 * @author Ing. Ruben Guevara <rguevarac@hotmail.es>
+	 */
 
+	public function listar_cartas_demo()
+	{
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+		$lista = $this->model_empresa->m_cargar_cartas_demo();
+
+		$arrData['datos'] = $lista;
+		$arrData['paginate']['totalRows'] = count($lista);
+    	$arrData['message'] = '';
+    	$arrData['flag'] = 1;
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
 }
