@@ -7,7 +7,7 @@
 		.service('CartaDemoServices', CartaDemoServices);
 
 	/** @ngInject */
-	function CartaDemoController($scope, uiGridConstants, CartaDemoServices) {
+	function CartaDemoController($scope, uiGridConstants, $uibModal, CartaDemoServices) {
 		var vm = this;
 		vm.fData = {};
 
@@ -42,9 +42,10 @@
 			{ field: 'color', name: 'color', displayName: 'COLOR', width: 150, },
 
 			{
-				field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false,
+				field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 130, enableFiltering: false, enableColumnMenu: false,
 				cellTemplate: '<label class="btn btn-primary" ng-click="grid.appScope.btnEditar(row);$event.stopPropagation();" tooltip-placement="left" uib-tooltip="EDITAR"> <i class="fa fa-edit"></i> </label>' +
-					'<label class="btn btn-success" ng-click="grid.appScope.btnProductos(row);$event.stopPropagation();"> <i class="fa fa-coffee" tooltip-placement="left" uib-tooltip="PRODUCTOS!"></i> </label>'
+					'<label class="btn btn-warning" ng-click="grid.appScope.btnCategorias(row);$event.stopPropagation();" tooltip-placement="left" uib-tooltip="CATEGORIAS"> <i class="fa fa-coffee"></i> </label>' +
+					'<label class="btn btn-success" ng-click="grid.appScope.btnProductos(row);$event.stopPropagation();"> <i class="fa fa-coffee" tooltip-placement="left" uib-tooltip="PRODUCTOS!"></i></label>'
 
 			},
 
@@ -61,6 +62,39 @@
 			});
 		}
 		vm.getPaginationServerSide();
+
+		vm.btnCategorias = function(row){
+			$uibModal.open({
+				templateUrl: 'app/pages/configuracion/categorias_formview.php',
+				controllerAs: 'mp',
+				size: 'lg',
+				backdropClass: 'splash splash-2 splash-info splash-ef-12',
+				windowClass: 'splash splash-2 splash-ef-12',
+				backdrop: 'static',
+				keyboard: false,
+				controller: function ($scope, $uibModalInstance) {
+					var vm = this;
+					vm.temporal = {}
+					vm.fData = row.entity;
+					console.log('row', row.entity);
+					vm.modalTitle = 'Categorias del ' + vm.fData.razon_social;
+
+					vm.gridOptions = {};
+					vm.gridOptions.data = [];
+
+
+					vm.agregarCat = function(){
+						console.log('TEMPORAL', vm.temporal);
+					}
+					vm.cancel = function () {
+						$uibModalInstance.dismiss('cancel');
+					};
+
+				}
+
+
+			})
+		}
 
 	}
 
