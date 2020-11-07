@@ -13,7 +13,7 @@
 				placeholder="Ingrese nombre de Categoria"
 				>
 			</div>
-			<div class="col-md-1 btn btn-success mt-lg" ng-click="agregarCat();">
+			<div class="col-md-1 btn btn-success mt-lg" ng-click="mp.agregarCat();">
 				Agregar
 			</div>
 		</div>
@@ -21,13 +21,12 @@
 			<div class="form-group col-xs-12 m-n">
 				<label class="control-label">Categorias:</label>
 				<div
-				ui-grid="gridOptions"
-				ui-grid-edit
-				ui-grid-resize-columns
-				ui-grid-auto-resize
-				class="grid table-responsive"
-				style="overflow: hidden;"
-				ng-style="getTableHeight();">
+					ui-grid="mp.gridOptions"
+					ui-grid-resize-columns
+					ui-grid-auto-resize
+					class="grid table-responsive"
+					style="overflow: hidden;"
+					ng-style="getTableHeight();">
 				</div>
             </div>
         </div>

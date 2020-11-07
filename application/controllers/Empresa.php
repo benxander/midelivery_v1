@@ -8,7 +8,7 @@ class Empresa extends CI_Controller {
         // Se le asigna a la informacion a la variable $sessionVP.
         $this->sessionVP = @$this->session->userdata('sess_vp_'.substr(base_url(),-8,7));
         $this->load->helper(array('fechas','otros','imagen'));
-        $this->load->model(array('model_empresa'));
+        $this->load->model(array('model_empresa','model_categoria'));
     }
 
 	/**
@@ -287,4 +287,61 @@ class Empresa extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode($arrData));
 	}
+	/** CATEGORIAS DEMO
+	 *
+	 * @Creado: 07/11/2020
+	 * @author Ing. Ruben Guevara <rguevarac@hotmail.es>
+	 */
+
+	public function listar_categorias_demo()
+	{
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+		$lista = $this->model_empresa->m_cargar_categorias_demo($allInputs);
+
+		$arrData['datos'] = $lista;
+    	$arrData['message'] = '';
+    	$arrData['flag'] = 1;
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
+	/** AGREGAR CATEGORIA DEMO
+	 *
+	 * @Creado: 07/11/2020
+	 * @author Ing. Ruben Guevara <rguevarac@hotmail.es>
+	 */
+
+	public function agregar_categoria_demo()
+	{
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+		$arrData['message'] = 'Error al registrar los datos, inténtelo nuevamente';
+    	$arrData['flag'] = 0;
+    	// AQUI ESTARAN LAS VALIDACIONES
+		if(empty($allInputs['categoria'])){
+			$arrData['message'] = 'Debe ingresar un nombre de categoria';
+			$this->output
+				->set_content_type('application/json')
+				->set_output(json_encode($arrData));
+			return;
+		}
+    	// INICIA EL REGISTRO
+
+		$data = array(
+			'idempresa' =>$allInputs['idempresa'],
+			'descripcion_cat' => strtoupper_total($allInputs['categoria']),
+			'imagen_cat' => null,
+			'createdat' => date('Y-m-d H:i:s'),
+			'updatedat' => date('Y-m-d H:i:s')
+		);
+
+		if($idcategoria = $this->model_categoria->m_registrar($data)){
+			$arrData['message'] = 'Se registraron los datos correctamente';
+			$arrData['datos'] = $idcategoria;
+    		$arrData['flag'] = 1;
+		}
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
+
 }

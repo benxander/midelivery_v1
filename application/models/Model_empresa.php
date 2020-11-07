@@ -167,5 +167,19 @@ class Model_Empresa extends CI_Model {
 		$this->db->where('emp.estado_emp', 2);
 		return $this->db->get()->result_array();
 	}
+
+	public function m_cargar_categorias_demo($datos)
+	{
+		$this->db->select("
+			cat.idcategoria,
+			cat.descripcion_cat AS categoria,
+			cat.imagen_cat
+		", FALSE);
+		$this->db->from('categoria cat');
+		$this->db->where('cat.idempresa', $datos['idempresa']);
+		$this->db->where('cat.estado_cat', 1);
+		$this->db->order_by('cat.idcategoria', 'ASC');
+		return $this->db->get()->result_array();
+	}
 }
 ?>
