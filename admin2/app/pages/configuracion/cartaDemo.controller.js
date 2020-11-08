@@ -10,6 +10,8 @@
 	function CartaDemoController($scope, uiGridConstants,
 		$uibModal,
 		alertify,
+		pageLoading,
+		FileUploader,
 		CartaDemoServices) {
 		var vm = this;
 		vm.fData = {};
@@ -100,14 +102,14 @@
 							field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false,
 							cellTemplate:
 							'<label class="btn text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
-						   },
+						},
 					]
 
 					vm.getPaginationServerSide = function() {
 
 						CartaDemoServices.sListarCategoriasDemo(vm.fData).then(function (rpta) {
 						  vm.gridOptions.data = rpta.datos;
-						  
+
 						});
 					  }
 					  vm.getPaginationServerSide();
@@ -115,7 +117,6 @@
 
 
 					vm.agregarCat = function(){
-						console.log('TEMPORAL', vm.temporal);
 						vm.temporal.idempresa = vm.fData.idempresa;
 
 						CartaDemoServices.sAgregarCategoriaDemo(vm.temporal).then(function (rpta) {
@@ -131,7 +132,7 @@
 								alert('Ocurrió un error');
 							  }
 							  pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
-							
+
 						  });
 
 					}
@@ -167,12 +168,110 @@
 			})
 		}
 
+		vm.btnProductos = function(row) {
+			$uibModal.open({
+				templateUrl: 'app/pages/configuracion/productos_formview.php',
+				controllerAs: 'mp',
+				size: 'lg',
+				backdropClass: 'splash splash-2 splash-info splash-ef-12',
+				windowClass: 'splash splash-2 splash-ef-12',
+				backdrop: 'static',
+				keyboard: false,
+				controller: function ($scope, $uibModalInstance, pinesNotifications) {
+					var vm = this;
+					vm.fData = row.entity;
+					vm.modalTitle = 'Productos del ' + vm.fData.razon_social;
+
+					vm.gridOptions = {
+						useExternalPagination: false,
+						useExternalSorting: false,
+						useExternalFiltering: false,
+						enableGridMenu: false,
+						enableSelectAll: false,
+						enableFiltering: false,
+						enableSorting: false,
+						appScopeProvider: vm,
+						data: [],
+					};
+
+					vm.gridOptions.columnDefs = [
+						{ field: 'idproducto', name: 'idproducto', displayName: 'ID PRODUCTO', width: 80, sort: { direction: uiGridConstants.DESC } },
+						{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'CATEGORIA', enableFiltering: false, enableColumnMenu: false },
+						{ field: 'descripcion_pr', name: 'descripcion_pr', displayName: 'NOMBRE DE PRODUCTO' },
+						{ field: 'precio', name: 'precio', displayName: 'PRECIO', width: 120, enableFiltering: false, enableColumnMenu: false, },
+
+						{
+							field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false,
+							cellTemplate: '<label class="btn text-primary" ng-click="grid.appScope.btnEditar(row);$event.stopPropagation();" tooltip-placement="left" uib-tooltip="EDITAR"> <i class="fa fa-edit"></i> </label>' +
+								'<label class="btn text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
+						},
+					]
+
+					vm.getPaginationServerSide = function () {
+
+						CartaDemoServices.sListarProductosDemo(vm.fData).then(function (rpta) {
+							vm.gridOptions.data = rpta.datos;
+
+						});
+					}
+					vm.getPaginationServerSide();
+
+					var uploader = $scope.uploader = new FileUploader({
+						url: angular.patchURLCI + 'producto/upload_excel'
+					});
+
+					vm.aceptar = function () {
+						console.log('uploader.queue', uploader.queue);
+						uploader.queue[0].upload();
+						pageLoading.start('Procesando...');
+						uploader.onSuccessItem = function (fileItem, response, status, headers) {
+							console.info('onSuccessItem', fileItem, response, status, headers);
+							pageLoading.stop();
+							if (response.flag == 1) {
+								var pTitle = 'OK!';
+								var pType = 'success';
+								// $uibModalInstance.close();
+								vm.getPaginationServerSide();
+							} else if (response.flag == 0) {
+								var pTitle = 'Advertencia!';
+								var pType = 'warning';
+							} else {
+								alert('Ocurrió un error');
+							}
+							pinesNotifications.notify({ title: pTitle, text: response.message, type: pType, delay: 3000 });
+						};
+						uploader.onErrorItem = function (fileItem, response, status, headers) {
+							console.info('onErrorItem', fileItem, response, status, headers);
+							pageLoading.stop();
+							if (response.flag == 1) {
+								var pTitle = 'OK!';
+								var pType = 'success';
+								// $uibModalInstance.close();
+								vm.getPaginationServerSide();
+							} else if (response.flag == 0) {
+								var pTitle = 'Advertencia!';
+								var pType = 'warning';
+							} else {
+								alert('Ocurrió un error');
+							}
+							pinesNotifications.notify({ title: pTitle, text: response.message, type: pType, delay: 3000 });
+						};
+					};
+
+					vm.cancel = function () {
+						$uibModalInstance.dismiss('cancel');
+					};
+				}
+			});
+		}
+
 	}
 
 	function CartaDemoServices($http, $q, handle) {
 		return({
 			sListarCartasDemo: sListarCartasDemo,
 			sListarCategoriasDemo: sListarCategoriasDemo,
+			sListarProductosDemo: sListarProductosDemo,
 			sAgregarCategoriaDemo: sAgregarCategoriaDemo,
 			sAnularCategoria: sAnularCategoria
 		});
@@ -191,6 +290,15 @@
 			var request = $http({
 				method: "post",
 				url: angular.patchURLCI + "Empresa/listar_categorias_demo",
+				data: datos
+			});
+			return(request.then(handle.success, handle.error));
+		}
+		function sListarProductosDemo(pDatos) {
+			var datos = pDatos || {}
+			var request = $http({
+				method: "post",
+				url: angular.patchURLCI + "Producto/listar_productos_demo",
 				data: datos
 			});
 			return(request.then(handle.success, handle.error));

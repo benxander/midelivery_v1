@@ -26,7 +26,7 @@
       'localytics.directives',
       'ui.select',
       // 'validation.match',
-      // 'angularFileUpload',
+      'angularFileUpload',
       // 'ngImgCrop',
       'ui.grid.selection',
       'ui.grid.edit',
@@ -41,7 +41,7 @@
       // 'ui.footable',
       'angular-intro',
       'ui.calendar',
-      'blockUI'
+      'blockUI',
       // 'highcharts-ng'
     ]);
 

@@ -81,4 +81,27 @@ class Model_producto extends CI_Model {
 		$this->db->where('idproducto',$datos['idproducto']);
 		return $this->db->update('producto', $data);
 	}
+
+	public function m_cargar_productos_demo($datos){
+		$this->db->select("
+			pr.idproducto,
+			pr.descripcion_pr,
+			pr.alergenos,
+			pr.precio,
+			cat.idcategoria,
+			cat.descripcion_cat
+		", FALSE);
+
+		$this->db->from('producto pr');
+		$this->db->join('categoria cat', 'pr.idcategoria = cat.idcategoria');
+		$this->db->where('pr.estado_pr', 1);
+		$this->db->where('cat.estado_cat', 1);
+		$this->db->where('cat.idempresa', $datos['idempresa']);
+		// if($datos['categoria']['id'] != 0){
+		// 	$this->db->where('cat.idcategoria', $datos['categoria']['id']);
+		// }
+
+		$this->db->order_by('idproducto', 'ASC');
+		return $this->db->get()->result_array();
+	}
 }
