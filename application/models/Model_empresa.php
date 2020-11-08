@@ -156,9 +156,10 @@ class Model_Empresa extends CI_Model {
 		$this->db->select("
 			emp.idempresa,
 			emp.razon_social,
-
+			emp.nombre_negocio,
+			modelo_carta AS idmodelo,
 			emp.idcolor,
-			concat('Modelo ', emp.modelo_carta) AS modelo_carta,
+			concat('MODELO ', emp.modelo_carta) AS modelo_carta,
 			co.nombre AS color,
 			co.hexa
 		", FALSE);

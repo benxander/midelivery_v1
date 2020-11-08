@@ -344,4 +344,26 @@ class Empresa extends CI_Controller {
 		    ->set_output(json_encode($arrData));
 	}
 
+	public function editar_carta_demo(){
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+		$arrData['message'] = 'Error al editar los datos, inténtelo nuevamente';
+    	$arrData['flag'] = 0;
+
+		$data = array(
+			'nombre_negocio' => strtolower_total($allInputs['nombre_negocio']),
+			'razon_social' => strtoupper_total($allInputs['razon_social']),
+			'modelo_carta' => $allInputs['modeloObj']['id'],
+			'idcolor' => $allInputs['colorObj']['idcolor'],
+			'updatedAt' => date('Y-m-d H:i:s')
+		);
+
+		if($this->model_empresa->m_editar($data,$allInputs['idempresa'])){
+			$arrData['message'] = 'Se editaron los datos correctamente ';
+    		$arrData['flag'] = 1;
+		}
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
+
 }
