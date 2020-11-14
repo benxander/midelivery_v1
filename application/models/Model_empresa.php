@@ -182,5 +182,35 @@ class Model_Empresa extends CI_Model {
 		$this->db->order_by('cat.idcategoria', 'ASC');
 		return $this->db->get()->result_array();
 	}
+
+	public function m_cargar_empresa_demo($datos)
+	{
+		$this->db->select("
+			emp.idempresa,
+			emp.razon_social,
+			emp.nombre_negocio,
+			emp.telefono,
+			emp.contacto,
+			emp.email,
+			emp.createdat,
+			emp.updatedat,
+			emp.idtipopago,
+			emp.idplan,
+			emp.estado_emp,
+			emp.codigo_postal,
+			emp.dni_cif,
+			emp.direccion,
+			emp.idusuario,
+			emp.modelo_carta,
+			emp.idcolor,
+			co.clase
+		", FALSE);
+
+		$this->db->from('empresa emp');
+		$this->db->join('color co', 'emp.idcolor = co.idcolor');
+		$this->db->where('emp.idempresa', $datos['idempresa']);
+		$this->db->limit('1');
+		return $this->db->get()->row_array();
+	}
 }
 ?>

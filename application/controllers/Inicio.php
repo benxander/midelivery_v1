@@ -28,7 +28,8 @@ class Inicio extends CI_Controller {
 	        	'Ficha_model',
 	        	'Banners_model',
 	        	'Pagina_dinamica_model',
-	        	'Categorias_model'
+				'Categorias_model',
+				'Model_empresa'
         	)
     	);
 	}
@@ -86,36 +87,77 @@ class Inicio extends CI_Controller {
 		$arrListado = array_values($arrListado);
 
 
-		$arrCarta = $this->Ficha_model->m_listar_detalle_carta();
-		$arrSeccion = array();
-		foreach ($arrCarta as $row) {
-			$arrSeccion[$row['idseccion']] = array(
-				'idseccion'	=> $row['idseccion'],
-				'seccion'	=> $row['seccion'],
-				'imagen_sec'	=> $row['imagen_sec'],
-				'lista_carta'	=> array()
+		// $arrCarta = $this->Ficha_model->m_listar_detalle_carta();
+		// $arrSeccion = array();
+		// foreach ($arrCarta as $row) {
+		// 	$arrSeccion[$row['idseccion']] = array(
+		// 		'idseccion'	=> $row['idseccion'],
+		// 		'seccion'	=> $row['seccion'],
+		// 		'imagen_sec'	=> $row['imagen_sec'],
+		// 		'lista_carta'	=> array()
+		// 	);
+		// }
+
+		// foreach ($arrSeccion as $key => $value) {
+		// 	$arrAux = array();
+		// 	foreach ($arrCarta as $row) {
+		// 		if( $key == $row['idseccion'] ){
+		// 			array_push($arrAux,
+		// 				array(
+		// 					'carta'		=> $row['carta']
+		// 				)
+		// 			);
+		// 		}
+		// 	}
+		// 	$arrSeccion[$key]['lista_carta'] = $arrAux;
+		// }
+		// $arrSeccion = array_values($arrSeccion);
+		$params = array(
+			'idempresa' => 1
+		);
+		$arrEmpresa = $this->Model_empresa->m_cargar_empresa_demo($params);
+		$arrCartaDigital = $this->Model_empresa->m_cargar_carta_digital($arrEmpresa);
+
+		$arrCategoria = array();
+		foreach ($arrCartaDigital as $row) {
+			$arrCategoria[$row['idcategoria']] = array(
+				'idcategoria'	=> $row['idcategoria'],
+				'categoria'	=> $row['categoria'],
+				'imagen_cat'	=> $row['imagen_cat'],
+				'color'			=> $arrEmpresa['clase'],
+				'productos'	=> array()
 			);
 		}
 
-		foreach ($arrSeccion as $key => $value) {
+		foreach ($arrCategoria as $key => $value) {
 			$arrAux = array();
-			foreach ($arrCarta as $row) {
-				if( $key == $row['idseccion'] ){
+			foreach ($arrCartaDigital as $row) {
+				if( $key == $row['idcategoria'] ){
 					array_push($arrAux,
 						array(
-							'carta'		=> $row['carta']
+							'idproducto'	=> $row['idproducto'],
+							'producto'		=> $row['producto'],
+							'precio'		=> $row['precio'],
+							'alergenos'		=> $row['alergenos'],
 						)
 					);
 				}
 			}
-			$arrSeccion[$key]['lista_carta'] = $arrAux;
+			$arrCategoria[$key]['productos'] = $arrAux;
 		}
-		$arrSeccion = array_values($arrSeccion);
+		$arrCategoria = array_values($arrCategoria);
 
 		$arrMenu = $this->Ficha_model->m_listar_menu_sidreria();
 
+		if($arrEmpresa['modelo_carta'] === '1' ){
+			$datos['estilo'] = base_url() . 'css/style_carta1.css';
+		}else{
+			$datos['estilo'] = base_url() . 'css/style_carta2.css';
+		}
+
 		$datos['modulos'] = $arrListado;
-		$datos['secciones_carta'] = $arrSeccion;
+		$datos['modelo_carta'] = $arrEmpresa['modelo_carta'];
+		$datos['categoria_carta'] = $arrCategoria;
 		$datos['menu_sid'] = $arrMenu;
 		$datos['imagen'] = $imagen;
 		$datos['footer'] = $footer;
