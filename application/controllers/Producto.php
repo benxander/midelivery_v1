@@ -122,6 +122,27 @@ class Producto extends CI_Controller {
 		    ->set_content_type('application/json')
 		    ->set_output(json_encode($arrData));
 	}
+	public function editar_producto_demo(){
+		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
+		$arrData['message'] = 'Error al editar los datos, inténtelo nuevamente';
+    	$arrData['flag'] = 0;
+
+		$data = array(
+			'descripcion_pr' => strtoupper_total($allInputs['descripcion_pr']),
+			// 'idcategoria' => $allInputs['categoria']['id'],
+			'precio' => $allInputs['precio'],
+			// 'alergenos' => implode(",",$allInputs['alergenos']),
+			'updatedat' => date('Y-m-d H:i:s')
+		);
+
+		if($this->model_producto->m_editar($data,$allInputs['idproducto'])){
+			$arrData['message'] = 'Se editaron los datos correctamente ';
+    		$arrData['flag'] = 1;
+		}
+		$this->output
+		    ->set_content_type('application/json')
+		    ->set_output(json_encode($arrData));
+	}
 	public function anular_producto(){
 		$allInputs = json_decode(trim($this->input->raw_input_stream),true);
 		$arrData['message'] = 'Error al anular los datos, inténtelo nuevamente';

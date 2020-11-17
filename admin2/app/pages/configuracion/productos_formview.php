@@ -24,6 +24,7 @@
 					ui-grid="mp.gridOptions"
 					ui-grid-resize-columns
 					ui-grid-auto-resize
+					ui-grid-edit
 					class="grid table-responsive"
 					style="overflow: hidden;"
 					ng-style="getTableHeight();">

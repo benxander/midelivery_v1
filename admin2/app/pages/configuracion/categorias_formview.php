@@ -19,11 +19,12 @@
 		</div>
 		<div class="row">
 			<div class="form-group col-xs-12 m-n">
-				<label class="control-label">Categorias:</label>
+				<label class="control-label">Categorias: (Doble clic para editar campo)</label>
 				<div
 					ui-grid="mp.gridOptions"
 					ui-grid-resize-columns
 					ui-grid-auto-resize
+					ui-grid-edit
 					class="grid table-responsive"
 					style="overflow: hidden;"
 					ng-style="getTableHeight();">

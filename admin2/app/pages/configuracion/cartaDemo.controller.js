@@ -189,14 +189,34 @@
 					};
 
 					vm.gridOptions.columnDefs = [
-						{ field: 'idcategoria', name: 'idcategoria', displayName: 'ID', width: 80, enableFiltering: false, sort: { direction: uiGridConstants.DESC }},
-						{ field: 'categoria', name:'categoria', displayName: 'CATEGORIA' },
+						{ field: 'idcategoria', name: 'idcategoria', displayName: 'ID', width: 80, enableFiltering: false, enableCellEdit: false, sort: { direction: uiGridConstants.DESC }},
+						{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'CATEGORIA'},
 						{
-							field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false,
+							field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false, enableCellEdit: false,
 							cellTemplate:
 							'<label class="btn text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
 						},
 					]
+					vm.gridOptions.onRegisterApi = function (gridApi) {
+						gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+							rowEntity.column = colDef.field;
+							rowEntity.anteriorValor = oldValue;
+							CartaDemoServices.sEditarCategoriaDemo(rowEntity).then(function (rpta) {
+								if (rpta.flag == 1) {
+									pTitle = 'OK!';
+									pType = 'success';
+								} else if (rpta.flag == 0) {
+									var pTitle = 'Advertencia!';
+									var pType = 'warning';
+								} else {
+									alert('Error inesperado');
+								}
+								vm.getPaginationServerSide();
+								pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
+							});
+							$scope.$apply();
+						});
+					}
 
 					vm.getPaginationServerSide = function() {
 
@@ -288,17 +308,38 @@
 					};
 
 					vm.gridOptions.columnDefs = [
-						{ field: 'idproducto', name: 'idproducto', displayName: 'ID PRODUCTO', width: 80, sort: { direction: uiGridConstants.DESC } },
-						{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'CATEGORIA', enableFiltering: false, enableColumnMenu: false },
+						{ field: 'idproducto', name: 'idproducto', displayName: 'ID PRODUCTO', width: 80, enableCellEdit: false, sort: { direction: uiGridConstants.DESC } },
+						{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'CATEGORIA', enableFiltering: false, enableColumnMenu: false, enableCellEdit: false },
 						{ field: 'descripcion_pr', name: 'descripcion_pr', displayName: 'NOMBRE DE PRODUCTO' },
 						{ field: 'precio', name: 'precio', displayName: 'PRECIO', width: 120, enableFiltering: false, enableColumnMenu: false, },
 
 						{
-							field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false,
+							field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false, enableCellEdit: false,
 							cellTemplate:
 								'<label class="btn text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
 						},
 					]
+
+					vm.gridOptions.onRegisterApi = function (gridApi) {
+						gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+							rowEntity.column = colDef.field;
+							rowEntity.anteriorValor = oldValue;
+							CartaDemoServices.sEditarProductoDemo(rowEntity).then(function (rpta) {
+								if (rpta.flag == 1) {
+									pTitle = 'OK!';
+									pType = 'success';
+								} else if (rpta.flag == 0) {
+									var pTitle = 'Advertencia!';
+									var pType = 'warning';
+								} else {
+									alert('Error inesperado');
+								}
+								vm.getPaginationServerSide();
+								pinesNotifications.notify({ title: pTitle, text: rpta.message, type: pType, delay: 3000 });
+							});
+							$scope.$apply();
+						});
+					}
 
 					vm.getPaginationServerSide = function () {
 
@@ -403,7 +444,9 @@
 			sEditarCartaDemo: sEditarCartaDemo,
 			sListarCategoriasDemo: sListarCategoriasDemo,
 			sListarProductosDemo: sListarProductosDemo,
+			sEditarProductoDemo: sEditarProductoDemo,
 			sAgregarCategoriaDemo: sAgregarCategoriaDemo,
+			sEditarCategoriaDemo: sEditarCategoriaDemo,
 			sAnularCategoria: sAnularCategoria
 		});
 
@@ -443,11 +486,29 @@
 			});
 			return(request.then(handle.success, handle.error));
 		}
+		function sEditarProductoDemo(pDatos) {
+			var datos = pDatos || {}
+			var request = $http({
+				method: "post",
+				url: angular.patchURLCI + "Producto/editar_producto_demo",
+				data: datos
+			});
+			return(request.then(handle.success, handle.error));
+		}
 		function sAgregarCategoriaDemo(pDatos) {
 			var datos = pDatos || {}
 			var request = $http({
 				method: "post",
 				url: angular.patchURLCI + "Empresa/agregar_categoria_demo",
+				data: datos
+			});
+			return(request.then(handle.success, handle.error));
+		}
+		function sEditarCategoriaDemo(pDatos) {
+			var datos = pDatos || {}
+			var request = $http({
+				method: "post",
+				url: angular.patchURLCI + "Categoria/editar_categoria",
 				data: datos
 			});
 			return(request.then(handle.success, handle.error));

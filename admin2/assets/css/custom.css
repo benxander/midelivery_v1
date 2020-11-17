@@ -49,9 +49,15 @@
 
 .ui-grid-viewport .ui-grid-cell button.btn-action {
 	margin-left: 4px;
-	width: 34px; }
+	width: 34px;
+}
 .ui-grid-viewport .ui-grid-cell button.btn-action i {
-		font-size: 15px; }
+	font-size: 15px;
+}
+.ui-grid-viewport .ui-editCell, .ui-editPanel{
+    background-color: #fcfbcd !important;
+    font-style: oblique !important;
+}
 
 section.tile-body{
 	margin-top: 0;

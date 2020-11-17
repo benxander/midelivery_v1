@@ -173,7 +173,7 @@ class Model_Empresa extends CI_Model {
 	{
 		$this->db->select("
 			cat.idcategoria,
-			cat.descripcion_cat AS categoria,
+			cat.descripcion_cat,
 			cat.imagen_cat
 		", FALSE);
 		$this->db->from('categoria cat');
