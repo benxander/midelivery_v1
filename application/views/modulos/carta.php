@@ -13,15 +13,15 @@
                                 type="button"
                                 data-parent="#accordion8"
                                 data-toggle="collapse"
-                                data-target="#2<?=$row['categoria']?>"
+                                data-target="#2<?=$row['idcategoria']?>"
                                 aria-expanded="true"
-                                aria-controls="2<?=$row['categoria']?>"
+                                aria-controls="2<?=$row['idcategoria']?>"
                             >
                                 <?=$row['categoria']?>
                             </button>
                         </h4>
                     </div>
-                    <div id="2<?=$row['categoria']?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="acordion2<?=$row['idcategoria']?>">
+                    <div id="2<?=$row['idcategoria']?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="acordion2<?=$row['idcategoria']?>">
                         <div class="panel-body">
                             <ul>
                             <?php foreach ($row['productos'] as $row2): ?>
