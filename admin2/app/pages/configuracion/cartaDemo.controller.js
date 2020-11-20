@@ -311,10 +311,11 @@
 						{ field: 'idproducto', name: 'idproducto', displayName: 'ID PRODUCTO', width: 80, enableCellEdit: false, sort: { direction: uiGridConstants.DESC } },
 						{ field: 'descripcion_cat', name: 'descripcion_cat', displayName: 'CATEGORIA', enableFiltering: false, enableColumnMenu: false, enableCellEdit: false },
 						{ field: 'descripcion_pr', name: 'descripcion_pr', displayName: 'NOMBRE DE PRODUCTO' },
-						{ field: 'precio', name: 'precio', displayName: 'PRECIO', width: 120, enableFiltering: false, enableColumnMenu: false, },
+						{ field: 'alergenos', name: 'alergenos', displayName: 'ALERGENOS', width: 100},
+						{ field: 'precio', name: 'precio', displayName: 'PRECIO', width: 90, enableFiltering: false, enableColumnMenu: false, },
 
 						{
-							field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 120, enableFiltering: false, enableColumnMenu: false, enableCellEdit: false,
+							field: 'accion', name: 'accion', displayName: 'ACCIONES', width: 90, enableFiltering: false, enableColumnMenu: false, enableCellEdit: false,
 							cellTemplate:
 								'<label class="btn text-red" ng-click="grid.appScope.btnAnular(row);$event.stopPropagation();"> <i class="fa fa-trash" tooltip-placement="left" uib-tooltip="ELIMINAR!"></i> </label>'
 						},

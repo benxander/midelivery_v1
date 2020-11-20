@@ -132,6 +132,7 @@ class Producto extends CI_Controller {
 			// 'idcategoria' => $allInputs['categoria']['id'],
 			'precio' => $allInputs['precio'],
 			// 'alergenos' => implode(",",$allInputs['alergenos']),
+			'alergenos' => empty($allInputs['alergenos'])? null : $allInputs['alergenos'],
 			'updatedat' => date('Y-m-d H:i:s')
 		);
 
@@ -315,7 +316,8 @@ class Producto extends CI_Controller {
 					'descripcion_pr' 	=> $row['descripcion_pr'],
 					'idcategoria' 		=> $row['idcategoria'],
 					'descripcion_cat' 	=> $row['descripcion_cat'],
-					'alergenos'			=> explode(",", $row['alergenos']),
+					'alergenos' 		=> $row['alergenos'],
+					'arrAlergenos'		=> explode(",", $row['alergenos']),
 					'precio' 			=> $row['precio'],
 					'categoria' 	=> array(
 						'idcategoria' => $row['idcategoria'],
